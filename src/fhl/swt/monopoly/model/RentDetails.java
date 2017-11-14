@@ -9,7 +9,7 @@ public class RentDetails {
 	private Map<Integer, BigDecimal> rentPerHouse;
 	private BigDecimal hotelRent;
 	private double mortage;
-
+	
 	public double getBaseRent() {
 		return baseRent;
 	}
@@ -36,6 +36,10 @@ public class RentDetails {
 
 	public void setMortage(double mortage) {
 		this.mortage = mortage;
+	}
+
+	public Map<Integer, BigDecimal> getRentPerHouse() {
+		return rentPerHouse;
 	}
 
 }
