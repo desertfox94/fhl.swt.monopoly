@@ -1,57 +1,50 @@
 package fhl.swt.monopoly.model;
 
+import java.awt.Color;
 import java.util.List;
-import java.util.Map;
+
+import com.sun.prism.Image;
 
 public class Edition {
 
 	private String name;
-	private Map<Integer, Street> straﬂenAnordnung;
-	private int maxSpielerAnzahl;
-	private String waehrung;
-	private double WaehrungsFaktor;
-	private List<Figur> figuren;
-	private Design design;
+	private List<Field> fields;
+	private int maxAmountOfPlayers;
+	private String currency;
+	private double currencyFactor;
+	private List<Color> colors;
+	private Image background;
+
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public Field getField(int i) {
+		return fields.get(i);
 	}
-	public Map<Integer, Street> getStraﬂenAnordnung() {
-		return straﬂenAnordnung;
-	}
-	public void setStraﬂenAnordnung(Map<Integer, Street> straﬂenAnordnung) {
-		this.straﬂenAnordnung = straﬂenAnordnung;
-	}
-	public int getMaxSpielerAnzahl() {
-		return maxSpielerAnzahl;
-	}
-	public void setMaxSpielerAnzahl(int maxSpielerAnzahl) {
-		this.maxSpielerAnzahl = maxSpielerAnzahl;
-	}
+
 	public String getWaehrung() {
-		return waehrung;
+		return currency;
 	}
+
 	public void setWaehrung(String waehrung) {
-		this.waehrung = waehrung;
+		this.currency = waehrung;
 	}
-	public double getWaehrungsFaktor() {
-		return WaehrungsFaktor;
+
+	public List<Color> getFiguren() {
+		return colors;
 	}
-	public void setWaehrungsFaktor(double waehrungsFaktor) {
-		WaehrungsFaktor = waehrungsFaktor;
+
+	public Image getBackground() {
+		return background;
 	}
-	public List<Figur> getFiguren() {
-		return figuren;
+
+	public double getCurrencyFactor() {
+		return currencyFactor;
 	}
-	public void setFiguren(List<Figur> figuren) {
-		this.figuren = figuren;
+
+	public int getMaxAmountOfPlayers() {
+		return maxAmountOfPlayers;
 	}
-	public Design getDesign() {
-		return design;
-	}
-	public void setDesign(Design design) {
-		this.design = design;
-	}
+
 }

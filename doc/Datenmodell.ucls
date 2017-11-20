@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <interface id="1" language="java" name="fhl.swt.monopoly.model.EventTrigger" project="fhl.swt.monopoly" 
+  <class id="1" language="java" name="fhl.swt.monopoly.model.CardSet" project="fhl.swt.monopoly" 
+    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/CardSet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="161" x="237" y="499"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="fhl.swt.monopoly.model.EventTrigger" project="fhl.swt.monopoly" 
     file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/EventTrigger.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="114" x="757" y="1288"/>    
+    <position height="81" width="114" x="230" y="1659"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="2" language="java" name="fhl.swt.monopoly.model.Game" project="fhl.swt.monopoly" 
+  <class id="3" language="java" name="fhl.swt.monopoly.model.Game" project="fhl.swt.monopoly" 
     file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Game.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="261" width="167" x="688" y="25"/>    
+    <position height="243" width="148" x="824" y="216"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="fhl.swt.monopoly.model.Card" project="fhl.swt.monopoly" 
+  <class id="4" language="java" name="fhl.swt.monopoly.model.Card" project="fhl.swt.monopoly" 
     file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Card.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="261" width="148" x="895" y="789"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="fhl.swt.monopoly.model.Design" project="fhl.swt.monopoly" 
-    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Design.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="156" x="325" y="789"/>    
+    <position height="297" width="163" x="237" y="1160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,16 +39,16 @@
   </class>  
   <enumeration id="5" language="java" name="fhl.swt.monopoly.model.FieldType" project="fhl.swt.monopoly" 
     file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/FieldType.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="207" width="196" x="521" y="1288"/>    
+    <position height="207" width="196" x="632" y="1659"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="6" language="java" name="fhl.swt.monopoly.model.Dices" project="fhl.swt.monopoly" 
-    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Dices.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="116" x="895" y="-132"/>    
+  <class id="6" language="java" name="fhl.swt.monopoly.model.Bank" project="fhl.swt.monopoly" 
+    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Bank.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="191" x="864" y="1160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,206 +57,255 @@
   </class>  
   <class id="7" language="java" name="fhl.swt.monopoly.model.DiceCast" project="fhl.swt.monopoly" 
     file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/DiceCast.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="279" width="141" x="895" y="25"/>    
+    <position height="117" width="116" x="438" y="216"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="fhl.swt.monopoly.model.Field" project="fhl.swt.monopoly" 
+  <class id="8" language="java" name="fhl.swt.monopoly.model.Die" project="fhl.swt.monopoly" 
+    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Die.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="138" x="438" y="499"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="fhl.swt.monopoly.model.Field" project="fhl.swt.monopoly" 
     file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Field.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="167" x="521" y="789"/>    
+    <position height="189" width="167" x="615" y="1160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="fhl.swt.monopoly.model.Street" project="fhl.swt.monopoly" 
+  <interface id="10" language="java" name="fhl.swt.monopoly.model.CardOwner" project="fhl.swt.monopoly" 
+    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/CardOwner.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="208" x="384" y="1659"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="fhl.swt.monopoly.model.Street" project="fhl.swt.monopoly" 
     file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Street.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="459" width="180" x="1083" y="789"/>    
+    <position height="459" width="169" x="1095" y="1160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="fhl.swt.monopoly.model.Figur" project="fhl.swt.monopoly" 
-    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Figur.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="127" x="728" y="789"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="fhl.swt.monopoly.model.Edition" project="fhl.swt.monopoly" 
+  <class id="12" language="java" name="fhl.swt.monopoly.model.Edition" project="fhl.swt.monopoly" 
     file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Edition.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="405" width="261" x="594" y="344"/>    
+    <position height="333" width="168" x="616" y="499"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="fhl.swt.monopoly.model.Player" project="fhl.swt.monopoly" 
+  <class id="13" language="java" name="fhl.swt.monopoly.model.Player" project="fhl.swt.monopoly" 
     file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Player.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="405" width="165" x="895" y="344"/>    
+    <position height="621" width="208" x="824" y="499"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="fhl.swt.monopoly.model.StreetGroup" project="fhl.swt.monopoly" 
+  <class id="14" language="java" name="fhl.swt.monopoly.model.StreetGroup" project="fhl.swt.monopoly" 
     file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/StreetGroup.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="225" width="195" x="1100" y="344"/>    
+    <position height="225" width="195" x="1095" y="499"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="fhl.swt.monopoly.model.RentDetails" project="fhl.swt.monopoly" 
-    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/RentDetails.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="297" width="260" x="1035" y="1288"/>    
+  <class id="15" language="java" name="fhl.swt.monopoly.model.StreetDetails" project="fhl.swt.monopoly" 
+    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/StreetDetails.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="351" width="170" x="1099" y="1659"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="15">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="16" name="group"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <interface id="16" language="java" name="fhl.swt.monopoly.model.StreetOwner" project="fhl.swt.monopoly" 
+    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/StreetOwner.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="191" x="868" y="1659"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="17" language="java" name="fhl.swt.monopoly.model.Owner" project="fhl.swt.monopoly" 
+    file="/fhl.swt.monopoly/src/fhl/swt/monopoly/model/Owner.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="168" x="230" y="216"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
   <association id="18">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="19" name="throwLog"/>      
-      <multiplicity id="20" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="21">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="22" name="figur"/>      
-      <multiplicity id="23" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="19" name="owner"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="21">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="22" name="rentDetails"/>      
+      <multiplicity id="23" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="24">    
     <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="25" name="cards"/>      
+      <attribute id="25" name="fields"/>      
       <multiplicity id="26" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="27">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="28" name="design"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="30">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="31" name="streets"/>      
-      <multiplicity id="32" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="27">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="28" name="currentPlayer"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="31" name="communtyCards"/>      
+      <multiplicity id="32" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="33">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="34" name="player"/>      
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="34" name="owner"/>      
       <multiplicity id="35" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="36">    
-    <end type="SOURCE" refId="8" navigable="false">      
+    <end type="SOURCE" refId="9" navigable="false">      
       <attribute id="37" name="trigger"/>      
       <multiplicity id="38" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="39">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="40" name="players"/>      
-      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="40" name="edition"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="42">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="43" name="straßenAnordnung"/>      
-      <multiplicity id="44" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="43" name="secondDie"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="45">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="46" name="edition"/>      
-      <multiplicity id="47" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="46" name="cards"/>      
+      <multiplicity id="47" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="48">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="49" name="type"/>      
-      <multiplicity id="50" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="49" name="players"/>      
+      <multiplicity id="50" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="51">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <realization id="52">    
+    <bendpoint x="812" y="1160"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <association id="53">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="54" name="eventCards"/>      
+      <multiplicity id="55" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="57" name="type"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="51">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
+  <realization id="59">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
   </realization>  
-  <association id="52">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="53" name="streets"/>      
-      <multiplicity id="54" minimum="0" maximum="2147483647"/>    
+  <association id="60">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="61" name="streets"/>      
+      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="55">    
+  <association id="63">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="64" name="streets"/>      
+      <multiplicity id="65" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="66">    
+    <bendpoint x="833" y="1160"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <association id="67">    
     <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="56" name="figuren"/>      
-      <multiplicity id="57" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="58">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="59" name="owner"/>      
-      <multiplicity id="60" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="61">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="62" name="rentDetails"/>      
-      <multiplicity id="63" minimum="0" maximum="1"/>    
+      <attribute id="68" name="group"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="71" name="firstDie"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

@@ -7,10 +7,10 @@ public class Street {
 	private String name;
 	private BigDecimal price;
 	private int numberOfHouses;
-	private int hotels;
+	private boolean hotelBuild;
 	private boolean mortage;
-	private Player owner;
-	private RentDetails rentDetails;
+	private StreetOwner owner;
+	private StreetDetails rentDetails;
 	private StreetGroup group;
 
 	public String getName() {
@@ -33,48 +33,48 @@ public class Street {
 		return numberOfHouses;
 	}
 
-	public void setNumberOfHouses(int numberOfHouses) {
+	public void buildHouses(int numberOfHouses) {
 		this.numberOfHouses = numberOfHouses;
 	}
 
-	public int getHotels() {
-		return hotels;
+	public void demolishHouses(int numberOfHouses) {
+		this.numberOfHouses = numberOfHouses;
 	}
 
-	public void setHotels(int hotels) {
-		this.hotels = hotels;
+	public boolean getHotel() {
+		return hotelBuild;
+	}
+
+	public void buildHotel() {
+		this.hotelBuild = true;
+	}
+
+	public void demolishHotel() {
+		this.hotelBuild = false;
 	}
 
 	public boolean isMortage() {
 		return mortage;
 	}
 
-	public void setMortage(boolean mortage) {
-		this.mortage = mortage;
+	public void assumeMortage() {
+		this.mortage = true;
 	}
 
-	public Player getOwner() {
+	public StreetOwner getOwner() {
 		return owner;
 	}
 
-	public void setOwner(Player owner) {
+	public void setOwner(StreetOwner owner) {
 		this.owner = owner;
 	}
 
-	public RentDetails getRentDetails() {
+	public StreetDetails getRentDetails() {
 		return rentDetails;
-	}
-
-	public void setRentDetails(RentDetails rentDetails) {
-		this.rentDetails = rentDetails;
 	}
 
 	public StreetGroup getGroup() {
 		return group;
-	}
-
-	public void setGroup(StreetGroup group) {
-		this.group = group;
 	}
 
 }

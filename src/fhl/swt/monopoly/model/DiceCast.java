@@ -2,41 +2,15 @@ package fhl.swt.monopoly.model;
 
 public class DiceCast {
 
-	private int numberOfPips;
-	private int firstDice;
-	private int secondDice;
-	private Player player;
+	private Die firstDie;
+	private Die secondDie;
 
 	public boolean isDouble() {
-		return firstDice == secondDice;
+		return firstDie.equals(secondDie);
 	}
 
-	public int getFirstDice() {
-		return firstDice;
-	}
-
-	public void setFirstDice(int firstDice) {
-		this.firstDice = firstDice;
-	}
-
-	public int getSecondDice() {
-		return secondDice;
-	}
-
-	public void setSecondDice(int secondDice) {
-		this.secondDice = secondDice;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-
-	public int getNumberOfPips() {
-		return numberOfPips;
+	public int roll() {
+		return 23243;
 	}
 	
 }

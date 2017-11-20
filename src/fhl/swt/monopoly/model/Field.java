@@ -4,6 +4,8 @@ public class Field {
 
 	private FieldType type;
 	private EventTrigger trigger;
+	
+	private int position;
 
 	public FieldType getType() {
 		return type;
@@ -19,6 +21,10 @@ public class Field {
 
 	public void setTrigger(EventTrigger trigger) {
 		this.trigger = trigger;
+	}
+
+	public int getPosition() {
+		return position;
 	}
 
 }

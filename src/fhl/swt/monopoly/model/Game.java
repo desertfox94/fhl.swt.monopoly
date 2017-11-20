@@ -7,14 +7,14 @@ public class Game {
 	private List<Player> players;
 	private Edition edition;
 	private int rounde;
-	private int currentPlayer;
+	private Player currentPlayer;
 
+	public void addPlayer() {
+		
+	}
+	
 	public List<Player> getPlayers() {
 		return players;
-	}
-
-	public void setPlayers(List<Player> players) {
-		this.players = players;
 	}
 
 	public Edition getEdition() {
@@ -29,16 +29,15 @@ public class Game {
 		return rounde;
 	}
 
-	public void setRounde(int rounde) {
+	public void setRound(int rounde) {
 		this.rounde = rounde;
 	}
 
-	public int getCurrentPlayer() {
-		return currentPlayer;
+	public Player getCurrentPlayer() {
+		return players.get(players.indexOf(currentPlayer) + 1);
 	}
 
-	public void setCurrentPlayer(int currentPlayer) {
-		this.currentPlayer = currentPlayer;
+	public void nextPlayer() {
 	}
 
 }

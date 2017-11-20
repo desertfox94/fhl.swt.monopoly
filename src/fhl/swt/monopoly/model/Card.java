@@ -8,6 +8,8 @@ public class Card implements EventTrigger {
 	private String decription;
 	private Image icon;
 
+	private CardOwner owner;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -36,6 +38,14 @@ public class Card implements EventTrigger {
 	public boolean execute() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public CardOwner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(CardOwner owner) {
+		this.owner = owner;
 	}
 
 }
