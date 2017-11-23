@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.sun.prism.Image;
 
+import fhl.swt.monopoly.core.fields.Field;
+
 public class Edition {
 
 	private String name;

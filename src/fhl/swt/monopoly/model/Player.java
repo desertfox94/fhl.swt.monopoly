@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.List;
 
+import fhl.swt.monopoly.core.cards.Card;
+
 public class Player implements StreetOwner, CardOwner {
 
 	private String id;
@@ -14,7 +16,6 @@ public class Player implements StreetOwner, CardOwner {
 	private int jailCount;
 	private int position;
 	private Color color;
-	
 	private int doubleCount;
 
 	public String getId() {
@@ -95,18 +96,6 @@ public class Player implements StreetOwner, CardOwner {
 	}
 
 	@Override
-	public void addCardToInventory(Card card) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeCardFromInventory(Card card) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void addToInventory(Street street) {
 		// TODO Auto-generated method stub
 		
@@ -114,6 +103,18 @@ public class Player implements StreetOwner, CardOwner {
 
 	@Override
 	public void removeFromInventory(Street street) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addCardToInventory(Card card) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeCardFromInventory(Card card) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -2,6 +2,8 @@ package fhl.swt.monopoly.model;
 
 import java.util.List;
 
+import fhl.swt.monopoly.core.cards.CardSet;
+
 public class Game {
 
 	private List<Player> players;
@@ -9,8 +11,12 @@ public class Game {
 	private int rounde;
 	private Player currentPlayer;
 
+	private CardSet communityCards;
+	
+	private CardSet eventCards;
+	
 	public void addPlayer() {
-		
+		 
 	}
 	
 	public List<Player> getPlayers() {
