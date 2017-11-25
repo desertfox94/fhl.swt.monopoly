@@ -5,12 +5,18 @@ public class DiceCast {
 	private Die firstDie;
 	private Die secondDie;
 
+	public int current() {
+		return firstDie.current() + secondDie.current();
+	}
+	
 	public boolean isDouble() {
 		return firstDie.equals(secondDie);
 	}
 
-	public int roll() {
-		return 23243;
+	public int next() {
+		firstDie.roll();
+		secondDie.roll();
+		return current();
 	}
 	
 }

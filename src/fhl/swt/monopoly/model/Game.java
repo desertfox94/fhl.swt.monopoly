@@ -1,25 +1,42 @@
 package fhl.swt.monopoly.model;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
+import fhl.swt.monopoly.core.CircleList;
 import fhl.swt.monopoly.core.cards.CardSet;
 
 public class Game {
 
-	private List<Player> players;
+	private CircleList<Player> players = new CircleList<>();
 	private Edition edition;
 	private int rounde;
 	private Player currentPlayer;
+	
+	private List<DiceCast> currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
+
+	public List<DiceCast> getCurrentPlayerDiceCastHistory() {
+		return currentPlayerDiceCastHistory;
+	}
 
 	private CardSet communityCards;
 	
 	private CardSet eventCards;
 	
-	public void addPlayer() {
-		 
+	public void addPlayer(Player player) {
+		 players.add(player);
 	}
 	
-	public List<Player> getPlayers() {
+	public CardSet getCommunityCards() {
+		return communityCards;
+	}
+
+	public CardSet getEventCards() {
+		return eventCards;
+	}
+
+	public CircleList<Player> getPlayers() {
 		return players;
 	}
 
@@ -40,10 +57,21 @@ public class Game {
 	}
 
 	public Player getCurrentPlayer() {
-		return players.get(players.indexOf(currentPlayer) + 1);
+		return currentPlayer;
 	}
 
-	public void nextPlayer() {
+	public Player nextPlayer() {
+		currentPlayer = players.next();
+		currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
+		return currentPlayer;
 	}
 
+	public void playerRolledTheDice(DiceCast diceCast) {
+		currentPlayerDiceCastHistory.add(diceCast);
+	}
+	
+	public int getPlayersThrowCount() {
+		return currentPlayerDiceCastHistory.size();
+	}
+	
 }

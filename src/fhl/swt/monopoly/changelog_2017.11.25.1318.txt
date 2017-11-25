@@ -1,0 +1,65 @@
+# CurrentPlayerController
+	+ MonopolyEngine engine
+	+ CurrentPlayerController(MonopolyEngine engine)
+# GameInitController
+	+ Game game
+	- addNewPlayer(Player player)
+	- selectColor(Color color)
+# LoadGameController extends GameInitController
+	+ DBService dbService
++ NewGameController extends GameInitController
+	+ addNewPlayer(Player player)
+	+ selectColor(Color color)
+# PlaygroundController
+	+ MonopolyEngine engine
+	+ PlaygroundController(MonopolyEngine engine)
+	+ canRollTheDice()
+# CircleList
+	+ int i
+	+ List<T> list
+	+ CircleList(List<T> list)
+	+ CircleList()
+	+ void select(T t)
+# DBService
+	+ connect(String connectionURL, String user, String pw)
+	+ static DBService getDefault()
+# MonopolyEngine	
+	+ int MAX_THROWS_IN_JAIL
+	+ int MAX_DOUBLE_COUNT
+	+ Playground playground
+	+ playerRollsTheDice()
+	+ canPlayerRollTheDice()
+	+ rollDiceInJail()
+	+ endTurn()
+	+ getGame()
++ Playground
+	+ CircleList<Field> fields
+	+ Playground(Edition edition)
+	+ movePlayer(Player player, int diceCast)
+# FreeparkingField extends Field
+# DiceCast
+	+ int current()
+	- int roll()
+	+ int next()
+# Edition	
+	# CircleList<Field> fields
+	+ CircleList<Field> getFields()	
+	+ setFields(CircleList<Field> fields)
+	- getField(int i)
+# Game
+	+ List<DiceCast> currentPlayerDiceCastHistory
+	+ getCurrentPlayerDiceCastHistory()
+	+ addPlayer(Player player)
+	+ CardSet getCommunityCards()
+	+ CardSet getEventCards()
+	# CircleList<Player> getPlayers()
+- Owner	
+# Player
+	- int position
+	+ Field field
+	+ Field getField()
+	+ setField(Field field)
+	- setPosition(int position)
+	- int getPosition()
+
+

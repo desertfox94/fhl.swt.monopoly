@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import fhl.swt.monopoly.core.cards.Card;
+import fhl.swt.monopoly.core.fields.Field;
 
 public class Player implements StreetOwner, CardOwner {
 
@@ -14,10 +15,18 @@ public class Player implements StreetOwner, CardOwner {
 	private List<Street> streets;
 	private List<Card> cards;
 	private int jailCount;
-	private int position;
+	private Field field;
 	private Color color;
 	private int doubleCount;
 
+	public Field getField() {
+		return field;
+	}
+
+	public void setField(Field field) {
+		this.field = field;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -69,14 +78,6 @@ public class Player implements StreetOwner, CardOwner {
 
 	public void sendToJail() {
 		jailCount++;
-	}
-
-	public int getPosition() {
-		return position;
-	}
-
-	public void setPosition(int position) {
-		this.position = position;
 	}
 
 	public Color getColor() {

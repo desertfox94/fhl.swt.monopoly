@@ -1,16 +1,16 @@
 package fhl.swt.monopoly.model;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.util.List;
 
-import com.sun.prism.Image;
-
+import fhl.swt.monopoly.core.CircleList;
 import fhl.swt.monopoly.core.fields.Field;
 
 public class Edition {
 
 	private String name;
-	private List<Field> fields;
+	private CircleList<Field> fields;
 	private int maxAmountOfPlayers;
 	private String currency;
 	private double currencyFactor;
@@ -21,8 +21,12 @@ public class Edition {
 		return name;
 	}
 
-	public Field getField(int i) {
-		return fields.get(i);
+	public CircleList<Field> getFields() {
+		return fields;
+	}
+
+	public void setFields(CircleList<Field> fields) {
+		this.fields = fields;
 	}
 
 	public String getWaehrung() {

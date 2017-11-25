@@ -1,9 +1,13 @@
 package fhl.swt.monopoly.controller;
 
-public class LoadGameController {
-		
+import fhl.swt.monopoly.core.DBService;
+
+public class LoadGameController extends GameInitController {
+	
+	private DBService dbService = DBService.getDefault();
+	
 	public void selectSaveGame() {
-		
+		game = dbService.loadGame();
 	}
 	
 }

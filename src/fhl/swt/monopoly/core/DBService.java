@@ -12,4 +12,14 @@ public class DBService {
 		return false;
 	}
 	
+	public boolean connect(String connectionURL, String user, String pw) {
+		return false;
+	}
+	
+	public static DBService getDefault() {
+		DBService dbService = new DBService();
+		dbService.connect("", "", "");
+		return dbService;
+	}
+	
 }
