@@ -77,4 +77,27 @@ public class Street {
 		return group;
 	}
 
+	public BigDecimal getCurrentRent() {
+		if (getHotel()) {
+			return rentDetails.getHotelRent();
+		}
+		switch (numberOfHouses) {
+		case 1:
+			return rentDetails.getFirstHouseRent();
+		case 2:
+			return rentDetails.getSecondHouseRent();
+		case 3:
+			return rentDetails.getThirdHouseRent();
+		case 4:
+			return rentDetails.getFourthHouseRent();
+		case 0:
+		default:
+			return new BigDecimal(rentDetails.getBaseRent());
+		}
+	}
+
+	public void setRentDetails(StreetDetails rentDetails) {
+		this.rentDetails = rentDetails;
+	}
+
 }

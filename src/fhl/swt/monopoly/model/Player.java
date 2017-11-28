@@ -2,6 +2,7 @@ package fhl.swt.monopoly.model;
 
 import java.awt.Color;
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 import fhl.swt.monopoly.core.cards.Card;
@@ -12,7 +13,7 @@ public class Player implements StreetOwner, CardOwner {
 	private String id;
 	private String name;
 	private BigDecimal balance;
-	private List<Street> streets;
+	private List<Street> streets = new LinkedList<>();
 	private List<Card> cards;
 	private int jailCount;
 	private Field field;
@@ -26,7 +27,7 @@ public class Player implements StreetOwner, CardOwner {
 	public void setField(Field field) {
 		this.field = field;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -38,7 +39,7 @@ public class Player implements StreetOwner, CardOwner {
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -50,7 +51,7 @@ public class Player implements StreetOwner, CardOwner {
 	public void pay(BigDecimal amount) {
 		balance.subtract(amount);
 	}
-	
+
 	public void addMoney(BigDecimal amount) {
 		balance.add(amount);
 	}
@@ -71,7 +72,7 @@ public class Player implements StreetOwner, CardOwner {
 	public boolean isInJail() {
 		return jailCount > 0;
 	}
-	
+
 	public void freeFromJail() {
 		jailCount = 0;
 	}
@@ -87,7 +88,7 @@ public class Player implements StreetOwner, CardOwner {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+
 	public void incDoubleCount() {
 		doubleCount++;
 	}
@@ -98,26 +99,29 @@ public class Player implements StreetOwner, CardOwner {
 
 	@Override
 	public void addToInventory(Street street) {
-		// TODO Auto-generated method stub
-		
+		streets.add(street);
 	}
 
 	@Override
 	public void removeFromInventory(Street street) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addCardToInventory(Card card) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void removeCardFromInventory(Card card) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
 	}
 
 }

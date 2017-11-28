@@ -1,6 +1,5 @@
 package fhl.swt.monopoly.model;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,8 +11,7 @@ public class Game {
 	private CircleList<Player> players = new CircleList<>();
 	private Edition edition;
 	private int rounde;
-	private Player currentPlayer;
-	
+
 	private List<DiceCast> currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
 
 	public List<DiceCast> getCurrentPlayerDiceCastHistory() {
@@ -21,13 +19,13 @@ public class Game {
 	}
 
 	private CardSet communityCards;
-	
+
 	private CardSet eventCards;
-	
+
 	public void addPlayer(Player player) {
-		 players.add(player);
+		players.add(player);
 	}
-	
+
 	public CardSet getCommunityCards() {
 		return communityCards;
 	}
@@ -57,21 +55,20 @@ public class Game {
 	}
 
 	public Player getCurrentPlayer() {
-		return currentPlayer;
+		return players.getCurrent();
 	}
 
 	public Player nextPlayer() {
-		currentPlayer = players.next();
 		currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
-		return currentPlayer;
+		return players.next();
 	}
 
 	public void playerRolledTheDice(DiceCast diceCast) {
 		currentPlayerDiceCastHistory.add(diceCast);
 	}
-	
+
 	public int getPlayersThrowCount() {
 		return currentPlayerDiceCastHistory.size();
 	}
-	
+
 }

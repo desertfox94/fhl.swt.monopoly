@@ -6,9 +6,9 @@ import java.util.List;
 public class CircleList<T> {
 
 	private int i;
-	
+
 	private final List<T> list;
-	
+
 	public CircleList(List<T> list) {
 		this.list = list;
 	}
@@ -16,7 +16,7 @@ public class CircleList<T> {
 	public CircleList() {
 		this.list = new ArrayList<T>();
 	}
-	
+
 	public T next() {
 		i++;
 		if (i >= list.size()) {
@@ -24,21 +24,25 @@ public class CircleList<T> {
 		}
 		return list.get(i);
 	}
-	
+
 	public T getCurrent() {
 		return list.get(i);
 	}
-	
+
 	public boolean add(T t) {
-		return true;
+		return list.add(t);
 	}
-	
+
 	public void select(T t) {
 		i = list.indexOf(t);
 	}
-	
+
 	public T remove(T t) {
 		return t;
 	}
-	
+
+	public List<T> toList() {
+		return list;
+	}
+
 }

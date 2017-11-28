@@ -6,8 +6,9 @@ import fhl.swt.monopoly.model.Player;
 public class CardField extends Field {
 
 	private CardSet cards;
-	
+
 	public CardField(CardSet cards) {
+		super(cards.getName());
 		this.cards = cards;
 	}
 

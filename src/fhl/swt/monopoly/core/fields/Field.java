@@ -4,11 +4,20 @@ import fhl.swt.monopoly.model.Player;
 
 public abstract class Field {
 
-	public abstract void landing(Player player);
-	
-	public void passing(Player player) {
-		
+	private String name;
+
+	public Field(String name) {
+		this.name = name;
 	}
 
-	
+	public abstract void landing(Player player);
+
+	public void passing(Player player) {
+
+	}
+
+	public String getName() {
+		return name;
+	}
+
 }

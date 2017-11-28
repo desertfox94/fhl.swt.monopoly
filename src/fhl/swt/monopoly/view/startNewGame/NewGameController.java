@@ -1,4 +1,6 @@
-package fhl.swt.monopoly.controller;
+package fhl.swt.monopoly.view.startNewGame;
+
+import fhl.swt.monopoly.view.GameInitController;
 
 public class NewGameController extends GameInitController {
 

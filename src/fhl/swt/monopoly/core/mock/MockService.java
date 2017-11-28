@@ -1,30 +1,27 @@
-package fhl.swt.monopoly.core;
+package fhl.swt.monopoly.core.mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fhl.swt.monopoly.core.mock.MockService;
+import fhl.swt.monopoly.core.DBService;
 import fhl.swt.monopoly.model.Game;
 
-public class DBService {
+public class MockService extends DBService {
 
 	public Game loadGame(String name) {
-		return null;
+		return GameMock.mockGame();
 	}
 
 	public boolean saveGame(Game game) {
-		return false;
+		return true;
 	}
 
 	public boolean connect(String connectionURL, String user, String pw) {
-		return false;
-	}
-
-	public static DBService getDefault() {
-		return new MockService();
+		return true;
 	}
 
 	public List<String> loadSavedGameTitles() {
 		return new ArrayList<>();
 	}
+
 }
