@@ -23,6 +23,7 @@ public class CardFactory {
 	}
 	
 	private void init() {
+		// comments
 		cardRegistery.put("1", FreeFromJail.class);
 	}
 	
