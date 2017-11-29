@@ -15,11 +15,7 @@ public class CardFactory {
 	}
 
 	public static CardFactory getInstance() {
-		if (factory == null) {
-			factory = new CardFactory();
-			factory.init();
-		}
-		return factory;
+		return  new CardFactory();
 	}
 	
 	private void init() {
