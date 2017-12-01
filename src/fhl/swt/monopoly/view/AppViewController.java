@@ -5,44 +5,65 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import fhl.swt.monopoly.model.Game;
-import fhl.swt.monopoly.view.playground.PlaygroundController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 public class AppViewController implements Initializable {
 
-	public BorderPane pane;
+	@FXML
+	public BorderPane mainPane;
 
-	private LoadGameController loadGameController = new LoadGameController();
+	@FXML
+	public GridPane mainMenu;
+
+	private static AppViewController instance;
+
+	public static AppViewController getInstance() {
+		return instance;
+	}
+
+	public AppViewController() {
+		instance = this;
+	}
 
 	@FXML
 	public void startNewGame() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(AppViewController.class.getResource("startNewGame/NewGameView.fxml"));
+			showInCenterPane(loader.load());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	public void showInCenterPane(Node pane) {
+		mainPane.centerProperty().set(pane);
+	}
+
+	@FXML
+	public void openMainMenu() {
+		showInCenterPane(mainMenu);
 	}
 
 	@FXML
 	public void loadGame() {
-		if (loadGameController.loadGame()) {
-			Game game = loadGameController.getGame();
+		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(AppViewController.class.getResource("playground/PlaygroundView.fxml"));
-			try {
-				SplitPane splitPane = loader.load();
-				PlaygroundController controller = loader.getController();
-				controller.preparePlayGround(game);
-				pane.centerProperty().set(splitPane);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			loader.setLocation(AppViewController.class.getResource("loadGame/LoadGameView.fxml"));
+			showInCenterPane(loader.load());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -86,9 +107,4 @@ public class AppViewController implements Initializable {
 	public void initialize(URL url, ResourceBundle bundle) {
 		System.out.println();
 	}
-
-	public void setStage(BorderPane pane) {
-		this.pane = pane;
-	}
-
 }

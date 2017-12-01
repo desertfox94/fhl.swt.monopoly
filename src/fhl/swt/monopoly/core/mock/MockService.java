@@ -24,4 +24,9 @@ public class MockService extends DBService {
 		return new ArrayList<>();
 	}
 
+	@Override
+	public Game loadLatestGame() {
+		return GameMock.mockGame();
+	}
+
 }

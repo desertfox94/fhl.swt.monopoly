@@ -24,6 +24,10 @@ public class DBService {
 		return new MockService();
 	}
 
+	public Game loadLatestGame() {
+		return null;
+	}
+
 	public List<String> loadSavedGameTitles() {
 		return new ArrayList<>();
 	}

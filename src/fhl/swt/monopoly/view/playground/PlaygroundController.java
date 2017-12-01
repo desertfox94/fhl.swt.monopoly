@@ -77,7 +77,7 @@ public class PlaygroundController {
 		rollTheDiceButton.setDisable(false);
 	}
 
-	public void preparePlayGround(Game game) {
+	public void preparePlayground(Game game) {
 		this.game = game;
 		engine = new MonopolyEngine(game);
 		invitePlayers();

@@ -2,7 +2,6 @@ package fhl.swt.monopoly;
 
 import java.io.IOException;
 
-import fhl.swt.monopoly.view.AppViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,10 +31,10 @@ public class App extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(App.class.getResource("view/AppView.fxml"));
 			rootLayout = (BorderPane) loader.load();
-			AppViewController controller = loader.getController();
-			controller.setStage(rootLayout);
 			// Show the scene containing the root layout.
 			Scene scene = new Scene(rootLayout);
+			primaryStage.setMinHeight(rootLayout.getMinHeight());
+			primaryStage.setMinWidth(rootLayout.getMinWidth());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {

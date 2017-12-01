@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1050.0" stylesheets="@../../../../../css/AppView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhl.swt.monopoly.view.AppViewController">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="600.0" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../../../../../css/AppView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhl.swt.monopoly.view.AppViewController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -21,6 +21,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#startNewGame" text="Neues Spiel!" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#save" text="Speichern" />
+                  <MenuItem mnemonicParsing="false" onAction="#openMainMenu" text="Zum Hauptmenü" />
               <MenuItem mnemonicParsing="false" onAction="#close" text="Beenden" />
             </items>
           </Menu>
@@ -32,4 +33,31 @@
         </menus>
       </MenuBar>
    </top>
+   <center>
+      <GridPane fx:id="mainMenu" BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Separator maxWidth="10.0" minWidth="10.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <Label text="Neues Spiel" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Label text="Spielstand laden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Region onMouseClicked="#loadGame" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+            <Region onMouseClicked="#startNewGame" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </GridPane>
+   </center>
 </BorderPane>
