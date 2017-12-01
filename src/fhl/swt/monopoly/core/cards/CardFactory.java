@@ -8,21 +8,25 @@ import java.util.List;
 public class CardFactory {
 
 	public static final HashMap<String, Class<?>> cardRegistery = new HashMap<>();
-	
+
 	private static CardFactory factory;
-	
+
 	private CardFactory() {
+		init();
 	}
 
 	public static CardFactory getInstance() {
-		return  new CardFactory();
+		if (factory == null) {
+			factory = new CardFactory();
+		}
+		return factory;
 	}
-	
+
 	private void init() {
 		// comments
 		cardRegistery.put("1", FreeFromJail.class);
 	}
-	
+
 	public static List<Card> createCarsSet(Collection<String> cardIds) {
 		List<Card> cards = new ArrayList<Card>(0);
 		for (String cardId : cardIds) {
@@ -35,5 +39,5 @@ public class CardFactory {
 		}
 		return cards;
 	}
-	
+
 }
