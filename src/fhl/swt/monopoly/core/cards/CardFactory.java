@@ -15,19 +15,16 @@ public class CardFactory {
 	}
 
 	public static CardFactory getInstance() {
-		if (factory == null) {
-			factory = new CardFactory();
-			factory.init();
-		}
-		return factory;
+		return  new CardFactory();
 	}
 	
 	private void init() {
+		// comments
 		cardRegistery.put("1", FreeFromJail.class);
 	}
 	
 	public static List<Card> createCarsSet(Collection<String> cardIds) {
-		List<Card> cards = new ArrayList<Card>(cardIds.size());
+		List<Card> cards = new ArrayList<Card>(0);
 		for (String cardId : cardIds) {
 			try {
 				cards.add((Card) cardRegistery.get(cardId).newInstance());

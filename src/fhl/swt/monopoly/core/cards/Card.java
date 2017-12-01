@@ -9,7 +9,7 @@ public abstract class Card {
 	private String description;
 
 	public Card(String title, String description) {
-		this.title = title;
+		this.title = title.trim();
 		this.description = description;
 	}
 	
