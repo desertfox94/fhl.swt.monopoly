@@ -5,7 +5,7 @@ import fhl.swt.monopoly.model.Player;
 public class FreeparkingField extends Field {
 
 	public FreeparkingField() {
-		super("Frei Parken");
+		super("Frei Parken", 20);
 	}
 
 	@Override

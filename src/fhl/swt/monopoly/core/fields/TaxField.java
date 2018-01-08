@@ -4,8 +4,8 @@ import fhl.swt.monopoly.model.Player;
 
 public class TaxField extends Field {
 
-	public TaxField() {
-		super("Einkommenssteuer");
+	public TaxField(int index) {
+		super("Einkommenssteuer", index);
 	}
 
 	@Override

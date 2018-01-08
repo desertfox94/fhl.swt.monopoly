@@ -3,6 +3,8 @@ package fhl.swt.monopoly.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import fhl.swt.monopoly.core.fields.Field;
+
 public class CircleList<T> {
 
 	private int i;
@@ -43,6 +45,10 @@ public class CircleList<T> {
 
 	public List<T> toList() {
 		return list;
+	}
+
+	public int indexOf(Field field) {
+		return list.indexOf(field);
 	}
 
 }

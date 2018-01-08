@@ -7,8 +7,8 @@ public class CardField extends Field {
 
 	private CardSet cards;
 
-	public CardField(CardSet cards) {
-		super(cards.getName());
+	public CardField(CardSet cards, int number) {
+		super(cards.getName(), number);
 		this.cards = cards;
 	}
 

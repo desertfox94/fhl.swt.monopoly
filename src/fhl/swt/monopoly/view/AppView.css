@@ -1,10 +1,10 @@
 .Region {
--fx-background-image:  url('../data/throneopoly_board.jpg');
+-fx-background-image:  url('throneopoly_board.jpg');
 -fx-background-size: contain;
 -fx-background-repeat: no-repeat;
 -fx-background-position: top;
 }
 
 .rotateButton {
--fx-background-image:  url('../data/rotate_right.png');
+-fx-background-image:  url('rotate_right.png');
 }

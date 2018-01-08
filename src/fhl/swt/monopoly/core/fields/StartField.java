@@ -5,7 +5,7 @@ import fhl.swt.monopoly.model.Player;
 public class StartField extends Field {
 
 	public StartField() {
-		super("Los");
+		super("Los", 0);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import fhl.swt.monopoly.model.Player;
 public class JailField extends Field {
 
 	public JailField() {
-		super("Gefängnis");
+		super("Gefängnis", 30);
 	}
 
 	@Override

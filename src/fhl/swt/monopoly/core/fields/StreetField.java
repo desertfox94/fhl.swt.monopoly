@@ -7,8 +7,8 @@ public class StreetField extends Field {
 
 	private Street street;
 
-	public StreetField(Street street) {
-		super(street.getName());
+	public StreetField(Street street, int index) {
+		super(street.getName(), index);
 		this.street = street;
 	}
 
