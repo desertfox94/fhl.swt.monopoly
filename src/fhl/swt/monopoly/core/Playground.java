@@ -11,15 +11,17 @@ public class Playground {
 	public Playground(Edition edition) {
 		fields = edition.getFields();
 	}
-	
+
 	public void movePlayer(Player player, int diceCast) {
-		fields.select(player.getField());
+		fields.select(player.getField().get());
 		Field field = fields.next();
 		for (int i = 0; i < diceCast; i++) {
+			player.moveTo(field);
 			field.passing(player);
+			field = fields.next();
 		}
 		field.landing(player);
-		player.setField(field);
+		player.moveTo(field);
 	}
-	
+
 }

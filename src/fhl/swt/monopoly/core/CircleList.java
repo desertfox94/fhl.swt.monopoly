@@ -51,4 +51,8 @@ public class CircleList<T> {
 		return list.indexOf(field);
 	}
 
+	public T get(int index) {
+		return list.get(index);
+	}
+
 }

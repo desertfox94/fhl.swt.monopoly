@@ -1,7 +1,7 @@
 package fhl.swt.monopoly.model;
 
-import java.awt.Color;
-import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 import java.util.List;
 
 import fhl.swt.monopoly.core.CircleList;
@@ -14,11 +14,15 @@ public class Edition {
 	private int maxAmountOfPlayers;
 	private String currency;
 	private double currencyFactor;
-	private List<Color> colors;
-	private Image background;
+	private List<Figure> figures = new LinkedList<>();
+	private BufferedImage background;
 
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public CircleList<Field> getFields() {
@@ -29,28 +33,48 @@ public class Edition {
 		this.fields = fields;
 	}
 
-	public String getWaehrung() {
+	public int getMaxAmountOfPlayers() {
+		return maxAmountOfPlayers;
+	}
+
+	public void setMaxAmountOfPlayers(int maxAmountOfPlayers) {
+		this.maxAmountOfPlayers = maxAmountOfPlayers;
+	}
+
+	public String getCurrency() {
 		return currency;
 	}
 
-	public void setWaehrung(String waehrung) {
-		this.currency = waehrung;
-	}
-
-	public List<Color> getFiguren() {
-		return colors;
-	}
-
-	public Image getBackground() {
-		return background;
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 	public double getCurrencyFactor() {
 		return currencyFactor;
 	}
 
-	public int getMaxAmountOfPlayers() {
-		return maxAmountOfPlayers;
+	public void setCurrencyFactor(double currencyFactor) {
+		this.currencyFactor = currencyFactor;
+	}
+
+	public List<Figure> getFigures() {
+		return figures;
+	}
+
+	public void setFigures(List<Figure> figures) {
+		this.figures = figures;
+	}
+
+	public void addFigure(Figure figure) {
+		figures.add(figure);
+	}
+
+	public BufferedImage getBackground() {
+		return background;
+	}
+
+	public void setBackground(BufferedImage background) {
+		this.background = background;
 	}
 
 }

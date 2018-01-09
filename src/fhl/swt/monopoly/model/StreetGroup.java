@@ -2,11 +2,12 @@ package fhl.swt.monopoly.model;
 
 import java.awt.Color;
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 public class StreetGroup {
 
-	private List<Street> streets;
+	private List<Street> streets = new LinkedList<>();
 	private Color color;
 	private BigDecimal pricePerHouse;
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import fhl.swt.monopoly.core.CircleList;
 import fhl.swt.monopoly.core.cards.CardSet;
+import fhl.swt.monopoly.core.fields.Field;
 
 public class Game {
 
@@ -14,16 +15,16 @@ public class Game {
 
 	private List<DiceCast> currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
 
-	public List<DiceCast> getCurrentPlayerDiceCastHistory() {
-		return currentPlayerDiceCastHistory;
-	}
-
 	private CardSet communityCards;
 
 	private CardSet eventCards;
 
 	public void addPlayer(Player player) {
 		players.add(player);
+		Field field = player.getField().get();
+		if (field == null) {
+			player.moveTo(edition.getFields().get(0));
+		}
 	}
 
 	public CardSet getCommunityCards() {
@@ -56,6 +57,10 @@ public class Game {
 
 	public Player getCurrentPlayer() {
 		return players.getCurrent();
+	}
+
+	public List<DiceCast> getCurrentPlayerDiceCastHistory() {
+		return currentPlayerDiceCastHistory;
 	}
 
 	public Player nextPlayer() {

@@ -50,7 +50,7 @@ public class MonopolyEngine {
 		if (player.getDoubleCount() == MAX_DOUBLE_COUNT) {
 			player.sendToJail();
 		}
-		// TODO: playground.movePlayer(player, diceCast.current());
+		playground.movePlayer(player, diceCast.current());
 		return diceCast;
 	}
 

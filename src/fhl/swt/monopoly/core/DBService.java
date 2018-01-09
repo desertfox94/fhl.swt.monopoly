@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fhl.swt.monopoly.core.mock.MockService;
+import fhl.swt.monopoly.model.Edition;
 import fhl.swt.monopoly.model.Game;
 
-public class DBService {
+public abstract class DBService {
+
+	public abstract List<String> loadAvailableEditions();
+
+	public abstract Edition loadEdition(String name);
 
 	public Game loadGame(String name) {
 		return null;
@@ -31,4 +36,5 @@ public class DBService {
 	public List<String> loadSavedGameTitles() {
 		return new ArrayList<>();
 	}
+
 }

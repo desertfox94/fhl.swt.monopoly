@@ -1,31 +1,38 @@
 package fhl.swt.monopoly.model;
 
-import java.awt.Color;
-import java.math.BigDecimal;
-import java.util.LinkedList;
 import java.util.List;
 
 import fhl.swt.monopoly.core.cards.Card;
 import fhl.swt.monopoly.core.fields.Field;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Player implements StreetOwner, CardOwner {
 
 	private String id;
-	private String name;
-	private BigDecimal balance;
-	private List<Street> streets = new LinkedList<>();
-	private List<Card> cards;
+	private StringProperty name = new SimpleStringProperty();
+	private DoubleProperty balance = new SimpleDoubleProperty();
+	private ObservableList<Street> streets = FXCollections.emptyObservableList();
+	private ObservableList<Card> cards = FXCollections.emptyObservableList();
 	private int jailCount;
-	private Field field;
-	private Color color;
+	private SimpleObjectProperty<Field> field = new SimpleObjectProperty<>();
+	private Figure figure;
 	private int doubleCount;
+	private SimpleIntegerProperty position = new SimpleIntegerProperty(0);
 
-	public Field getField() {
+	public SimpleObjectProperty<Field> getField() {
 		return field;
 	}
 
-	public void setField(Field field) {
-		this.field = field;
+	public void moveTo(Field field) {
+		this.field.set(field);
+		position.set(field.getIndex());
 	}
 
 	public String getId() {
@@ -37,22 +44,22 @@ public class Player implements StreetOwner, CardOwner {
 	}
 
 	public String getName() {
-		return name;
+		return name.get();
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name.set(name);
 	}
 
-	public BigDecimal getBalance() {
+	public DoubleProperty getBalance() {
 		return balance;
 	}
 
-	public void pay(BigDecimal amount) {
+	public void pay(double amount) {
 		balance.subtract(amount);
 	}
 
-	public void addMoney(BigDecimal amount) {
+	public void addMoney(double amount) {
 		balance.add(amount);
 	}
 
@@ -66,7 +73,7 @@ public class Player implements StreetOwner, CardOwner {
 	}
 
 	public void setCards(List<Card> cards) {
-		this.cards = cards;
+		this.cards = FXCollections.observableArrayList(cards);
 	}
 
 	public boolean isInJail() {
@@ -81,12 +88,12 @@ public class Player implements StreetOwner, CardOwner {
 		jailCount++;
 	}
 
-	public Color getColor() {
-		return color;
+	public Figure getFigure() {
+		return figure;
 	}
 
-	public void setColor(Color color) {
-		this.color = color;
+	public void setFigure(Figure figure) {
+		this.figure = figure;
 	}
 
 	public void incDoubleCount() {
@@ -120,8 +127,12 @@ public class Player implements StreetOwner, CardOwner {
 
 	}
 
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
+	public void setBalance(double balance) {
+		this.balance.set(balance);
+	}
+
+	public SimpleIntegerProperty getPosition() {
+		return position;
 	}
 
 }

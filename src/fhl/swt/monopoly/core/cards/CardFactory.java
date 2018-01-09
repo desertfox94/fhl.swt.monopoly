@@ -9,6 +9,29 @@ public class CardFactory {
 
 	public static final HashMap<String, Class<?>> cardRegistery = new HashMap<>();
 
+	public static CardSet createEventCards() {
+		return new CardSet(null, "Event Cards") {
+
+			@Override
+			void initCards() {
+				// TODO Auto-generated method stub
+
+			}
+		};
+	}
+
+	public static CardSet createCommunityCards() {
+		return new CardSet(null, "Community Cards") {
+
+			@Override
+			void initCards() {
+				// TODO Auto-generated method stub
+
+			}
+		};
+
+	}
+
 	private static CardFactory factory;
 
 	private CardFactory() {

@@ -1,9 +1,11 @@
 package fhl.swt.monopoly.view.playerInventory;
 
+import fhl.swt.monopoly.core.fields.Field;
 import fhl.swt.monopoly.model.Game;
 import fhl.swt.monopoly.model.Player;
 import fhl.swt.monopoly.model.Street;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -70,8 +72,13 @@ public class PlayerInventoryController {
 		streetGroupColum.setCellValueFactory(s -> new SimpleStringProperty(""));
 		streetNameColum.setCellValueFactory(s -> new SimpleStringProperty(s.getValue().getName()));
 		currentRentColumn.setCellValueFactory(s -> new SimpleStringProperty(s.getValue().getCurrentRent().toString()));
-		accountBalanceLabel.textProperty().bind(new SimpleStringProperty(player.getBalance().toString()));
-		currentFieldLabel.textProperty().bind(new SimpleStringProperty(player.getField() == null ? "" : player.getField().getName()));
+		accountBalanceLabel.textProperty().bind(player.getBalance().asString());
+		player.getField().addListener(new ChangeListener<Field>() {
+			public void changed(javafx.beans.value.ObservableValue<? extends Field> observable, Field oldValue, Field newValue) {
+				currentFieldLabel.textProperty().set(newValue.getName());
+			};
+		});
+		currentFieldLabel.textProperty().set(player.getField().get().getName());
 		refreshTitle();
 	}
 

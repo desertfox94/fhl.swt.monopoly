@@ -100,4 +100,8 @@ public class Street {
 		this.rentDetails = rentDetails;
 	}
 
+	public void setGroup(StreetGroup group) {
+		this.group = group;
+	}
+
 }
