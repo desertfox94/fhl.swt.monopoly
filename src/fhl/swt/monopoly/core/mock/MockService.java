@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import de.desertfox.csv.CSVImport;
+import fhl.swt.csv.CSVImport;
 import fhl.swt.monopoly.core.DBService;
 import fhl.swt.monopoly.core.cards.CardFactory;
 import fhl.swt.monopoly.core.cards.CardSet;
