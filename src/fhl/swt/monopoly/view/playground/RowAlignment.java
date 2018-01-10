@@ -5,11 +5,11 @@ public enum RowAlignment {
 	BOTTOM, LEFT, TOP, RIGHT;
 
 	public static RowAlignment get(int fieldIndex) {
-		if (fieldIndex < 10) {
+		if (fieldIndex <= 10) {
 			return BOTTOM;
-		} else if (fieldIndex >= 10 && fieldIndex < 20) {
+		} else if (fieldIndex > 10 && fieldIndex <= 20) {
 			return LEFT;
-		} else if (fieldIndex >= 20 && fieldIndex < 30) {
+		} else if (fieldIndex > 20 && fieldIndex <= 30) {
 			return TOP;
 		} else {
 			return RIGHT;

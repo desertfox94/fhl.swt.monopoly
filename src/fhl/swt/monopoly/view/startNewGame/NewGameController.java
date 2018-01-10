@@ -71,6 +71,7 @@ public class NewGameController extends GameInitController implements Initializab
 		game.setEdition(selectedEdition);
 		for (Player player : getPlayers()) {
 			game.addPlayer(player);
+			player.setGame(game);
 		}
 		startGame(game);
 	}
@@ -90,9 +91,8 @@ public class NewGameController extends GameInitController implements Initializab
 					player.setName(name);
 					player.setFigure(selectedEdition.getFigures().stream().filter(f -> f.getName().equals(figure)).findFirst().get());
 					players.add(player);
-
+					player.setBalance(8000);
 				}
-
 			}
 		}
 		return players;

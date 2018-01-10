@@ -14,11 +14,11 @@ public class Playground {
 
 	public void movePlayer(Player player, int diceCast) {
 		fields.select(player.getField().get());
-		Field field = fields.next();
+		Field field = null;
 		for (int i = 0; i < diceCast; i++) {
+			field = fields.next();
 			player.moveTo(field);
 			field.passing(player);
-			field = fields.next();
 		}
 		field.landing(player);
 		player.moveTo(field);

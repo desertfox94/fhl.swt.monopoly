@@ -20,7 +20,22 @@
             <ToolBar nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
                <items>
                   <Button fx:id="endTurnButton" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onAction="#endTurn" text="Zug beenden" />
-                  <Button fx:id="rollTheDiceButton" maxHeight="30.0" mnemonicParsing="false" onAction="#rollTheDice" prefHeight="30.0" prefWidth="100.0" text="Würfeln!" />
+                  <ImageView fx:id="dieTwo" fitHeight="35.0" fitWidth="35.0" onMouseClicked="#rollTheDice" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@die/1.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="dieOne" fitHeight="35.0" fitWidth="35.0" onMouseClicked="#rollTheDice" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@die/1.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                   <Separator orientation="VERTICAL" />
                   <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#rotate" prefHeight="30.0" prefWidth="30.0" styleClass="rotateButton">
                      <tooltip>

@@ -4,7 +4,10 @@ import java.util.List;
 
 import fhl.swt.monopoly.core.cards.Card;
 import fhl.swt.monopoly.core.fields.Field;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -16,11 +19,13 @@ import javafx.collections.ObservableList;
 public class Player implements StreetOwner, CardOwner {
 
 	private String id;
+	private Game game;
 	private StringProperty name = new SimpleStringProperty();
 	private DoubleProperty balance = new SimpleDoubleProperty();
-	private ObservableList<Street> streets = FXCollections.emptyObservableList();
-	private ObservableList<Card> cards = FXCollections.emptyObservableList();
-	private int jailCount;
+	private ObservableList<Street> streets = FXCollections.observableArrayList();
+	private ObservableList<Card> cards = FXCollections.observableArrayList();
+	private IntegerProperty jailCount = new SimpleIntegerProperty();
+	private BooleanProperty jail = new SimpleBooleanProperty();
 	private SimpleObjectProperty<Field> field = new SimpleObjectProperty<>();
 	private Figure figure;
 	private int doubleCount;
@@ -56,15 +61,15 @@ public class Player implements StreetOwner, CardOwner {
 	}
 
 	public void pay(double amount) {
-		balance.subtract(amount);
+		balance.set(balance.get() - amount);
 	}
 
 	public void addMoney(double amount) {
-		balance.add(amount);
+		balance.set(balance.get() + amount);
 	}
 
 	@Override
-	public List<Street> getStreets() {
+	public ObservableList<Street> getStreets() {
 		return streets;
 	}
 
@@ -77,15 +82,17 @@ public class Player implements StreetOwner, CardOwner {
 	}
 
 	public boolean isInJail() {
-		return jailCount > 0;
+		return jail.get();
 	}
 
 	public void freeFromJail() {
-		jailCount = 0;
+		jailCount.set(0);
 	}
 
 	public void sendToJail() {
-		jailCount++;
+		jailCount.set(1);
+		jail.set(true);
+		// field.set(game.getEdition().getFields().get(JailField.INDEX));
 	}
 
 	public Figure getFigure() {
@@ -133,6 +140,10 @@ public class Player implements StreetOwner, CardOwner {
 
 	public SimpleIntegerProperty getPosition() {
 		return position;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
 }

@@ -19,4 +19,9 @@ public class Bank implements StreetOwner {
 
 	}
 
+	@Override
+	public String getName() {
+		return "Bank";
+	}
+
 }

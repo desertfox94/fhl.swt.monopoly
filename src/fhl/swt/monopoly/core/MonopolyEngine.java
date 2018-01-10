@@ -68,4 +68,8 @@ public class MonopolyEngine {
 		return game;
 	}
 
+	public DiceCast getDiceCast() {
+		return diceCast;
+	}
+
 }

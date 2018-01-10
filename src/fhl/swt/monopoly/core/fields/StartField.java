@@ -4,19 +4,20 @@ import fhl.swt.monopoly.model.Player;
 
 public class StartField extends Field {
 
+	private static final int MONEY = 200;
+
 	public StartField() {
 		super("Los", 0);
 	}
 
 	@Override
 	public void landing(Player player) {
-		// TODO Auto-generated method stub
-
+		player.addMoney(MONEY * 2);
 	}
 
 	@Override
 	public void passing(Player player) {
-		// player.addMoney(new BigDecimal(8000));
+		player.addMoney(MONEY);
 	}
 
 }

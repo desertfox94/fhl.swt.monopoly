@@ -5,12 +5,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import fhl.swt.monopoly.core.CircleList;
+
 public class CardFactory {
 
 	public static final HashMap<String, Class<?>> cardRegistery = new HashMap<>();
 
 	public static CardSet createEventCards() {
-		return new CardSet(null, "Event Cards") {
+		return new CardSet(new CircleList<>(), "Event Card") {
 
 			@Override
 			void initCards() {
@@ -21,7 +23,7 @@ public class CardFactory {
 	}
 
 	public static CardSet createCommunityCards() {
-		return new CardSet(null, "Community Cards") {
+		return new CardSet(new CircleList<>(), "Community Card") {
 
 			@Override
 			void initCards() {

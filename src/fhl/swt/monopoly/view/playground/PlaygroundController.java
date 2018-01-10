@@ -8,19 +8,17 @@ import java.util.List;
 import java.util.Map;
 
 import fhl.swt.monopoly.core.MonopolyEngine;
-import fhl.swt.monopoly.model.DiceCast;
 import fhl.swt.monopoly.model.Game;
 import fhl.swt.monopoly.model.Player;
 import fhl.swt.monopoly.view.AppViewController;
 import fhl.swt.monopoly.view.playerInventory.PlayerInventoryController;
+import fhl.swt.monopoly.view.playground.die.DieListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
@@ -40,7 +38,10 @@ public class PlaygroundController {
 	private Game game;
 
 	@FXML
-	private Button rollTheDiceButton;
+	private ImageView dieOne;
+
+	@FXML
+	private ImageView dieTwo;
 
 	@FXML
 	private Pane playgroundPane;
@@ -72,21 +73,14 @@ public class PlaygroundController {
 
 	@FXML
 	private void rollTheDice() {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Gewürfelt");
-		alert.setHeaderText(null);
-		DiceCast diceCast = engine.playerRollsTheDice();
-		String message;
-		if (diceCast.isDouble()) {
-			message = "Sie haben einen Pasch gewürfelt und rücken " + diceCast.current() + " Felder vor:";
-		} else {
-			message = "Sie rücken um " + diceCast.current() + " Felder vor.";
-		}
-		alert.setContentText(message);
-
-		alert.showAndWait();
-		rollTheDiceButton.setDisable(!engine.canPlayerRollTheDice());
+		engine.playerRollsTheDice();
+		disableDice(!engine.canPlayerRollTheDice());
 		adjustPlayerPosition(game.getCurrentPlayer());
+	}
+
+	private void disableDice(boolean b) {
+		dieOne.setDisable(b);
+		dieTwo.setDisable(b);
 	}
 
 	private double getSizeOfBackgroundImage() {
@@ -102,13 +96,14 @@ public class PlaygroundController {
 	private void endTurn() {
 		game.nextPlayer();
 		playerHub.getPanes().forEach(x -> controllers.get(x).refreshTitle());
-		rollTheDiceButton.setDisable(false);
+		disableDice(false);
 		adjustPlayerPosition(game.getCurrentPlayer());
 	}
 
 	public void preparePlayground(Game game) {
 		this.game = game;
 		engine = new MonopolyEngine(game);
+		engine.getDiceCast().addListeners(new DieListener(dieOne), new DieListener(dieTwo));
 		playgroundImageDescr = PlaygroundImageDescriptor.loadGOTPlaygroundDescriptor();
 		BufferedImage background = game.getEdition().getBackground();
 		WritableImage fxImage = SwingFXUtils.toFXImage(background, new WritableImage(600, 600));

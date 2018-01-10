@@ -6,7 +6,7 @@ import fhl.swt.monopoly.model.Player;
 import fhl.swt.monopoly.model.Street;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.collections.FXCollections;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -68,11 +68,18 @@ public class PlayerInventoryController {
 	}
 
 	private void intializeControls() {
-		streetTable.setItems(FXCollections.observableArrayList(player.getStreets()));
+		streetTable.setItems(player.getStreets());
 		streetGroupColum.setCellValueFactory(s -> new SimpleStringProperty(""));
 		streetNameColum.setCellValueFactory(s -> new SimpleStringProperty(s.getValue().getName()));
-		currentRentColumn.setCellValueFactory(s -> new SimpleStringProperty(s.getValue().getCurrentRent().toString()));
-		accountBalanceLabel.textProperty().bind(player.getBalance().asString());
+		// currentRentColumn.setCellValueFactory(s -> new SimpleStringProperty("" +
+		// s.getValue().getRent().get()));
+		player.getBalance().addListener(new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				accountBalanceLabel.textProperty().set(newValue.toString());
+			}
+		});
 		player.getField().addListener(new ChangeListener<Field>() {
 			public void changed(javafx.beans.value.ObservableValue<? extends Field> observable, Field oldValue, Field newValue) {
 				currentFieldLabel.textProperty().set(newValue.getName());

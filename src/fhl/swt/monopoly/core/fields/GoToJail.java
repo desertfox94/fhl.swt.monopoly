@@ -10,8 +10,7 @@ public class GoToJail extends Field {
 
 	@Override
 	public void landing(Player player) {
-		// TODO Auto-generated method stub
-
+		player.sendToJail();
 	}
 
 }

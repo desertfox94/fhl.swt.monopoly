@@ -2,6 +2,9 @@ package fhl.swt.monopoly.model;
 
 import java.math.BigDecimal;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 public class Street {
 
 	private String name;
@@ -12,6 +15,8 @@ public class Street {
 	private StreetOwner owner;
 	private StreetDetails rentDetails;
 	private StreetGroup group;
+
+	private DoubleProperty rent = new SimpleDoubleProperty();
 
 	public String getName() {
 		return name;
@@ -35,6 +40,7 @@ public class Street {
 
 	public void buildHouses(int numberOfHouses) {
 		this.numberOfHouses = numberOfHouses;
+		rent.set(getCurrentRent().doubleValue());
 	}
 
 	public void demolishHouses(int numberOfHouses) {
@@ -77,7 +83,7 @@ public class Street {
 		return group;
 	}
 
-	public BigDecimal getCurrentRent() {
+	private BigDecimal getCurrentRent() {
 		if (getHotel()) {
 			return rentDetails.getHotelRent();
 		}
@@ -98,10 +104,15 @@ public class Street {
 
 	public void setRentDetails(StreetDetails rentDetails) {
 		this.rentDetails = rentDetails;
+		rent.set(rentDetails.getBaseRent());
 	}
 
 	public void setGroup(StreetGroup group) {
 		this.group = group;
+	}
+
+	public DoubleProperty getRent() {
+		return rent;
 	}
 
 }

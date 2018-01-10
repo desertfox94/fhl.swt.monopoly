@@ -20,6 +20,9 @@ public class CircleList<T> {
 	}
 
 	public T next() {
+		if (list.isEmpty()) {
+			return null;
+		}
 		i++;
 		if (i >= list.size()) {
 			i = 0;

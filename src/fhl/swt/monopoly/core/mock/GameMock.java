@@ -32,7 +32,7 @@ public class GameMock extends Game {
 
 	private static Player mockPlayer(String name, Figure figure) {
 		Player player = new Player();
-		player.setBalance(45000);
+		player.setBalance(8000.0);
 		int streetCount = r.nextInt(8);
 		player.setFigure(figure);
 		// for (int i = 0; i < streetCount; i++) {
