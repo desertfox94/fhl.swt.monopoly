@@ -3,15 +3,17 @@ package fhl.swt.monopoly.view.startNewGame.NewPlayer;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
+import fhl.swt.monopoly.model.Figure;
 
 public class NewPlayerController implements Initializable {
 
@@ -19,7 +21,7 @@ public class NewPlayerController implements Initializable {
 	private Label number;
 
 	@FXML
-	private FigureCombobox icons;
+	private ComboBox<Figure> combobox;
 
 	@FXML
 	private TextField name;
@@ -27,6 +29,8 @@ public class NewPlayerController implements Initializable {
 	private NewPlayerModel newPlayerModel = new NewPlayerModel();
 
 	private ObservableList<String> availableFigures;
+
+	private FigureCombobox figureCombobox;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -45,7 +49,8 @@ public class NewPlayerController implements Initializable {
 			}
 
 		});
-		icons.selectionModelProperty().addListener(
+		ObjectProperty<SingleSelectionModel<Figure>> selectionModelProperty = combobox.selectionModelProperty();
+		selectionModelProperty.addListener(
 				new ChangeListener<Object>() {
 					@Override
 					public void changed(
@@ -67,6 +72,7 @@ public class NewPlayerController implements Initializable {
 			}
 
 		});
+		figureCombobox = new FigureCombobox(combobox);
 	}
 
 	public void setNumber(int n) {
@@ -77,9 +83,9 @@ public class NewPlayerController implements Initializable {
 		return newPlayerModel.getValidProperty().get();
 	}
 
-	public void setItems(ObservableList<String> availableFigures) {
-//		icons.setAvailableFigures(availableFigures);
-//		icons.setItems(availableFigures);
+	public void setItems(ObservableList<Figure> availableFigures) {
+		figureCombobox.setAvailableFigures(availableFigures);
+		//		icons.setItems(availableFigures);
 	}
 
 	public void addValidListener(ChangeListener<Boolean> changeListener) {

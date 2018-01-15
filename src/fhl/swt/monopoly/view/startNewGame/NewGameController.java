@@ -22,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import fhl.swt.monopoly.core.DBService;
 import fhl.swt.monopoly.model.Edition;
+import fhl.swt.monopoly.model.Figure;
 import fhl.swt.monopoly.model.Game;
 import fhl.swt.monopoly.model.Player;
 import fhl.swt.monopoly.view.GameInitController;
@@ -35,7 +36,7 @@ public class NewGameController extends GameInitController implements
 	private ObservableList<String> editions = FXCollections
 			.observableArrayList(DBService.getDefault().loadAvailableEditions());
 
-	private ObservableList<String> figures = FXCollections
+	private ObservableList<Figure> figures = FXCollections
 			.observableArrayList();
 
 	private List<String> takenFigures = new LinkedList<>();
@@ -112,6 +113,7 @@ public class NewGameController extends GameInitController implements
 	}
 
 	private void initPlayers() {
+		figures = FXCollections.observableArrayList(selectedEdition.getFigures());
 		try {
 			playersGrid.getChildren().clear();
 			Pane newPlayerView;
@@ -124,10 +126,7 @@ public class NewGameController extends GameInitController implements
 				controller = loader.getController();
 				controller.setNumber(i);
 				// figures.addAll(selectedEdition.getFigures());
-				controller.setItems(FXCollections
-						.observableArrayList(selectedEdition.getFigures()
-								.stream().map(f -> f.getName())
-								.collect(Collectors.toList())));
+				controller.setItems(figures);
 				controller.addValidListener(new ChangeListener<Boolean>() {
 					@Override
 					public void changed(

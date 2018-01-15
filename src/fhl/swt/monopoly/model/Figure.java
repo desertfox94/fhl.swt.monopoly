@@ -25,6 +25,10 @@ public class Figure {
 		return image.get();
 	}
 
+	public void setSelected(boolean selected) {
+		this.selected.set(selected);
+	}
+
 	public String getName() {
 		return name.get();
 	}
