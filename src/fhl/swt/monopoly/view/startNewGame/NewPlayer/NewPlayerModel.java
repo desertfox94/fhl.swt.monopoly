@@ -1,21 +1,21 @@
 package fhl.swt.monopoly.view.startNewGame.NewPlayer;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
 public class NewPlayerModel {
 
-	private BooleanProperty valid;
-	
-	private StringProperty name;
-	
-	private StringProperty icon;
-	
+	private BooleanProperty valid = new SimpleBooleanProperty();
+
+	private StringProperty name = new SimpleStringProperty();
+
+	private StringProperty icon = new SimpleStringProperty();
+
 	public NewPlayerModel() {
 	}
-	
+
 	public BooleanProperty getValidProperty() {
 		return valid;
 	}

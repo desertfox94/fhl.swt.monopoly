@@ -2,7 +2,6 @@ package fhl.swt.monopoly.view.startNewGame;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -19,11 +18,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import fhl.swt.monopoly.App;
 import fhl.swt.monopoly.core.DBService;
 import fhl.swt.monopoly.model.Edition;
 import fhl.swt.monopoly.model.Game;
@@ -127,6 +123,19 @@ public class NewGameController extends GameInitController implements
 				loader.load();
 				controller = loader.getController();
 				controller.setNumber(i);
+				// figures.addAll(selectedEdition.getFigures());
+				controller.setItems(FXCollections
+						.observableArrayList(selectedEdition.getFigures()
+								.stream().map(f -> f.getName())
+								.collect(Collectors.toList())));
+				controller.addValidListener(new ChangeListener<Boolean>() {
+					@Override
+					public void changed(
+							ObservableValue<? extends Boolean> arg0,
+							Boolean arg1, Boolean arg2) {
+						startGameButton.setDisable(!hasEnoughPlayers());
+					}
+				});
 				newPlayerView = (Pane) loader.getRoot();
 				playersGrid.addRow(i, newPlayerView);
 				players.add(controller);
@@ -144,13 +153,13 @@ public class NewGameController extends GameInitController implements
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		editionsBox.setItems(editions);
-		editionsBox.getSelectionModel().selectedIndexProperty()
-				.addListener(new ChangeListener<Number>() {
-
+		editionsBox.getSelectionModel().selectedItemProperty()
+				.addListener(new ChangeListener<String>() {
 					@Override
-					public void changed(
-							ObservableValue<? extends Number> observableValue,
-							Number number, Number number2) {
+					public void changed(ObservableValue<? extends String> arg0,
+							String arg1, String arg2) {
+						selectedEdition = DBService.getDefault().loadEdition(
+								arg2);
 						initPlayers();
 					}
 				});
