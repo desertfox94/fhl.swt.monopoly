@@ -19,14 +19,14 @@ public class NewPlayerController implements Initializable {
 	private Label number;
 
 	@FXML
-	private ComboBox<String> icons;
+	private FigureCombobox icons;
 
 	@FXML
 	private TextField name;
 
 	private NewPlayerModel newPlayerModel = new NewPlayerModel();
 
-	private ObservableList<String> items;
+	private ObservableList<String> availableFigures;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -78,8 +78,8 @@ public class NewPlayerController implements Initializable {
 	}
 
 	public void setItems(ObservableList<String> availableFigures) {
-		this.items = FXCollections.observableArrayList(availableFigures);
-		icons.setItems(availableFigures);
+//		icons.setAvailableFigures(availableFigures);
+//		icons.setItems(availableFigures);
 	}
 
 	public void addValidListener(ChangeListener<Boolean> changeListener) {
