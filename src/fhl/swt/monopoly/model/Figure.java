@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -13,8 +14,8 @@ public class Figure {
 	private ObjectProperty<BufferedImage> image;
 
 	private StringProperty name;
-	
-	private BooleanProperty selected;
+
+	private BooleanProperty selected = new SimpleBooleanProperty(false);
 
 	public Figure(BufferedImage image, String name) {
 		this.image = new SimpleObjectProperty<>(image);
@@ -36,18 +37,18 @@ public class Figure {
 	public StringProperty getNameProperty() {
 		return name;
 	}
-	
+
 	public BooleanProperty getSelected() {
 		return selected;
 	}
-	
+
 	public boolean isSelected() {
 		return selected.get();
 	}
-	
+
 	@Override
 	public String toString() {
 		return getName();
 	}
-	
+
 }
