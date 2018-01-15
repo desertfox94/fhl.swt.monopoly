@@ -36,11 +36,9 @@ public class FigureCombobox {
 			public void changed(ObservableValue<? extends Figure> observable, Figure oldValue, Figure newValue) {
 				if (oldValue != null && oldValue != EMPTY) {
 					availableFigures.add(oldValue);
-					oldValue.setSelected(false);
 				}
 				if (newValue != null && newValue != EMPTY) {
 					availableFigures.remove(newValue);
-					newValue.setSelected(true);
 				}
 			}
 		});
