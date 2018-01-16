@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import fhl.swt.monopoly.model.Figure;
 import fhl.swt.monopoly.model.Player;
+import fhl.swt.monopoly.view.startNewGame.NewGameController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -31,6 +32,8 @@ public class NewPlayerController implements Initializable {
 
 	private FigureCombobox figureCombobox;
 
+	private NewGameController gameController;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		name.textProperty().bindBidirectional(newPlayerModel.getName());
@@ -42,6 +45,11 @@ public class NewPlayerController implements Initializable {
 					if (newValue.length() > MAX_PLAYER_NAME_LENGTH) {
 						newValue = newValue.substring(0, MAX_PLAYER_NAME_LENGTH);
 					}
+				
+					if(gameController.isUsed(newValue))
+					{
+						
+					}
 					name.textProperty().set(newValue);
 				}
 			}
@@ -51,6 +59,11 @@ public class NewPlayerController implements Initializable {
 		figureCombobox = new FigureCombobox(combobox);
 	}
 
+	public void setGameController(NewGameController gameController)
+	{
+		this.gameController = gameController;
+	}
+	
 	public void setNumber(int n) {
 		number.textProperty().set(String.valueOf(n));
 	}

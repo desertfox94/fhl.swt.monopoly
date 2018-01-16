@@ -120,6 +120,12 @@ public class NewGameController extends GameInitController implements Initializab
 	private boolean isEveryPlayerComplete() {
 		return players.stream().filter(p -> p.isModelIncomplete()).count() == 0;
 	}
+	
+	public boolean isUsed(String name)
+	{
+		return players.stream().filter(p -> p.getNewPlayerModel().getName().get().equals(name)).count() > 1;
+		
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
