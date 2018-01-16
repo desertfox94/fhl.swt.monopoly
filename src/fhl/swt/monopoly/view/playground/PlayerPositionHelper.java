@@ -1,13 +1,10 @@
 package fhl.swt.monopoly.view.playground;
 
 import java.awt.Point;
-import java.util.Random;
 
 import fhl.swt.monopoly.model.Game;
 
 public class PlayerPositionHelper {
-
-	private static final Random RANDOM = new Random();
 
 	private PlaygroundImageDescriptor imageDescriptor;
 
@@ -20,15 +17,11 @@ public class PlayerPositionHelper {
 
 	public Point calc(int index, double playgroundOrientation) {
 		double scale = scaledSizeOfImage / imageDescriptor.getSize();
-		// int index = player.getField().getIndex();
-		System.out.println("index: " + index);
-		System.out.println("scale: " + scale);
 		RowAlignment alignment = RowAlignment.get(index);
 		RowAlignment normalizedAlignment = normalizeFieldIndex(alignment, playgroundOrientation);
 		int x = (int) (imageDescriptor.getHorizontalStartOfField(index, normalizedAlignment) * scale);
 		int y = (int) (imageDescriptor.getVerticalStartOfField(index, normalizedAlignment) * scale);
 		Point point = new Point(x, y);
-		System.out.println(point);
 		return point;
 	}
 

@@ -68,7 +68,6 @@ public class PlaygroundController {
 	private void rotate() {
 		double rotate = playground.getRotate();
 		playground.setRotate(rotate + 90);
-		System.out.println();
 	}
 
 	@FXML
@@ -86,7 +85,7 @@ public class PlaygroundController {
 	private double getSizeOfBackgroundImage() {
 		double width = playground.getWidth();
 		double height = playground.getHeight();
-		if (height == 0 && width == 0) {
+		if (height == 0.0 || width == 0.0) {
 			return 600;
 		}
 		return height < width ? height : width;
@@ -119,22 +118,23 @@ public class PlaygroundController {
 					adjustPlayerPosition(player);
 				}
 			}
-
 		});
 	}
 
 	private void adjustPlayerPosition(Player player) {
 		Point pos = new PlayerPositionHelper(playgroundImageDescr, getSizeOfBackgroundImage(), game).calc(player.getPosition().intValue(), playground.getRotate());
 		ImageView img = playerFigures.get(player);
-		player.getPosition().addListener(new ChangeListener<Number>() {
+		img.relocate(pos.getX(), pos.getY());
+	}
+
+	private ChangeListener<Number> createPlayerMovedListener(Player player) {
+		return new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number old, Number playerPosition) {
-				Point pos = new PlayerPositionHelper(playgroundImageDescr, getSizeOfBackgroundImage(), game).calc(playerPosition.intValue(), playground.getRotate());
-				ImageView img = playerFigures.get(player);
-				img.relocate(pos.getX(), pos.getY());
+				adjustPlayerPosition(player);
 			}
-		});
+		};
 	}
 
 	private void invitePlayers() {
@@ -142,6 +142,7 @@ public class PlaygroundController {
 		List<Player> allPlayers = game.getPlayers().toList();
 		for (Player player : allPlayers) {
 			addPlayerInventoryToPlayerHub(player);
+			player.getPosition().addListener(createPlayerMovedListener(player));
 			playerFigures.put(player, createPlayerFigure(player));
 		}
 	}
