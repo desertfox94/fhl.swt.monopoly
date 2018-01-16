@@ -29,7 +29,7 @@ public class NewGameController extends GameInitController implements Initializab
 
 	private Edition selectedEdition;
 
-	private ObservableList<String> editions = FXCollections.observableArrayList(DBService.getDefault().loadAvailableEditions());
+	private ObservableList<Edition> editions = FXCollections.observableArrayList(DBService.getDefault().loadAvailableEditions());
 
 	private ObservableList<Figure> figures = FXCollections.observableArrayList();
 
@@ -45,7 +45,7 @@ public class NewGameController extends GameInitController implements Initializab
 	private GridPane playersGrid;
 
 	@FXML
-	private ChoiceBox<String> editionsBox;
+	private ChoiceBox<Edition> editionsBox;
 
 	private List<NewPlayerController> players = new LinkedList<>();
 
@@ -93,7 +93,7 @@ public class NewGameController extends GameInitController implements Initializab
 			playersGrid.getChildren().clear();
 			Pane newPlayerView;
 			NewPlayerController controller;
-			for (int i = 1; i <= 6; i++) {
+			for (int i = 1; i <= selectedEdition.getMaxAmountOfPlayers(); i++) {
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(NewPlayerController.class.getResource("NewPlayer.fxml"));
 				loader.load();
@@ -125,10 +125,10 @@ public class NewGameController extends GameInitController implements Initializab
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		editionsBox.setItems(editions);
-		editionsBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+		editionsBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Edition>() {
 			@Override
-			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				selectedEdition = DBService.getDefault().loadEdition(arg2);
+			public void changed(ObservableValue<? extends Edition> arg0, Edition arg1, Edition arg2) {
+				selectedEdition = arg2;
 				initPlayers();
 			}
 		});

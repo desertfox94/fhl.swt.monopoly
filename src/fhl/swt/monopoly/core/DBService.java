@@ -9,7 +9,7 @@ import fhl.swt.monopoly.model.Game;
 
 public abstract class DBService {
 
-	public abstract List<String> loadAvailableEditions();
+	public abstract List<Edition> loadAvailableEditions();
 
 	public abstract Edition loadEdition(String name);
 

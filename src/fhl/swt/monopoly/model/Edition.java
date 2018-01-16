@@ -76,5 +76,10 @@ public class Edition {
 	public void setBackground(BufferedImage background) {
 		this.background = background;
 	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }
