@@ -84,6 +84,7 @@ public class NewGameController extends GameInitController implements Initializab
 
 	private void initPlayers() {
 		figures = FXCollections.observableArrayList(selectedEdition.getFigures());
+		players.clear();
 		try {
 			playersGrid.getChildren().clear();
 			Pane newPlayerView;
