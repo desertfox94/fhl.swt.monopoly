@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import fhl.swt.monopoly.model.Figure;
 import fhl.swt.monopoly.model.Player;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class NewPlayerController implements Initializable {
+
+	private static final int MAX_PLAYER_NAME_LENGTH = 40;
 
 	@FXML
 	private Label number;
@@ -31,6 +34,19 @@ public class NewPlayerController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		name.textProperty().bindBidirectional(newPlayerModel.getName());
+		name.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String oldValue, String newValue) {
+				if (newValue != null) {
+					newValue = newValue.trim();
+					if (newValue.length() > MAX_PLAYER_NAME_LENGTH) {
+						newValue = newValue.substring(0, MAX_PLAYER_NAME_LENGTH);
+					}
+					name.textProperty().set(newValue);
+				}
+			}
+			
+		});
 		newPlayerModel.getFigure().bind(combobox.getSelectionModel().selectedItemProperty());
 		figureCombobox = new FigureCombobox(combobox);
 	}
