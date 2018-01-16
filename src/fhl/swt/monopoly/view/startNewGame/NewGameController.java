@@ -33,8 +33,6 @@ public class NewGameController extends GameInitController implements Initializab
 
 	private ObservableList<Figure> figures = FXCollections.observableArrayList();
 
-	private List<String> takenFigures = new LinkedList<>();
-
 	@FXML
 	private Pane root;
 
@@ -48,8 +46,6 @@ public class NewGameController extends GameInitController implements Initializab
 	private ChoiceBox<Edition> editionsBox;
 
 	private List<NewPlayerController> players = new LinkedList<>();
-
-	private boolean updateInProgress, editionSelected, enoughPlayers;
 
 	@FXML
 	public void selectEdition() {
@@ -77,7 +73,6 @@ public class NewGameController extends GameInitController implements Initializab
 	}
 
 	private List<Player> getPlayers() {
-		String name;
 		List<Player> players = new LinkedList<>();
 		for (NewPlayerController playerController : this.players) {
 			if (playerController.isModelValid()) {
