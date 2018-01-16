@@ -1,5 +1,6 @@
 package fhl.swt.monopoly.view.startNewGame.NewPlayer;
 
+import java.awt.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,11 +12,19 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 
 public class NewPlayerController implements Initializable {
+
+	private static final String NAME_ERROR = "nameError";
+
+	private static final String FIGURE_ERROR = "figureError";
 
 	private static final int MAX_PLAYER_NAME_LENGTH = 40;
 
@@ -28,7 +37,7 @@ public class NewPlayerController implements Initializable {
 	@FXML
 	private TextField name;
 
-	private NewPlayerModel newPlayerModel = new NewPlayerModel();
+	private NewPlayerModel newPlayerModel = new NewPlayerModel(this);
 
 	private FigureCombobox figureCombobox;
 
@@ -45,11 +54,7 @@ public class NewPlayerController implements Initializable {
 					if (newValue.length() > MAX_PLAYER_NAME_LENGTH) {
 						newValue = newValue.substring(0, MAX_PLAYER_NAME_LENGTH);
 					}
-				
-					if(gameController.isUsed(newValue))
-					{
-						
-					}
+					setNameValid(!gameController.isUsed(newValue));
 					name.textProperty().set(newValue);
 				}
 			}
@@ -58,7 +63,26 @@ public class NewPlayerController implements Initializable {
 		newPlayerModel.getFigure().bind(combobox.getSelectionModel().selectedItemProperty());
 		figureCombobox = new FigureCombobox(combobox);
 	}
+	
+	void setNameValid(boolean valid) {
+		if (valid) {
+			name.getStyleClass().remove(NAME_ERROR);
+		} else {
+			name.getStyleClass().add(NAME_ERROR);
+		}
+	}
+	
+	void setFigureValid(boolean valid) {
+		if (valid) {
+			combobox.getStyleClass().remove(FIGURE_ERROR);
+			combobox.getStyleClass().add("figureValid");
 
+		} else {
+			combobox.getStyleClass().remove("figureValid");
+			combobox.getStyleClass().add(FIGURE_ERROR);
+		}
+	}
+	
 	public void setGameController(NewGameController gameController)
 	{
 		this.gameController = gameController;

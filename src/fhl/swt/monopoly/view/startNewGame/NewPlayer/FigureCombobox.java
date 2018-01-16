@@ -58,7 +58,9 @@ public class FigureCombobox {
 		if (selected != null) {
 			items.add(selected);
 		}
-		items.add(EMPTY);
+		if (selected != EMPTY) {
+			items.add(EMPTY);
+		}
 		return items;
 	}
 

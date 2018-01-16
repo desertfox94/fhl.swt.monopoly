@@ -19,8 +19,11 @@ public class NewPlayerModel {
 	private ObjectProperty<Figure> figure = new SimpleObjectProperty<>();
 
 	private BooleanProperty incomplete = new SimpleBooleanProperty();
+	
+	private NewPlayerController controller;
 
-	public NewPlayerModel() {
+	public NewPlayerModel(NewPlayerController controller) {
+		this.controller = controller;
 		name.addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -38,10 +41,8 @@ public class NewPlayerModel {
 
 	private void refreshStatus() {
 		
-		boolean nameIsEmpty = name.getValue() == null || name.getValue().isEmpty();
-		Figure figureValue = figure.getValue();
-		boolean figureNotSelected = figureValue == null || isDummy(figureValue);
-
+		boolean figureNotSelected = figureNotSelected();
+		boolean nameIsEmpty = nameIsEmpty();
 		if (nameIsEmpty && figureNotSelected) {
 			incomplete.set(false);
 			valid.set(false);
@@ -52,6 +53,17 @@ public class NewPlayerModel {
 			incomplete.set(false);
 			valid.set(true);
 		}
+		controller.setFigureValid(!figureNotSelected);
+		controller.setNameValid(!nameIsEmpty);
+	}
+	
+	public boolean nameIsEmpty() {
+		return name.getValue() == null || name.getValue().isEmpty();
+	}
+	
+	public boolean figureNotSelected() {
+		Figure figureValue = figure.getValue();
+		return figureValue == null || isDummy(figureValue);
 	}
 	
 	private boolean isDummy(Figure figure) {
