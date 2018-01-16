@@ -58,13 +58,18 @@ public class NewPlayerController implements Initializable {
 	public boolean isModelValid() {
 		return newPlayerModel.isValid();
 	}
+	
+	public boolean isModelIncomplete() {
+		return newPlayerModel.isIncomplete();
+	}
 
 	public void setItems(ObservableList<Figure> availableFigures) {
 		figureCombobox.setAvailableFigures(availableFigures);
 	}
 
-	public void addValidListener(ChangeListener<Boolean> changeListener) {
+	public void addModelValidationListener(ChangeListener<Boolean> changeListener) {
 		newPlayerModel.getValidProperty().addListener(changeListener);
+		newPlayerModel.getIncomplete().addListener(changeListener);
 	}
 
 	public TextField getName() {

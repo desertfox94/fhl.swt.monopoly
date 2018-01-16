@@ -18,30 +18,44 @@ public class NewPlayerModel {
 
 	private ObjectProperty<Figure> figure = new SimpleObjectProperty<>();
 
+	private BooleanProperty incomplete = new SimpleBooleanProperty();
+
 	public NewPlayerModel() {
 		name.addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				refreshIsValid();
+				refreshStatus();
 			}
 		});
 		figure.addListener(new ChangeListener<Figure>() {
 			@Override
 			public void changed(ObservableValue<? extends Figure> observable, Figure oldValue, Figure newValue) {
-				refreshIsValid();
+				refreshStatus();
 			}
 
 		});
 	}
 
-	private void refreshIsValid() {
-		String nameValue = name.getValue();
+	private void refreshStatus() {
+		
+		boolean nameIsEmpty = name.getValue() == null || name.getValue().isEmpty();
 		Figure figureValue = figure.getValue();
-		if (nameValue == null || figureValue == null) {
+		boolean figureNotSelected = figureValue == null || isDummy(figureValue);
+
+		if (nameIsEmpty && figureNotSelected) {
+			incomplete.set(false);
+			valid.set(false);
+		} else if (nameIsEmpty || figureNotSelected) {
+			incomplete.set(true);
 			valid.set(false);
 		} else {
-			valid.set(!nameValue.trim().isEmpty() && !figureValue.getName().isEmpty());
+			incomplete.set(false);
+			valid.set(true);
 		}
+	}
+	
+	private boolean isDummy(Figure figure) {
+		return figure.getImage() == null;
 	}
 
 	public BooleanProperty getValidProperty() {
@@ -54,6 +68,14 @@ public class NewPlayerModel {
 
 	public ObjectProperty<Figure> getFigure() {
 		return figure;
+	}
+
+	public BooleanProperty getIncomplete() {
+		return incomplete;
+	}
+
+	public boolean isIncomplete() {
+		return incomplete.get();
 	}
 
 	public boolean isValid() {

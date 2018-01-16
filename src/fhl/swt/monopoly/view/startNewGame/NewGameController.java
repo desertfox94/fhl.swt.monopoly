@@ -96,11 +96,10 @@ public class NewGameController extends GameInitController implements Initializab
 				controller.setNumber(i);
 				// figures.addAll(selectedEdition.getFigures());
 				controller.setItems(figures);
-				controller.addValidListener(new ChangeListener<Boolean>() {
+				controller.addModelValidationListener(new ChangeListener<Boolean>() {
 					@Override
 					public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-						boolean hasEnoughPlayers = hasEnoughPlayers();
-						startGameButton.setDisable(!hasEnoughPlayers);
+						startGameButton.setDisable(!(hasEnoughPlayers()) || !isEveryPlayerComplete());
 					}
 				});
 				newPlayerView = (Pane) loader.getRoot();
@@ -116,6 +115,10 @@ public class NewGameController extends GameInitController implements Initializab
 	private boolean hasEnoughPlayers() {
 		return players.stream().filter(p -> p.isModelValid()).count() > 1;
 	}
+	
+	private boolean isEveryPlayerComplete() {
+		return players.stream().filter(p -> p.isModelIncomplete()).count() == 0;
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -125,6 +128,7 @@ public class NewGameController extends GameInitController implements Initializab
 			public void changed(ObservableValue<? extends Edition> arg0, Edition arg1, Edition arg2) {
 				selectedEdition = arg2;
 				initPlayers();
+				startGameButton.setDisable(true);
 			}
 		});
 	}
