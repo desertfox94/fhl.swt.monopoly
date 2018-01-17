@@ -6,13 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import fhl.swt.monopoly.core.DBService;
-import fhl.swt.monopoly.model.Edition;
-import fhl.swt.monopoly.model.Figure;
-import fhl.swt.monopoly.model.Game;
-import fhl.swt.monopoly.model.Player;
-import fhl.swt.monopoly.view.GameInitController;
-import fhl.swt.monopoly.view.startNewGame.NewPlayer.NewPlayerController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,6 +17,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import fhl.swt.monopoly.core.DBService;
+import fhl.swt.monopoly.model.Edition;
+import fhl.swt.monopoly.model.Figure;
+import fhl.swt.monopoly.model.Game;
+import fhl.swt.monopoly.model.Player;
+import fhl.swt.monopoly.view.GameInitController;
+import fhl.swt.monopoly.view.startNewGame.NewPlayer.NewPlayerController;
 
 public class NewGameController extends GameInitController implements Initializable {
 
@@ -106,6 +106,7 @@ public class NewGameController extends GameInitController implements Initializab
 				newPlayerView = (Pane) loader.getRoot();
 				playersGrid.addRow(i, newPlayerView);
 				players.add(controller);
+				controller.setGameController(this);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -116,15 +117,17 @@ public class NewGameController extends GameInitController implements Initializab
 	private boolean hasEnoughPlayers() {
 		return players.stream().filter(p -> p.isModelValid()).count() > 1;
 	}
-	
+
 	private boolean isEveryPlayerComplete() {
 		return players.stream().filter(p -> p.isModelIncomplete()).count() == 0;
 	}
-	
-	public boolean isUsed(String name)
-	{
-		return players.stream().filter(p -> p.getNewPlayerModel().getName().get().equals(name)).count() > 1;
-		
+
+	public boolean isUsed(String name) {
+		if (name == null || name.isEmpty()) {
+			return false;
+		}
+		return players.stream().filter(p -> name.equals(p.getModel().getName())).count() > 1;
+
 	}
 
 	@Override

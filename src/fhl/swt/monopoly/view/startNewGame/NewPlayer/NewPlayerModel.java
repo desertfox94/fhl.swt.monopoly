@@ -1,6 +1,5 @@
 package fhl.swt.monopoly.view.startNewGame.NewPlayer;
 
-import fhl.swt.monopoly.model.Figure;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -9,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import fhl.swt.monopoly.model.Figure;
 
 public class NewPlayerModel {
 
@@ -19,7 +19,7 @@ public class NewPlayerModel {
 	private ObjectProperty<Figure> figure = new SimpleObjectProperty<>();
 
 	private BooleanProperty incomplete = new SimpleBooleanProperty();
-	
+
 	private NewPlayerController controller;
 
 	public NewPlayerModel(NewPlayerController controller) {
@@ -40,7 +40,6 @@ public class NewPlayerModel {
 	}
 
 	private void refreshStatus() {
-		
 		boolean figureNotSelected = figureNotSelected();
 		boolean nameIsEmpty = nameIsEmpty();
 		if (nameIsEmpty && figureNotSelected) {
@@ -55,17 +54,22 @@ public class NewPlayerModel {
 		}
 		controller.setFigureValid(!figureNotSelected);
 		controller.setNameValid(!nameIsEmpty);
+		if (!nameIsEmpty) {
+			boolean notUsed = !controller.isUsed(getName());
+			controller.setNameValid(notUsed);
+			valid.set(notUsed);
+		}
 	}
-	
+
 	public boolean nameIsEmpty() {
 		return name.getValue() == null || name.getValue().isEmpty();
 	}
-	
+
 	public boolean figureNotSelected() {
 		Figure figureValue = figure.getValue();
 		return figureValue == null || isDummy(figureValue);
 	}
-	
+
 	private boolean isDummy(Figure figure) {
 		return figure.getImage() == null;
 	}
@@ -74,8 +78,13 @@ public class NewPlayerModel {
 		return valid;
 	}
 
-	public StringProperty getName() {
+	public StringProperty getNameProperty() {
 		return name;
+	}
+
+	public String getName() {
+		String n = name.get();
+		return n == null ? "" : n;
 	}
 
 	public ObjectProperty<Figure> getFigure() {

@@ -1,6 +1,5 @@
 package fhl.swt.monopoly.model;
 
-import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class Edition {
 	private String currency;
 	private double currencyFactor;
 	private List<Figure> figures = new LinkedList<>();
-	private BufferedImage background;
+	private String background;
 
 	public String getName() {
 		return name;
@@ -69,14 +68,14 @@ public class Edition {
 		figures.add(figure);
 	}
 
-	public BufferedImage getBackground() {
+	public String getBackground() {
 		return background;
 	}
 
-	public void setBackground(BufferedImage background) {
+	public void setBackground(String background) {
 		this.background = background;
 	}
-	
+
 	@Override
 	public String toString() {
 		return name;

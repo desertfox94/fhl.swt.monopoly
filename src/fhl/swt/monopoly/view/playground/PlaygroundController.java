@@ -7,12 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fhl.swt.monopoly.core.MonopolyEngine;
-import fhl.swt.monopoly.model.Game;
-import fhl.swt.monopoly.model.Player;
-import fhl.swt.monopoly.view.AppViewController;
-import fhl.swt.monopoly.view.playerInventory.PlayerInventoryController;
-import fhl.swt.monopoly.view.playground.die.DieListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
@@ -23,13 +17,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import fhl.swt.monopoly.core.MonopolyEngine;
+import fhl.swt.monopoly.model.Game;
+import fhl.swt.monopoly.model.Player;
+import fhl.swt.monopoly.view.AppViewController;
+import fhl.swt.monopoly.view.playerInventory.PlayerInventoryController;
+import fhl.swt.monopoly.view.playground.die.DieListener;
 
 public class PlaygroundController {
 
@@ -104,11 +99,7 @@ public class PlaygroundController {
 		engine = new MonopolyEngine(game);
 		engine.getDiceCast().addListeners(new DieListener(dieOne), new DieListener(dieTwo));
 		playgroundImageDescr = PlaygroundImageDescriptor.loadGOTPlaygroundDescriptor();
-		BufferedImage background = game.getEdition().getBackground();
-		WritableImage fxImage = SwingFXUtils.toFXImage(background, new WritableImage(600, 600));
-		BackgroundSize size = new BackgroundSize(playground.getWidth(), playground.getHeight(), false, false, true, false);
-		BackgroundImage backgroundImage = new BackgroundImage(fxImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
-		playground.setBackground(new Background(backgroundImage));
+		playground.setStyle("-fx-background-image:  url('" + game.getEdition().getBackground() + "');");
 		invitePlayers();
 		playground.widthProperty().addListener(new ChangeListener<Number>() {
 

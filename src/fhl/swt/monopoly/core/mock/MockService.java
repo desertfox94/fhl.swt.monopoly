@@ -78,12 +78,12 @@ public class MockService extends DBService {
 			figures.add(loadFigure("std/monopoly_shoe.png", "Schuh"));
 			figures.add(loadFigure("std/monopoly_guy.png", "Mr. Monopoly"));
 		}
-		
+
 		edition.setMaxAmountOfPlayers(figures.size());
 		List<Street> streets;
 		try {
 			streets = CSVImport.fromFile(new File(getClass().getResource(streetsCsv).getPath()), new StreetImporter());
-			edition.setBackground(ImageIO.read(getClass().getResourceAsStream(background)));
+			edition.setBackground(getClass().getResource(background).toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -96,7 +96,7 @@ public class MockService extends DBService {
 		return edition;
 	}
 
-	private Figure loadFigure(String imagePath, String name)  {
+	private Figure loadFigure(String imagePath, String name) {
 		try {
 			return new Figure(ImageIO.read(getClass().getResourceAsStream(imagePath)), name);
 		} catch (IOException e) {

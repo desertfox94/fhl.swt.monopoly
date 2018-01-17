@@ -1,24 +1,19 @@
 package fhl.swt.monopoly.view.startNewGame.NewPlayer;
 
-import java.awt.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import fhl.swt.monopoly.model.Figure;
-import fhl.swt.monopoly.model.Player;
-import fhl.swt.monopoly.view.startNewGame.NewGameController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
+import fhl.swt.monopoly.model.Figure;
+import fhl.swt.monopoly.model.Player;
+import fhl.swt.monopoly.view.startNewGame.NewGameController;
 
 public class NewPlayerController implements Initializable {
 
@@ -37,15 +32,15 @@ public class NewPlayerController implements Initializable {
 	@FXML
 	private TextField name;
 
-	private NewPlayerModel newPlayerModel = new NewPlayerModel(this);
+	private NewPlayerModel model = new NewPlayerModel(this);
 
 	private FigureCombobox figureCombobox;
 
 	private NewGameController gameController;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		name.textProperty().bindBidirectional(newPlayerModel.getName());
+		name.textProperty().bindBidirectional(model.getNameProperty());
 		name.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String oldValue, String newValue) {
@@ -54,50 +49,52 @@ public class NewPlayerController implements Initializable {
 					if (newValue.length() > MAX_PLAYER_NAME_LENGTH) {
 						newValue = newValue.substring(0, MAX_PLAYER_NAME_LENGTH);
 					}
-					setNameValid(!gameController.isUsed(newValue));
 					name.textProperty().set(newValue);
 				}
 			}
-			
+
 		});
-		newPlayerModel.getFigure().bind(combobox.getSelectionModel().selectedItemProperty());
+		model.getFigure().bind(combobox.getSelectionModel().selectedItemProperty());
 		figureCombobox = new FigureCombobox(combobox);
 	}
-	
+
 	void setNameValid(boolean valid) {
 		if (valid) {
-			name.getStyleClass().remove(NAME_ERROR);
+			name.getStyleClass().removeAll(NAME_ERROR);
 		} else {
 			name.getStyleClass().add(NAME_ERROR);
 		}
 	}
-	
+
 	void setFigureValid(boolean valid) {
 		if (valid) {
-			combobox.getStyleClass().remove(FIGURE_ERROR);
+			combobox.getStyleClass().removeAll(FIGURE_ERROR);
 			combobox.getStyleClass().add("figureValid");
 
 		} else {
-			combobox.getStyleClass().remove("figureValid");
+			combobox.getStyleClass().removeAll("figureValid");
 			combobox.getStyleClass().add(FIGURE_ERROR);
 		}
 	}
-	
-	public void setGameController(NewGameController gameController)
-	{
+
+	boolean isUsed(String name) {
+		return gameController.isUsed(name);
+	}
+
+	public void setGameController(NewGameController gameController) {
 		this.gameController = gameController;
 	}
-	
+
 	public void setNumber(int n) {
 		number.textProperty().set(String.valueOf(n));
 	}
 
 	public boolean isModelValid() {
-		return newPlayerModel.isValid();
+		return model.isValid();
 	}
-	
+
 	public boolean isModelIncomplete() {
-		return newPlayerModel.isIncomplete();
+		return model.isIncomplete();
 	}
 
 	public void setItems(ObservableList<Figure> availableFigures) {
@@ -105,8 +102,8 @@ public class NewPlayerController implements Initializable {
 	}
 
 	public void addModelValidationListener(ChangeListener<Boolean> changeListener) {
-		newPlayerModel.getValidProperty().addListener(changeListener);
-		newPlayerModel.getIncomplete().addListener(changeListener);
+		model.getValidProperty().addListener(changeListener);
+		model.getIncomplete().addListener(changeListener);
 	}
 
 	public TextField getName() {
@@ -115,12 +112,12 @@ public class NewPlayerController implements Initializable {
 
 	public Player getPlayer() {
 		Player player = new Player();
-		player.setName(newPlayerModel.getName().get());
-		player.setFigure(newPlayerModel.getFigure().get());
+		player.setName(model.getNameProperty().get());
+		player.setFigure(model.getFigure().get());
 		return player;
 	}
 
-	public NewPlayerModel getNewPlayerModel() {
-		return newPlayerModel;
+	public NewPlayerModel getModel() {
+		return model;
 	}
 }
