@@ -2,6 +2,7 @@ package fhl.swt.monopoly.core;
 
 import java.util.List;
 
+import fhl.swt.monopoly.core.fields.Field;
 import fhl.swt.monopoly.model.DiceCast;
 import fhl.swt.monopoly.model.Game;
 import fhl.swt.monopoly.model.Player;
@@ -12,13 +13,10 @@ public class MonopolyEngine {
 	private static final int MAX_DOUBLE_COUNT = 3;
 	private final Game game;
 
-	private Playground playground;
-
 	private final DiceCast diceCast = new DiceCast();
 
 	public MonopolyEngine(Game game) {
 		this.game = game;
-		playground = new Playground(game.getEdition());
 	}
 
 	private DiceCast rollDiceInJail() {
@@ -29,7 +27,8 @@ public class MonopolyEngine {
 		if (diceCast.isDouble()) {
 			game.getCurrentPlayer().freeFromJail();
 		}
-		// TODO: Darf ein Spieler um die ANzahl der Paschaugen vorrücken oder würfelt er
+		// TODO: Darf ein Spieler um die ANzahl der Paschaugen vorrücken oder
+		// würfelt er
 		// erneut?
 		return diceCast;
 	}
@@ -50,8 +49,21 @@ public class MonopolyEngine {
 		if (player.getDoubleCount() == MAX_DOUBLE_COUNT) {
 			player.sendToJail();
 		}
-		playground.movePlayer(player, diceCast.current());
+		movePlayer(player, diceCast.current());
 		return diceCast;
+	}
+
+	private void movePlayer(Player player, int diceCast) {
+		CircleList<Field> fields = game.getEdition().getFields();
+		fields.select(player.getField().get());
+		Field field = null;
+		for (int i = 0; i < diceCast; i++) {
+			field = fields.next();
+			player.moveTo(field);
+			field.passing(player);
+		}
+		field.landing(player);
+		player.moveTo(field);
 	}
 
 	private void rollTheDice() {

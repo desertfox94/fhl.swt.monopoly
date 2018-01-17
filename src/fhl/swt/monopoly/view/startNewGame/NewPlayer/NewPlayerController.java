@@ -58,7 +58,7 @@ public class NewPlayerController implements Initializable {
 		figureCombobox = new FigureCombobox(combobox);
 	}
 
-	void setNameValid(boolean valid) {
+	public void setNameValid(boolean valid) {
 		if (valid) {
 			name.getStyleClass().removeAll(NAME_ERROR);
 		} else {
@@ -66,7 +66,7 @@ public class NewPlayerController implements Initializable {
 		}
 	}
 
-	void setFigureValid(boolean valid) {
+	public void setFigureValid(boolean valid) {
 		if (valid) {
 			combobox.getStyleClass().removeAll(FIGURE_ERROR);
 			combobox.getStyleClass().add("figureValid");
@@ -77,7 +77,7 @@ public class NewPlayerController implements Initializable {
 		}
 	}
 
-	boolean isUsed(String name) {
+	public boolean isUsed(String name) {
 		return gameController.isUsed(name);
 	}
 

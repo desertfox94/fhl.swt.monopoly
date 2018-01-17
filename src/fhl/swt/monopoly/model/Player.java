@@ -2,8 +2,6 @@ package fhl.swt.monopoly.model;
 
 import java.util.List;
 
-import fhl.swt.monopoly.core.cards.Card;
-import fhl.swt.monopoly.core.fields.Field;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -15,6 +13,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import fhl.swt.monopoly.core.cards.Card;
+import fhl.swt.monopoly.core.fields.Field;
 
 public class Player implements StreetOwner, CardOwner {
 

@@ -1,4 +1,4 @@
-package fhl.swt.csv;
+package fhl.swt.monopoly.io.csv;
 
 import java.util.HashMap;
 import java.util.Map;

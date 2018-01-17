@@ -3,8 +3,8 @@ package fhl.swt.monopoly.io;
 import java.util.HashMap;
 import java.util.Map;
 
-import fhl.swt.csv.CsvImporter;
-import fhl.swt.csv.CsvLine;
+import fhl.swt.monopoly.io.csv.CsvImporter;
+import fhl.swt.monopoly.io.csv.CsvLine;
 import fhl.swt.monopoly.model.Street;
 import fhl.swt.monopoly.model.StreetDetails;
 import fhl.swt.monopoly.model.StreetGroup;

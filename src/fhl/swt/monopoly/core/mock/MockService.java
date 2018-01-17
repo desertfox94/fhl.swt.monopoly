@@ -9,12 +9,12 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import fhl.swt.csv.CSVImport;
 import fhl.swt.monopoly.core.DBService;
 import fhl.swt.monopoly.core.cards.CardFactory;
 import fhl.swt.monopoly.core.cards.CardSet;
 import fhl.swt.monopoly.core.fields.FieldsFactory;
 import fhl.swt.monopoly.io.StreetImporter;
+import fhl.swt.monopoly.io.csv.CSVImport;
 import fhl.swt.monopoly.model.Edition;
 import fhl.swt.monopoly.model.Figure;
 import fhl.swt.monopoly.model.Game;
