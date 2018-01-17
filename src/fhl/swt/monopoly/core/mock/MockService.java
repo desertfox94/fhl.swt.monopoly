@@ -1,6 +1,5 @@
 package fhl.swt.monopoly.core.mock;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,7 +81,7 @@ public class MockService extends DBService {
 		edition.setMaxAmountOfPlayers(figures.size());
 		List<Street> streets;
 		try {
-			streets = CSVImport.fromFile(new File(getClass().getResource(streetsCsv).getPath()), new StreetImporter());
+			streets = CSVImport.from(getClass().getResourceAsStream(streetsCsv), new StreetImporter());
 			edition.setBackground(getClass().getResource(background).toString());
 		} catch (IOException e) {
 			e.printStackTrace();
