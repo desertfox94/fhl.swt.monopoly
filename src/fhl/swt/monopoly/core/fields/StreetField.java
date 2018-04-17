@@ -4,7 +4,9 @@ import fhl.swt.monopoly.core.MessageUtil;
 import fhl.swt.monopoly.model.Player;
 import fhl.swt.monopoly.model.Street;
 import fhl.swt.monopoly.model.StreetOwner;
-
+/**
+ * A regular Street field. several of these will form a majority of the playing field.
+ */
 public class StreetField extends Field {
 
 	private Street street;

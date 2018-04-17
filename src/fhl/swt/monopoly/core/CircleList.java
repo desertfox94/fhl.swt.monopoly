@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fhl.swt.monopoly.core.fields.Field;
-
+/*
+ * A simple circular list, used for displaying the Map, as well as rotating through cardstacks.
+ */
 public class CircleList<T> {
 
 	private int i;
@@ -16,7 +18,7 @@ public class CircleList<T> {
 	}
 
 	public CircleList() {
-		this.list = new ArrayList<T>();
+		this (new ArrayList<T>());
 	}
 
 	public T next() {

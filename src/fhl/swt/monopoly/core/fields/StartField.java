@@ -1,7 +1,9 @@
 package fhl.swt.monopoly.core.fields;
 
 import fhl.swt.monopoly.model.Player;
-
+/**
+ * the Start field in the bottom right corner of the playing field.
+ */
 public class StartField extends Field {
 
 	private static final int MONEY = 200;

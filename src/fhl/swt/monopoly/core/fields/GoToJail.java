@@ -1,7 +1,9 @@
 package fhl.swt.monopoly.core.fields;
 
 import fhl.swt.monopoly.model.Player;
-
+/**
+ * the "go to jail"-field in the top right corner of the playing field.
+ */
 public class GoToJail extends Field {
 
 	public GoToJail() {

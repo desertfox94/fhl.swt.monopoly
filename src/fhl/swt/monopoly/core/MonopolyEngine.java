@@ -6,7 +6,9 @@ import fhl.swt.monopoly.core.fields.Field;
 import fhl.swt.monopoly.model.DiceCast;
 import fhl.swt.monopoly.model.Game;
 import fhl.swt.monopoly.model.Player;
-
+/**
+ * An engine implementing a substantial part of the game logic and rules.
+ */
 public class MonopolyEngine {
 
 	private static final int MAX_THROWS_IN_JAIL = 3;
@@ -19,6 +21,10 @@ public class MonopolyEngine {
 		this.game = game;
 	}
 
+	/**
+	 * This Method is called by a player at the start of his move, if he is in jail.
+	 * @return returns the dicecast of the roll, independent from its result. Frees the player if a double was rolled.
+	 */
 	private DiceCast rollDiceInJail() {
 		if (game.getPlayersThrowCount() > MAX_THROWS_IN_JAIL) {
 			throw new RuntimeException("Spieler hat zu oft gewürfelt!");
@@ -33,10 +39,17 @@ public class MonopolyEngine {
 		return diceCast;
 	}
 
+	
 	public void endTurn() {
 		game.nextPlayer();
 	}
 
+	
+	/**
+	 * This Method is called by a player at the start of his move if he is not in jail.
+	 * it also manages the count of doubles rolled by the player in his current move, as well as initializing player movement.
+	 * @return returns the dicecast of the roll, independent from its result. 
+	 */
 	public DiceCast playerRollsTheDice() {
 		Player player = game.getCurrentPlayer();
 		if (player.isInJail()) {
@@ -53,6 +66,13 @@ public class MonopolyEngine {
 		return diceCast;
 	}
 
+
+	/**
+	 * This Method is called by rolling the dice and moves the player forward on the playing field.
+	 * It also contains logic for passing and landing on a field.
+	 * @param player The player who last rolled, and who is supposed to be moved.
+	 * @param diceCast The value of the player's roll, so the method can evaluate how far to move said player.
+	 */
 	private void movePlayer(Player player, int diceCast) {
 		CircleList<Field> fields = game.getEdition().getFields();
 		fields.select(player.getField().get());
@@ -66,14 +86,22 @@ public class MonopolyEngine {
 		player.moveTo(field);
 	}
 
+	/**
+	 * 
+	 */
 	private void rollTheDice() {
 		diceCast.next();
 		game.playerRolledTheDice(diceCast);
 	}
 
+	
+	/**
+	 * evaluates whether or not the player shoud be allowed to roll, based on the number of times he rolled and if he rolled doubles.
+	 * @return returns true, if current player can roll, false otherwise.
+	 */
 	public boolean canPlayerRollTheDice() {
 		List<DiceCast> diceCastHistory = game.getCurrentPlayerDiceCastHistory();
-		return diceCastHistory.isEmpty() || diceCastHistory.stream().allMatch(diceCast -> diceCast.isDouble());
+		return (diceCastHistory.isEmpty() || diceCastHistory.stream().allMatch(diceCast -> diceCast.isDouble())) && diceCastHistory.size() < 3;
 	}
 
 	public Game getGame() {

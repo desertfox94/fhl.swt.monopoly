@@ -42,6 +42,8 @@ public class App extends Application {
 		}
 	}
 
+	
+	// This is where the fun begins.
 	public static void main(String[] args) {
 		launch(args);
 	}

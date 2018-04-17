@@ -1,7 +1,10 @@
 package fhl.swt.monopoly.core.fields;
 
 import fhl.swt.monopoly.model.Player;
-
+/**
+ * the free parking field in the top left corner of the playing field.
+ *
+ */
 public class FreeparkingField extends Field {
 
 	public FreeparkingField() {
