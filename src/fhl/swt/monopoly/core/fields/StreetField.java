@@ -30,7 +30,7 @@ public class StreetField extends Field {
 			double rent = street.getRent().doubleValue();
 			String text = "Sie sind auf " + street.getName() + " (" + owner.getName() + ") gelandet und zahlen " + rent + " Miete.";
 			String title = "Miete zahlen";
-			MessageUtil.show(text, title);
+			MessageUtil.inform(text, title);
 			player.pay(rent);
 			if (owner instanceof Player) {
 				((Player) owner).addMoney(rent);

@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import fhl.swt.monopoly.core.MessageUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -69,12 +70,8 @@ public class AppViewController implements Initializable {
 
 	@FXML
 	public void save() {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Spiel gespeichert");
-		alert.setHeaderText(null);
-		alert.setContentText("Das Spiel wurde erfolgreich gespeichert!");
-
-		alert.showAndWait();
+		// TODO: save current state of game.
+		MessageUtil.inform("Spiel gespeichert", "Das Spiel wurde erfolgreich gespeichert!");
 	}
 
 	@FXML
@@ -91,6 +88,7 @@ public class AppViewController implements Initializable {
 		alert.getButtonTypes().setAll(saveAndClose, closeWithoutSave, buttonTypeCancel);
 
 		Optional<ButtonType> result = alert.showAndWait();
+
 		if (result.get() == buttonTypeCancel) {
 			return;
 		} else if (result.get() == saveAndClose) {
@@ -105,6 +103,5 @@ public class AppViewController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle bundle) {
-		System.out.println();
 	}
 }
