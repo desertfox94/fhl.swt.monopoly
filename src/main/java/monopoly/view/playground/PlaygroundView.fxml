@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.3837675350701403" prefHeight="650.0" prefWidth="1000.0" stylesheets="@../AppView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhl.swt.monopoly.view.playground.PlaygroundController">
+<SplitPane dividerPositions="0.3837675350701403" prefHeight="650.0" prefWidth="1000.0" stylesheets="@../AppView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monopoly.view.playground.PlaygroundController">
   <items>
       <Accordion fx:id="playerHub" />
       <BorderPane prefHeight="200.0" prefWidth="200.0">

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" minHeight="35.0" minWidth="300.0" stylesheets="@InputValidation.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhl.swt.monopoly.view.startNewGame.NewPlayer.NewPlayerController">
+<GridPane maxHeight="-Infinity" minHeight="35.0" minWidth="300.0" stylesheets="@InputValidation.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monopoly.view.startNewGame.NewPlayer.NewPlayerController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
