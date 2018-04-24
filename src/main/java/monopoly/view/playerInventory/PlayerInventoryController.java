@@ -71,7 +71,8 @@ public class PlayerInventoryController {
 		streetTable.setItems(player.getStreets());
 		streetGroupColum.setCellValueFactory(s -> new SimpleStringProperty(""));
 		streetNameColum.setCellValueFactory(s -> new SimpleStringProperty(s.getValue().getName()));
-		// currentRentColumn.setCellValueFactory(s -> new SimpleStringProperty("" +
+		// currentRentColumn.setCellValueFactory(s -> new
+		// SimpleStringProperty("" +
 		// s.getValue().getRent().get()));
 		player.getBalance().addListener(new ChangeListener<Number>() {
 

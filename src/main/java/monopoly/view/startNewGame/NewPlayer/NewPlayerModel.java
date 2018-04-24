@@ -39,6 +39,11 @@ public class NewPlayerModel {
 		});
 	}
 
+	/**
+	 * Aktualisiert den Status eines Spielers. Ein Spieler kann entweder
+	 * unbenutzt (incomplete = false && valid = false), incomplete (Name oder
+	 * Bild ausgewählt) oder valide sein (eindeutiger Name und Bild gewählt)
+	 */
 	private void refreshStatus() {
 		boolean figureNotSelected = figureNotSelected();
 		boolean nameIsEmpty = nameIsEmpty();
@@ -66,12 +71,7 @@ public class NewPlayerModel {
 	}
 
 	public boolean figureNotSelected() {
-		Figure figureValue = figure.getValue();
-		return figureValue == null || isDummy(figureValue);
-	}
-
-	private boolean isDummy(Figure figure) {
-		return figure.getImage() == null;
+		return figure.getValue() == null;
 	}
 
 	public BooleanProperty getValidProperty() {

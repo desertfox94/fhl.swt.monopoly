@@ -10,7 +10,7 @@ import monopoly.model.Figure;
 
 public class FigureCombobox {
 
-	private static final Figure EMPTY = new Figure(null, "");
+	private static final Figure PLACEHOLDER = new Figure(null, "");
 
 	private ObservableList<Figure> availableFigures;
 
@@ -34,10 +34,10 @@ public class FigureCombobox {
 
 			@Override
 			public void changed(ObservableValue<? extends Figure> observable, Figure oldValue, Figure newValue) {
-				if (oldValue != null && oldValue != EMPTY) {
+				if (oldValue != null && oldValue != PLACEHOLDER) {
 					availableFigures.add(oldValue);
 				}
-				if (newValue != null && newValue != EMPTY) {
+				if (newValue != null && newValue != PLACEHOLDER) {
 					availableFigures.remove(newValue);
 				}
 			}
@@ -46,7 +46,7 @@ public class FigureCombobox {
 
 	public Figure getSelection() {
 		Figure selectedItem = comboBox.getSelectionModel().getSelectedItem();
-		if (selectedItem != EMPTY) {
+		if (selectedItem != PLACEHOLDER) {
 			return selectedItem;
 		}
 		return null;
@@ -58,8 +58,8 @@ public class FigureCombobox {
 		if (selected != null) {
 			items.add(selected);
 		}
-		if (selected != EMPTY) {
-			items.add(EMPTY);
+		if (selected != PLACEHOLDER) {
+			items.add(PLACEHOLDER);
 		}
 		return items;
 	}

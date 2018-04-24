@@ -15,17 +15,25 @@ public class PlayerPositionHelper {
 		this.scaledSizeOfImage = scaledSizeOfImage;
 	}
 
-	public Point calc(int index, double playgroundOrientation) {
+	/**
+	 * Bestimmt die Position des Spielers, in Abhängigkeit davon, wie das
+	 * Spieleld ausgerichtet ist.
+	 * 
+	 * @param rowIndex
+	 * @param playgroundOrientation
+	 * @return
+	 */
+	public Point calc(int rowIndex, double playgroundOrientation) {
 		double scale = scaledSizeOfImage / imageDescriptor.getSize();
-		RowAlignment alignment = RowAlignment.get(index);
-		RowAlignment normalizedAlignment = normalizeFieldIndex(alignment, playgroundOrientation);
-		int x = (int) (imageDescriptor.getHorizontalStartOfField(index, normalizedAlignment) * scale);
-		int y = (int) (imageDescriptor.getVerticalStartOfField(index, normalizedAlignment) * scale);
+		RowAlignment normalizedAlignment = normalizeFieldIndex(rowIndex, playgroundOrientation);
+		int x = (int) (imageDescriptor.getHorizontalStartOfField(rowIndex, normalizedAlignment) * scale);
+		int y = (int) (imageDescriptor.getVerticalStartOfField(rowIndex, normalizedAlignment) * scale);
 		Point point = new Point(x, y);
 		return point;
 	}
 
-	private RowAlignment normalizeFieldIndex(RowAlignment alignment, double orientation) {
+	private RowAlignment normalizeFieldIndex(int rowIndex, double orientation) {
+		RowAlignment alignment = RowAlignment.get(rowIndex);
 		int rotationsNeeded;
 		if (orientation < 90.0) {
 			rotationsNeeded = 0;

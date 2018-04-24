@@ -40,26 +40,15 @@ public class NewGameController extends GameInitController implements Initializab
 	private Button startGameButton;
 
 	@FXML
+	/**
+	 * Auf diesem Grid werden die Felder für Spieler hinzugefügt
+	 */
 	private GridPane playersGrid;
 
 	@FXML
 	private ChoiceBox<Edition> editionsBox;
 
-	private List<NewPlayerController> players = new LinkedList<>();
-
-	@FXML
-	public void selectEdition() {
-	}
-
-	@FXML
-	public void addNewPlayer() {
-
-	}
-
-	@FXML
-	public void selectFigur() {
-
-	}
+	private List<NewPlayerController> newPlayerControllers = new LinkedList<>();
 
 	@FXML
 	public void startGame() {
@@ -74,7 +63,7 @@ public class NewGameController extends GameInitController implements Initializab
 
 	private List<Player> getPlayers() {
 		List<Player> players = new LinkedList<>();
-		for (NewPlayerController playerController : this.players) {
+		for (NewPlayerController playerController : this.newPlayerControllers) {
 			if (playerController.isModelValid()) {
 				players.add(playerController.getPlayer());
 			}
@@ -82,51 +71,68 @@ public class NewGameController extends GameInitController implements Initializab
 		return players;
 	}
 
-	private void initPlayers() {
-		figures = FXCollections.observableArrayList(selectedEdition.getFigures());
-		players.clear();
-		try {
-			playersGrid.getChildren().clear();
-			Pane newPlayerView;
-			NewPlayerController controller;
-			for (int i = 1; i <= selectedEdition.getMaxAmountOfPlayers(); i++) {
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(NewPlayerController.class.getResource("NewPlayer.fxml"));
-				loader.load();
-				controller = loader.getController();
-				controller.setNumber(i);
-				// figures.addAll(selectedEdition.getFigures());
-				controller.setItems(figures);
-				controller.addModelValidationListener(new ChangeListener<Boolean>() {
-					@Override
-					public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-						startGameButton.setDisable(!(hasEnoughPlayers()) || !isEveryPlayerComplete());
-					}
-				});
-				newPlayerView = (Pane) loader.getRoot();
-				playersGrid.addRow(i, newPlayerView);
-				players.add(controller);
-				controller.setGameController(this);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	private void prepareForNewPlayers() {
+		newPlayerControllers.clear();
+		playersGrid.getChildren().clear();
+		for (int i = 1; i <= selectedEdition.getMaxAmountOfPlayers(); i++) {
+			playersGrid.addRow(i, initNewPlayerView(i));
 		}
 	}
 
+	private Pane initNewPlayerView(int number) {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(NewPlayerController.class.getResource("NewPlayer.fxml"));
+		try {
+			loader.load();
+		} catch (IOException e) {
+			System.err.println("Failed to load NewPlayerView");
+			throw new RuntimeException(e);
+		}
+		NewPlayerController controller = loader.getController();
+		controller.setNumber(number);
+		controller.setItems(figures);
+		controller.addModelValidationListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
+				startGameButton.setDisable(!(hasEnoughPlayers()) || !areAllPlayerComplete());
+			}
+		});
+		controller.setGameController(this);
+		newPlayerControllers.add(controller);
+		return (Pane) loader.getRoot();
+	}
+
+	private void loadFiguresForEdition() {
+		figures = FXCollections.observableArrayList(selectedEdition.getFigures());
+	}
+
+	/**
+	 * Hat das Spiel mehr als einen Spieler
+	 * 
+	 * @return
+	 */
 	private boolean hasEnoughPlayers() {
-		return players.stream().filter(p -> p.isModelValid()).count() > 1;
+		return newPlayerControllers.stream().filter(p -> p.isModelValid()).count() > 1;
 	}
 
-	private boolean isEveryPlayerComplete() {
-		return players.stream().filter(p -> p.isModelIncomplete()).count() == 0;
+	/**
+	 * @return Spieler müssen immer einen Namen und ein Bild angegeben haben
+	 */
+	private boolean areAllPlayerComplete() {
+		return newPlayerControllers.stream().filter(p -> p.isModelIncomplete()).count() == 0;
 	}
 
+	/**
+	 * Hat ein anderer Spieler bereits diesen Namen?
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public boolean isUsed(String name) {
 		if (name == null || name.isEmpty()) {
 			return false;
 		}
-		return players.stream().filter(p -> name.equals(p.getModel().getName())).count() > 1;
+		return newPlayerControllers.stream().filter(p -> name.equals(p.getModel().getName())).count() > 1;
 
 	}
 
@@ -135,12 +141,17 @@ public class NewGameController extends GameInitController implements Initializab
 		editionsBox.setItems(editions);
 		editionsBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Edition>() {
 			@Override
-			public void changed(ObservableValue<? extends Edition> arg0, Edition arg1, Edition arg2) {
-				selectedEdition = arg2;
-				initPlayers();
-				startGameButton.setDisable(true);
+			public void changed(ObservableValue<? extends Edition> arg0, Edition arg1, Edition newEdition) {
+				handleEditionChanged(newEdition);
 			}
+
 		});
 	}
 
+	private void handleEditionChanged(Edition newEdition) {
+		selectedEdition = newEdition;
+		loadFiguresForEdition();
+		prepareForNewPlayers();
+		startGameButton.setDisable(true);
+	}
 }

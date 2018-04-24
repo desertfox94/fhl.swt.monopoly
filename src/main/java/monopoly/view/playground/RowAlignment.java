@@ -4,6 +4,11 @@ public enum RowAlignment {
 
 	BOTTOM, LEFT, TOP, RIGHT;
 
+	/**
+	 * 
+	 * @param fieldIndex
+	 * @return
+	 */
 	public static RowAlignment get(int fieldIndex) {
 		if (fieldIndex <= 10) {
 			return BOTTOM;

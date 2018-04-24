@@ -27,7 +27,7 @@ public class GameInitController {
 			Control playground = loader.load();
 			PlaygroundController controller = loader.getController();
 			controller.preparePlayground(game);
-			AppViewController.getInstance().showInCenterPane(playground);
+			AppViewController.showInCenterPane(playground);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,13 +1,10 @@
 package monopoly.view;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -17,7 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import monopoly.core.MessageUtil;
 
-public class AppViewController implements Initializable {
+public class AppViewController {
 
 	@FXML
 	public BorderPane mainPane;
@@ -27,15 +24,14 @@ public class AppViewController implements Initializable {
 
 	private static AppViewController instance;
 
-	public static AppViewController getInstance() {
-		return instance;
-	}
-
 	public AppViewController() {
 		instance = this;
 	}
 
 	@FXML
+	/**
+	 * Opens the NewGameView, no save action will be executed.
+	 */
 	public void startNewGame() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -47,8 +43,13 @@ public class AppViewController implements Initializable {
 		}
 	}
 
-	public void showInCenterPane(Node pane) {
-		mainPane.centerProperty().set(pane);
+	/**
+	 * Shows a Node in the center pane of the AppView
+	 * 
+	 * @param pane
+	 */
+	public static void showInCenterPane(Node pane) {
+		instance.mainPane.centerProperty().set(pane);
 	}
 
 	@FXML
@@ -57,6 +58,9 @@ public class AppViewController implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Switches the to "LoadGameView".
+	 */
 	public void loadGame() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -101,7 +105,4 @@ public class AppViewController implements Initializable {
 		System.exit(0);
 	}
 
-	@Override
-	public void initialize(URL url, ResourceBundle bundle) {
-	}
 }

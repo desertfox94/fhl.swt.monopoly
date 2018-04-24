@@ -112,22 +112,6 @@ public class PlaygroundController {
 		});
 	}
 
-	private void adjustPlayerPosition(Player player) {
-		Point pos = new PlayerPositionHelper(playgroundImageDescr, getSizeOfBackgroundImage(), game).calc(player.getPosition().intValue(), playground.getRotate());
-		ImageView img = playerFigures.get(player);
-		img.relocate(pos.getX(), pos.getY());
-	}
-
-	private ChangeListener<Number> createPlayerMovedListener(Player player) {
-		return new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> arg0, Number old, Number playerPosition) {
-				adjustPlayerPosition(player);
-			}
-		};
-	}
-
 	private void invitePlayers() {
 		controllers = new HashMap<>();
 		List<Player> allPlayers = game.getPlayers().toList();
@@ -163,6 +147,22 @@ public class PlaygroundController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private void adjustPlayerPosition(Player player) {
+		Point pos = new PlayerPositionHelper(playgroundImageDescr, getSizeOfBackgroundImage(), game).calc(player.getPosition().intValue(), playground.getRotate());
+		ImageView img = playerFigures.get(player);
+		img.relocate(pos.getX(), pos.getY());
+	}
+
+	private ChangeListener<Number> createPlayerMovedListener(Player player) {
+		return new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> arg0, Number old, Number playerPosition) {
+				adjustPlayerPosition(player);
+			}
+		};
 	}
 
 }
