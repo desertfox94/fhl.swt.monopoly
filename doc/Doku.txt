@@ -1,3 +1,4 @@
+GitHub Repository:	https://github.com/desertfox94/fhl.swt.monopoly
 Branching Modell:	Master only
 
 Testverfahren:		Unit Tests mit JUnit4
@@ -10,4 +11,4 @@ FX-test coverage:	Es werden mindestens die Standartabläufe getestet.
 
 Build tool:			Maven
 
-Continuous Integration: Jenkins Server, mit eingerichtetem GitHub Pull-Hook.
+Continuous Integration: Jenkins Server (http://35.190.64.214/), mit eingerichtetem GitHub Pull-Hook.
