@@ -10,6 +10,9 @@ import monopoly.model.Figure;
 import monopoly.model.Game;
 import monopoly.model.Player;
 
+/*
+Mock class for Monopoly game
+ */
 public class GameMock extends Game {
 
 	private static Random r = new Random();
