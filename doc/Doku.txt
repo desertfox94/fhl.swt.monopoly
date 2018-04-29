@@ -1,0 +1,13 @@
+Branching Modell:	Master only
+
+Testverfahren:		Unit Tests mit JUnit4
+					UI Tests mit TestFX
+
+Unit-test coverage:	~95% C0 (Anweisungsüberdeckung)  und ~70% C1 (Zweigüberdeckung)
+					POJOs sind ausgenomment.
+
+FX-test coverage:	Es werden mindestens die Standartabläufe getestet.
+
+Build tool:			Maven
+
+Continuous Integration: Jenkins Server, mit eingerichtetem GitHub Pull-Hook.
