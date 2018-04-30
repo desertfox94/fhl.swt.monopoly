@@ -22,7 +22,7 @@ public class GameMock extends Game {
 		games.add(mockGame());
 		return games;
 	}
-	// instantiate Game-class mock-up
+	// instantiate Game mock-up
 	public static Game mockGame() {
 		Game game = new Game();
 		Edition edition = DBService.getDefault().loadEdition(null);
@@ -32,7 +32,7 @@ public class GameMock extends Game {
 		game.addPlayer(mockPlayer("Bud", edition.getFigures().get(2)));
 		return game;
 	}
-
+    // instantiate Player mock-up
 	private static Player mockPlayer(String name, Figure figure) {
 		Player player = new Player();
 		player.setBalance(8000.0);
