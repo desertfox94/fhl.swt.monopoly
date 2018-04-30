@@ -1,14 +1,14 @@
 package monopoly.core.mock;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import monopoly.core.DBService;
 import monopoly.model.Edition;
 import monopoly.model.Figure;
 import monopoly.model.Game;
 import monopoly.model.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /*
 Mock class for Monopoly game
@@ -22,7 +22,7 @@ public class GameMock extends Game {
 		games.add(mockGame());
 		return games;
 	}
-
+	// instantiate Game-class mock-up
 	public static Game mockGame() {
 		Game game = new Game();
 		Edition edition = DBService.getDefault().loadEdition(null);
