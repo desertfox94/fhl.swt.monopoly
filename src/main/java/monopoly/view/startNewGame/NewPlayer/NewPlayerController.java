@@ -1,8 +1,5 @@
 package monopoly.view.startNewGame.NewPlayer;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -14,6 +11,9 @@ import javafx.scene.control.TextField;
 import monopoly.model.Figure;
 import monopoly.model.Player;
 import monopoly.view.startNewGame.NewGameController;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class NewPlayerController implements Initializable {
 

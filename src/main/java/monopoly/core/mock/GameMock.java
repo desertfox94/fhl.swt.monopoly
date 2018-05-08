@@ -17,6 +17,7 @@ public class GameMock extends Game {
 
 	private static Random r = new Random();
 
+	//create list of game/s
 	public static List<Game> games() {
 		List<Game> games = new ArrayList<>();
 		games.add(mockGame());
