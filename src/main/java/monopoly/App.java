@@ -1,12 +1,12 @@
 package monopoly;
 
-import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class App extends Application {
 
@@ -24,6 +24,7 @@ public class App extends Application {
 
 	/**
 	 * Initializes the root layout.
+	 * @Stage primaryStage
 	 */
 	public void initRootLayout(Stage primaryStage) {
 		try {
