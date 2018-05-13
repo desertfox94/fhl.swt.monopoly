@@ -53,8 +53,8 @@ public class TestStreet {
 	
 		assertTrue(street.getNumberOfHouses() == 1); 
 		
-		street.demolishHouses(1);						// not correctly implemented yet, should not reduce to 
-		assertTrue(street.getNumberOfHouses() == 1); 	// a certain number of houses, but demolish a certain amount
+		street.demolishHouses(1);				// demolish reduces number of houses to certrain amount
+		assertTrue(street.getNumberOfHouses() == 1); 	
 		
 		street.demolishHouses(0);
 		assertTrue(street.getNumberOfHouses() == 0); 
