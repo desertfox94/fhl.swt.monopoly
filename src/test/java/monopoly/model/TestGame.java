@@ -43,10 +43,11 @@ public class TestGame {
 	@Test
 	public void testDiceCastHistory() {
 		Game game = new Game();
-		Player p0 = new Player();
-		Player p1 = new Player();
-		game.getPlayers().add(p0);
-		game.getPlayers().add(p1);
+		Player p = new Player();
+		game.getPlayers().add(p);
+		DiceCast d = new DiceCast();
+		game.playerRolledTheDice(d);
+		assertTrue(game.getCurrentPlayerDiceCastHistory().contains(d));
 	}
 
 
