@@ -1,12 +1,10 @@
 package monopoly.model;
 
 
-import org.junit.Test;
-
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 /**
  * @author Florian Nickel
@@ -14,17 +12,17 @@ import static org.junit.Assert.assertTrue;
 public class TestStreetOwner {
     @Test
     public void testAddStreet(){
-        Payer player = new Payer();
-        Player.addToInventory(new Street());
-        assertTrue(player.getStreets().Count == 1);
+        Player player = new Player();
+        player.addToInventory(new Street());
+        assertFalse(player.getStreets().isEmpty());
     }
 
     @Test
     public void testRemoveStreet(){
-        Payer player = new Payer();
+    	Player player = new Player();
         Street street = new Street();
-        Player.addToInventory(street);
+        player.addToInventory(street);
         player.removeFromInventory(street);
-        assertTrue(player.getStreets().Count == 0);
+        assertTrue(player.getStreets().isEmpty());
     }
 }

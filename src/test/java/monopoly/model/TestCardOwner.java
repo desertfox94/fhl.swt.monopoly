@@ -1,12 +1,13 @@
 package monopoly.model;
 
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import org.junit.Test;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import static org.junit.Assert.assertTrue;
+import monopoly.core.cards.Card;
+import monopoly.core.cards.CardFactory;
 
 /**
  * @author Florian Nickel
@@ -14,17 +15,17 @@ import static org.junit.Assert.assertTrue;
 public class TestCardOwner {
     @Test
     public void testAddCard(){
-        Payer player = new Payer();
-        Player.addCardToInventory(new CardFactory().getInstance().createEventCards()draw());
-        assertTrue(player.getCards().Count == 1);
+    	Player player = new Player();
+    	player.addCardToInventory(CardFactory.createEventCards().draw());
+    	assertFalse(player.getCards().isEmpty());
     }
 
     @Test
     public void testRemoveCard(){
-        Payer player = new Payer();
-        Card card = new CardFactory().getInstance().createEventCards()draw();
-        Player.addCardToInventory(card);
+    	Player player = new Player();
+        Card card = CardFactory.createEventCards().draw();
+        player.addCardToInventory(card);
         player.removeCardFromInventory(card);
-        assertTrue(player.getCards().Count == 0);
+        assertTrue(player.getCards().isEmpty());
     }
 }
