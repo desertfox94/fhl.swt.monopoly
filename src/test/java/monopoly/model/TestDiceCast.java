@@ -1,6 +1,8 @@
 package monopoly.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -14,9 +16,8 @@ public class TestDiceCast {
 		DiceCast diceCast = new DiceCast();
 		int roll = diceCast.next();
 		assertTrue(roll == diceCast.current());
-		if (roll > 12 || roll < 2)
-			assertTrue(false);
-
+		assertTrue(roll <= 12);
+		assertTrue(roll >= 2);
 	}
 
 	@Test
@@ -24,9 +25,13 @@ public class TestDiceCast {
 		DiceCast diceCast = new DiceCast();
 		while (!diceCast.isDouble())
 			diceCast.next();
-		int roll = diceCast.next();
-		if (roll % 2 != 0)
-			assertTrue(false);
+		
+		// 1)
+		assertEquals("Ein Pasch muss durch 2 teilbar sein!", 0, diceCast.current() % 2);
+		
+		// 2)
+		if (diceCast.current() % 2 != 0)
+			fail("Ein Pasch muss durch 2 teilbar sein!");
 	}
 
 	@Test
