@@ -118,20 +118,17 @@ public class Player implements StreetOwner, CardOwner {
 
 	@Override
 	public void removeFromInventory(Street street) {
-		// TODO Auto-generated method stub
-
+		streets.remove(street);
 	}
 
 	@Override
 	public void addCardToInventory(Card card) {
-		// TODO Auto-generated method stub
-
+		cards.add(card);
 	}
 
 	@Override
 	public void removeCardFromInventory(Card card) {
-		// TODO Auto-generated method stub
-
+		cards.remove(card);
 	}
 
 	public void setBalance(double balance) {
