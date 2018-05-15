@@ -1,28 +1,15 @@
 package monopoly.core.cards;
 
-import monopoly.model.Player;
-
-public class FreeFromJail extends Card implements OwnableCard {
-
-	private Player player;
+public class FreeFromJail extends OwnableCard {
 
 	public FreeFromJail() {
 		super("Gefänginsfreikarte", "Sie kommen aus dem Gefängnis frei!");
 	}
 
 	@Override
-	public boolean execute(Player player) {
+	protected boolean execute() {
+		player.freeFromJail();
 		return false;
-	}
-
-	@Override
-	public Player getPlayer() {
-		return player;
-	}
-
-	@Override
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 
 }

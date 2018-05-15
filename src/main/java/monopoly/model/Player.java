@@ -87,6 +87,7 @@ public class Player implements StreetOwner, CardOwner {
 
 	public void freeFromJail() {
 		jailCount.set(0);
+		jail.set(false);
 	}
 
 	public void sendToJail() {
@@ -143,4 +144,9 @@ public class Player implements StreetOwner, CardOwner {
 		this.game = game;
 	}
 
+	@Override
+	public String toString() {
+		return name.toString();
+	}
+	
 }
