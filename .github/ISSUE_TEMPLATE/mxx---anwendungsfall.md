@@ -14,7 +14,7 @@ Welche Ausgangssituation muss vorliegen?
 **Normalverlauf**
 Wie ist der Ablauf? Welche Möglichkeiten soll das Feature dem Spieler bieten?
 
-**Alternativverlauf **
+**Alternativverlauf**
 Welche Abweichungen vom Normalverlauf kann es geben?
 
 **Nachbedingung**
