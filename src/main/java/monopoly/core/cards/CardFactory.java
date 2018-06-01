@@ -12,25 +12,15 @@ public class CardFactory {
 	public static final HashMap<String, Class<?>> cardRegistery = new HashMap<>();
 
 	public static CardSet createEventCards() {
-		return new CardSet(new CircleList<>(), "Event Card") {
-
-			@Override
-			void initCards() {
-				// TODO Auto-generated method stub
-
-			}
-		};
+		CircleList<Card> eventCards = new CircleList<>();
+		// TODO: Create all EventCards
+		return new CardSet(eventCards, "Event Card");
 	}
 
 	public static CardSet createCommunityCards() {
-		return new CardSet(new CircleList<>(), "Community Card") {
-
-			@Override
-			void initCards() {
-				// TODO Auto-generated method stub
-
-			}
-		};
+		CircleList<Card> cards = new CircleList<>();
+		// TODO: Create all CommunityCards
+		return new CardSet(cards, "Community Card");
 
 	}
 

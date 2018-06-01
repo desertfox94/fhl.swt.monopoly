@@ -11,7 +11,7 @@ public class CircleList<T> {
 
 	private int i;
 
-	private final List<T> list;
+	private List<T> list;
 
 	public CircleList(List<T> list) {
 		this.list = list;
@@ -32,6 +32,14 @@ public class CircleList<T> {
 		return list.get(i);
 	}
 
+	public void putLast(T t) {
+		List<T> newList = new ArrayList<>(list.subList(0, i));
+		newList.add(t);
+		newList.addAll(list.subList(i, list.size()));
+		i++;
+		list = newList;
+	}
+	
 	public T getCurrent() {
 		return list.get(i);
 	}
@@ -44,16 +52,16 @@ public class CircleList<T> {
 		i = list.indexOf(t);
 	}
 
-	public T remove(T t) {
-		return t;
+	public boolean remove(T t) {
+		return list.remove(t);
 	}
 
 	public List<T> toList() {
 		return list;
 	}
-
-	public int indexOf(Field field) {
-		return list.indexOf(field);
+	
+	public boolean contains(T t) {
+		return list.contains(t);
 	}
 
 	public T get(int index) {

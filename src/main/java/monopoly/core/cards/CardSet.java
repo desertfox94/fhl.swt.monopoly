@@ -2,7 +2,7 @@ package monopoly.core.cards;
 
 import monopoly.core.CircleList;
 
-public abstract class CardSet {
+public class CardSet {
 
 	private CircleList<Card> cards;
 	private String name;
@@ -12,20 +12,14 @@ public abstract class CardSet {
 		this.name = name;
 	}
 
-	protected void addCard(Card card) {
-		cards.add(card);
-	}
-
-	abstract void initCards();
-
 	public Card draw() {
 		Card card = cards.next();
 		cards.remove(card);
 		return card;
 	}
 
-	public void add(Card card) {
-		cards.add(card);
+	public void returnCard(Card card) {
+		cards.putLast(card);
 	}
 
 	public String getName() {

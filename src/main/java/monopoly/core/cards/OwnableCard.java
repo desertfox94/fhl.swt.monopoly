@@ -21,11 +21,9 @@ public abstract class OwnableCard extends Card {
 
 	@Override
 	public final boolean execute(Player player) {
-		if (player != null && !this.player.equals(player)) {
-			throw new RuntimeException(String.format("Diese Karte kann nicht auf %s angewendet werden, da sie bereits %s zugewiesen ist!", player.toString(), this.player.toString()));
-		}
 		boolean result = execute();
 		player.removeCardFromInventory(this);
+		cardSet.returnCard(this);
 		player = null;
 		return result;
 	}

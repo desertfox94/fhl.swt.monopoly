@@ -4,6 +4,8 @@ import monopoly.model.Player;
 
 public abstract class Card {
 
+	protected CardSet cardSet;
+	
 	private String title;
 	
 	private String description;
