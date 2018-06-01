@@ -115,4 +115,9 @@ public class Street {
 		return rent;
 	}
 
+
+	public void zurAuktionFreigeben(){
+		//Todo: M13 zur Auktion freigeben
+	}
+
 }
