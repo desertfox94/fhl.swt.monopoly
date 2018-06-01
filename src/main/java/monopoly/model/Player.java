@@ -38,6 +38,7 @@ public class Player implements StreetOwner, CardOwner {
 	public void moveTo(Field field) {
 		this.field.set(field);
 		position.set(field.getIndex());
+
 	}
 
 	public String getId() {
