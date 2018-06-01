@@ -3,12 +3,13 @@ package monopoly.core.cards;
 public class FreeFromJail extends OwnableCard {
 
 	public FreeFromJail() {
-		super("Gefänginsfreikarte", "Sie kommen aus dem Gefängnis frei!");
+		super("Gefï¿½nginsfreikarte", "Sie kommen aus dem Gefï¿½ngnis frei!");
 	}
 
 	@Override
 	protected boolean execute() {
 		player.freeFromJail();
+		player.removeCardFromInventory(this);
 		return false;
 	}
 
