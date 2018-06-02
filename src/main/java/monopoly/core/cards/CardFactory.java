@@ -5,23 +5,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-import monopoly.core.CircleList;
+import monopoly.core.mock.MockService;
 
 public class CardFactory {
 
 	public static final HashMap<String, Class<?>> cardRegistery = new HashMap<>();
 
 	public static CardSet createEventCards() {
-		CircleList<Card> eventCards = new CircleList<>();
-		// TODO: Create all EventCards
-		return new CardSet(eventCards, "Event Card");
+		return MockService.createDummyCards("Ereigniskarten", 5);
 	}
 
 	public static CardSet createCommunityCards() {
-		CircleList<Card> cards = new CircleList<>();
-		// TODO: Create all CommunityCards
-		return new CardSet(cards, "Community Card");
-
+		return MockService.createDummyCards("Gemeinschaftskarten", 5);
 	}
 
 	private static CardFactory factory;

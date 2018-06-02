@@ -8,7 +8,9 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import monopoly.core.CircleList;
 import monopoly.core.DBService;
+import monopoly.core.cards.Card;
 import monopoly.core.cards.CardFactory;
 import monopoly.core.cards.CardSet;
 import monopoly.core.fields.FieldsFactory;
@@ -101,6 +103,15 @@ public class MockService extends DBService {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static CardSet createDummyCards(String type, int n) {
+		CircleList<Card> cards = new CircleList<>();
+		for (int i = 0; i < n; i++) {
+			cards.add(new DummyCard());
+		}
+		return new CardSet(cards, type);
+
 	}
 
 }
