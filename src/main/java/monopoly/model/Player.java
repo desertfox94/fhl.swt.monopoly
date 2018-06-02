@@ -145,6 +145,8 @@ public class Player implements StreetOwner, CardOwner {
 		this.game = game;
 	}
 
+	public Game getGame() {return game;}
+
 	@Override
 	public String toString() {
 		return name.toString();

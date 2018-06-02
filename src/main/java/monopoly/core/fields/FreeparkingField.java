@@ -13,8 +13,12 @@ public class FreeparkingField extends Field {
 
 	@Override
 	public void landing(Player player) {
-		// TODO Auto-generated method stub
 
+		double currentMoneyInTheMiddle = player.getGame().getMoneyInTheMiddle().doubleValue();
+		if (player instanceof Player) {
+			((Player) player).addMoney(currentMoneyInTheMiddle);
+		}
+		player.getGame().setMoneyInTheMiddle(0);
 	}
 
 }
