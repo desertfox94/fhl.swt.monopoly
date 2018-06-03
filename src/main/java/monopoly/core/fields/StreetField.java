@@ -8,21 +8,23 @@ import monopoly.model.StreetOwner;
 
 /**
  * A regular Street field. several of these will form a majority of the playing field.
+ * 
+ * MessageUtils auskommentiert, da  streetField.landing(player) im junittest einen ExceptioninitializerError wirft
  */
 public class StreetField extends Field {
-
+	public boolean buyStreet = false; // für JunitTesting als globale 
     private Street street;
 
     public StreetField(Street street, int index) {
         super(street.getName(), index);
         this.street = street;
     }
-
+      
     @Override
     public void landing(Player player) {
         StreetOwner owner = street.getOwner();
         if (owner == null) {
-            boolean buyStreet = MessageUtil.ask("Wollen Sie " + street.getName() + " kaufen?", "Stra�e kaufen", "Ja!", "Nein, Auktion starten");
+           // boolean buyStreet = MessageUtil.ask("Wollen Sie " + street.getName() + " kaufen?", "Stra�e kaufen", "Ja!", "Nein, Auktion starten");          
             if (buyStreet) {
                 player.pay(street.getPrice().doubleValue());
                 player.addToInventory(street);
@@ -34,39 +36,34 @@ public class StreetField extends Field {
         } else if (owner != player) {
             double rent = street.getRent().doubleValue();
         	boolean hasZeroHouses = true;
-            if ( (player.getBalance().doubleValue() <= rent) && (!player.isInJail()) ) {            	
+            if ( (player.getBalance().doubleValue() < rent) && (!player.isInJail()) ) {            	
             	if( !street.isMortage() ) {        		
             		for (Street s : player.getStreets()) {
-            			if (s.getNumberOfHouses() != 0) { //TODO
+            			if (s.getNumberOfHouses() != 0) { 
             				hasZeroHouses = false;
             			}
-            		}
+            		}            		
             		if (hasZeroHouses == true) {
-            			String text = "Sie sind auf " + street.getName() + " (" + owner.getName() + ") gelandet und müssen eine Hypothek aufnehmen";
-            			String title = "Hypothek aufnehmen";
-            			MessageUtil.inform(text, title);
-            			street.isMortage(); // nachfragen welche bedigungen noch eintreten         			
+            			street.isMortage(); // nachfragen welche bedigungen eintreten bei hypothek   			
             		}	
             		else { }       	//verkaufe häuser, zahle rent. rent immer noch weniger? Hypothek aufnehmen / nachfragen 
-            	}         	
-            	else if( street.isMortage() ) {
-            		String text = "Sie haben keine Möglichkeit mehr ihre Forderungen zu bezahlen";
-            		String title = "Sie sind Bankrott!";
-            		MessageUtil.inform(text, title);    
-            		double moneyLeft = player.getBalance().doubleValue();
-            		 if (owner instanceof Player) {
-                         ((Player) owner).addMoney(moneyLeft); // gebe gläubigen den rest des Geldes
-                     } 
-            		player.getGame().endGame(); // ende game für diesen Spieler
-            	}
+            	} 
+            	 	
+            double moneyLeft = player.getBalance().doubleValue();
+            player.setBalance(player.getBalance().doubleValue() - moneyLeft);
+            	if (owner instanceof Player) {
+            		((Player) owner).addMoney(moneyLeft); // gebe gläubigen den rest des Geldes
+                } 
+            		//player.getGame().endGame(); // ende game für diesen Spieler        	
             } 
-  
-            String text = "Sie sind auf " + street.getName() + " (" + owner.getName() + ") gelandet und zahlen " + rent + " Miete.";
-            String title = "Miete zahlen";
-            MessageUtil.inform(text, title);
-            player.pay(rent);
-            if (owner instanceof Player) {
-                ((Player) owner).addMoney(rent);
+          //  String text = "Sie sind auf " + street.getName() + " (" + owner.getName() + ") gelandet und zahlen " + rent + " Miete.";
+          //  String title = "Miete zahlen";
+          //   MessageUtil.inform(text, title);
+            if ( (player.getBalance().doubleValue() >= rent) && (!player.isInJail()) ) {
+            	player.pay(rent);
+            	if (owner instanceof Player) {
+            		((Player) owner).addMoney(rent);
+            	}
             }
         }
     }
