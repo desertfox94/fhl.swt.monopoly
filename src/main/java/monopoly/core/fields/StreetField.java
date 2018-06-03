@@ -1,6 +1,7 @@
 package monopoly.core.fields;
 
 import monopoly.core.MessageUtil;
+import monopoly.model.Game;
 import monopoly.model.Player;
 import monopoly.model.Street;
 import monopoly.model.StreetOwner;
@@ -32,7 +33,34 @@ public class StreetField extends Field {
             }
         } else if (owner != player) {
             double rent = street.getRent().doubleValue();
-            //Todo: hat der Speler genug geld Siehe: Miete bezahlen M19
+        	boolean hasZeroHouses = true;
+            if ( (player.getBalance().doubleValue() <= rent) && (!player.isInJail()) ) {            	
+            	if( !street.isMortage() ) {        		
+            		for (Street s : player.getStreets()) {
+            			if (s.getNumberOfHouses() != 0) { //TODO
+            				hasZeroHouses = false;
+            			}
+            		}
+            		if (hasZeroHouses == true) {
+            			String text = "Sie sind auf " + street.getName() + " (" + owner.getName() + ") gelandet und müssen eine Hypothek aufnehmen";
+            			String title = "Hypothek aufnehmen";
+            			MessageUtil.inform(text, title);
+            			street.isMortage(); // nachfragen welche bedigungen noch eintreten         			
+            		}	
+            		else { }       	//verkaufe häuser, zahle rent. rent immer noch weniger? Hypothek aufnehmen / nachfragen 
+            	}         	
+            	else if( street.isMortage() ) {
+            		String text = "Sie haben keine Möglichkeit mehr ihre Forderungen zu bezahlen";
+            		String title = "Sie sind Bankrott!";
+            		MessageUtil.inform(text, title);    
+            		double moneyLeft = player.getBalance().doubleValue();
+            		 if (owner instanceof Player) {
+                         ((Player) owner).addMoney(moneyLeft); // gebe gläubigen den rest des Geldes
+                     } 
+            		player.getGame().endGame(); // ende game für diesen Spieler
+            	}
+            } 
+  
             String text = "Sie sind auf " + street.getName() + " (" + owner.getName() + ") gelandet und zahlen " + rent + " Miete.";
             String title = "Miete zahlen";
             MessageUtil.inform(text, title);
