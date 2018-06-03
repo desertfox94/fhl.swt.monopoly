@@ -33,14 +33,14 @@ public class StreetField extends Field {
             }
         } else if (owner != player) {
             double rent = street.getRent().doubleValue();
-        	boolean hasZeroHouses = false;
+        	boolean hasZeroHouses = true;
             if ( (player.getBalance().doubleValue() <= rent) && (!player.isInJail()) ) {            	
             	if( !street.isMortage() ) {        		
-            				for (Street s : player.getStreets()) {
-            					if (s.getNumberOfHouses() == 0) { //TODO
-            						hasZeroHouses = true;
-            					}
-            				}
+            		for (Street s : player.getStreets()) {
+            			if (s.getNumberOfHouses() != 0) { //TODO
+            				hasZeroHouses = false;
+            			}
+            		}
             		if (hasZeroHouses == true) {
             			String text = "Sie sind auf " + street.getName() + " (" + owner.getName() + ") gelandet und müssen eine Hypothek aufnehmen";
             			String title = "Hypothek aufnehmen";
