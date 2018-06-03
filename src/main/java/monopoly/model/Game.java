@@ -15,7 +15,6 @@ public class Game {
 	private Edition edition;
 	private int rounde;
 	private DoubleProperty moneyInTheMiddle = new SimpleDoubleProperty();
-
 	private List<DiceCast> currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
 
 	private CardSet communityCards;

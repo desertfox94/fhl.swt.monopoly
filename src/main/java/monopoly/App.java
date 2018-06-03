@@ -23,7 +23,7 @@ public class App extends Application {
 	}
 
 	/**
-	 * Initializes the root layout and draws scene.
+	 * Initializes the root layout and draws scene .
 	 * @Stage primaryStage
 	 */
 	public void initRootLayout(Stage primaryStage) {
