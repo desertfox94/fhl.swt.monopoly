@@ -138,7 +138,6 @@ public class TestStreet {
 		assertTrue(	street.getRent().getValue().compareTo(rent2.getValue()) == 0);					
 	}
 	
-
 	@Test
 	public void testgetCurrentRent() {
 		Street street = new Street();
@@ -170,5 +169,13 @@ public class TestStreet {
 		assertTrue(street.getRentDetails().getThirdHouseRent() == pricethird);
 		assertTrue(street.getRentDetails().getFourthHouseRent() == pricefourth);		
 	}	
+
+	@Test
+	public void testReleaseToAuction() {
+		Street street = new Street();
+		assertFalse(street.IsAuctionObjective());
+		street.zurAuktionFreigeben();
+		assertTrue(street.IsAuctionObjective());
+	}
 }
 
