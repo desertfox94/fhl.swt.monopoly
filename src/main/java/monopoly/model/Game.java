@@ -86,5 +86,9 @@ public class Game {
 	public void setMoneyInTheMiddle(double moneyInTheMiddle) {
 		this.moneyInTheMiddle.set(moneyInTheMiddle);
 	}
+	
+	public void endGame() {
+		//TODO
+	}
 
 }
