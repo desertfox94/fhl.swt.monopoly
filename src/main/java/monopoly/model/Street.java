@@ -15,7 +15,7 @@ public class Street {
 	private StreetOwner owner;
 	private StreetDetails rentDetails;
 	private StreetGroup group;
-	private boolean isAuctionObjective;
+	private boolean auctionObjective;
 
 	private DoubleProperty rent = new SimpleDoubleProperty();
 
@@ -84,8 +84,8 @@ public class Street {
 		return group;
 	}
 	
-	public boolean IsAuctionObjective() {
-		return isAuctionObjective;
+	public boolean isAuctionObjective() {
+		return auctionObjective;
 	}
 
 	private BigDecimal getCurrentRent() {
@@ -121,9 +121,13 @@ public class Street {
 	}
 
 
-	public void zurAuktionFreigeben(){
-		isAuctionObjective = true;
+	public void startAuction(){
+		auctionObjective = true;
 		//Todo: MXX Auktion starten aufrufen.
+	}
+	
+	public void endAuction() {
+		auctionObjective = false;
 	}
 
 }
