@@ -23,6 +23,7 @@ public class StreetField extends Field {
     @Override
     public void landing(Player player) {
         StreetOwner owner = street.getOwner();
+        buyStreet = MessageUtil.ask("Strasse Kaufen", "Wollen Sie die Strasse Kaufen?", "ja", "nein, Auktion starten");
         if (owner == null) {
             if (buyStreet) {
                 player.pay(street.getPrice().doubleValue());
