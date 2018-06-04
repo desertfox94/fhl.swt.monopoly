@@ -170,12 +170,24 @@ public class TestStreet {
 		assertTrue(street.getRentDetails().getFourthHouseRent() == pricefourth);		
 	}	
 
+	// Florian Nickel
 	@Test
 	public void testReleaseToAuction() {
 		Street street = new Street();
-		assertFalse(street.IsAuctionObjective());
-		street.zurAuktionFreigeben();
-		assertTrue(street.IsAuctionObjective());
+		assertFalse(street.isAuctionObjective());
+		street.startAuction();
+		assertTrue(street.isAuctionObjective());
+	}
+	
+	// Florian Nickel
+	@Test
+	public void testTerminateAuction() {
+		Street street = new Street();
+		assertFalse(street.isAuctionObjective());
+		street.startAuction();
+		assertTrue(street.isAuctionObjective());
+		street.endAuction();
+		assertFalse(street.isAuctionObjective());
 	}
 }
 

@@ -30,7 +30,7 @@ public class StreetField extends Field {
                 street.setOwner(player);
             } else {
                 //zur auktion freigeben
-                street.zurAuktionFreigeben();
+                street.startAuction();
             }
         } else if (owner != player) {
             double rent = street.getRent().doubleValue();
