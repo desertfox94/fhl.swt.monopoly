@@ -24,7 +24,6 @@ public class StreetField extends Field {
     public void landing(Player player) {
         StreetOwner owner = street.getOwner();
         if (owner == null) {
-           // boolean buyStreet = MessageUtil.ask("Wollen Sie " + street.getName() + " kaufen?", "Stra�e kaufen", "Ja!", "Nein, Auktion starten");          
             if (buyStreet) {
                 player.pay(street.getPrice().doubleValue());
                 player.addToInventory(street);
@@ -35,31 +34,21 @@ public class StreetField extends Field {
             }
         } else if (owner != player) {
             double rent = street.getRent().doubleValue();
-        	boolean hasZeroHouses = true;
-            if ( (player.getBalance().doubleValue() < rent) && (!player.isInJail()) ) {            	
-            	if( !street.isMortage() ) {        		
-            		for (Street s : player.getStreets()) {
-            			if (s.getNumberOfHouses() != 0) { 
-            				hasZeroHouses = false;
-            			}
-            		}            		
-            		if (hasZeroHouses == true) {
-            			street.isMortage(); // nachfragen welche bedigungen eintreten bei hypothek   			
-            		}	
-            		else { }       	//verkaufe häuser, zahle rent. rent immer noch weniger? Hypothek aufnehmen / nachfragen 
-            	} 
-            	 	
-            double moneyLeft = player.getBalance().doubleValue();
-            player.setBalance(player.getBalance().doubleValue() - moneyLeft);
-            	if (owner instanceof Player) {
-            		((Player) owner).addMoney(moneyLeft); // gebe gläubigen den rest des Geldes
-                } 
-            		//player.getGame().endGame(); // ende game für diesen Spieler        	
+        	boolean streetWithoutHouse = false;
+            if ( player.getBalance().doubleValue() < rent ) {            	   		
+            	for (Street s : player.getStreets()) {
+            		if (s.getNumberOfHouses() == 0) {  // nehme vorerst erste Straße ohne Haus im loop
+            			streetWithoutHouse = true;
+            			if (!s.isMortage()) {s.assumeMortage();} // hypothek aufnehmen 
+            		}
+            	}            		
+            	if (streetWithoutHouse == false) {
+                	if (owner instanceof Player) {
+                		((Player) owner).addMoney(rent); // gehe ins negative um rent zu zahlen
+                	} 										
+            	}			        	
             } 
-          //  String text = "Sie sind auf " + street.getName() + " (" + owner.getName() + ") gelandet und zahlen " + rent + " Miete.";
-          //  String title = "Miete zahlen";
-          //   MessageUtil.inform(text, title);
-            if ( (player.getBalance().doubleValue() >= rent) && (!player.isInJail()) ) {
+            if ( (player.getBalance().doubleValue() >= rent) && (!((Player) owner).isInJail()) ) {
             	player.pay(rent);
             	if (owner instanceof Player) {
             		((Player) owner).addMoney(rent);
