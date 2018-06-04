@@ -170,6 +170,7 @@ public class TestStreet {
 		assertTrue(street.getRentDetails().getFourthHouseRent() == pricefourth);		
 	}	
 
+	// Florian Nickel
 	@Test
 	public void testReleaseToAuction() {
 		Street street = new Street();
