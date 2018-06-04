@@ -12,9 +12,13 @@ import monopoly.core.fields.Field;
 public class Game {
 
 	private CircleList<Player> players = new CircleList<>();
+
 	private Edition edition;
+
 	private int rounde;
+
 	private DoubleProperty moneyInTheMiddle = new SimpleDoubleProperty();
+
 	private List<DiceCast> currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
 
 	private CardSet communityCards;
@@ -82,10 +86,15 @@ public class Game {
 		return currentPlayerDiceCastHistory.size();
 	}
 
-	public void setMoneyInTheMiddle(double moneyInTheMiddle) {
-		this.moneyInTheMiddle.set(moneyInTheMiddle);
+	public void payOutMoneyInTheMiddle(Player player) {
+		player.addMoney(moneyInTheMiddle.doubleValue());
+		moneyInTheMiddle.set(0.0);
 	}
-	
+
+	public void putMoneyInTheMiddle(double amount) {
+		moneyInTheMiddle.set(moneyInTheMiddle.get() + amount);
+	}
+
 	public void endGame() {
 		//TODO
 	}

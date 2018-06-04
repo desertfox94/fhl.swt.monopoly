@@ -1,36 +1,31 @@
 package monopoly.core.fields;
 
-import monopoly.core.CircleList;
-import monopoly.model.Edition;
+import static junit.framework.TestCase.assertEquals;
 import monopoly.model.Game;
 import monopoly.model.Player;
-import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class TestFreeparkingField
 {
-    @Test
-    public void testFreeparkingField()
-    {
-        Game game = new Game();
-        CircleList circlist = new CircleList();
-        FreeparkingField freeparkingField = new FreeparkingField();
-        Edition edi = new Edition();
-        Player player = new Player();
-        game.getPlayers().add(player);
-        edi.setFields(circlist);
-        game.setMoneyInTheMiddle(500);
-        Boolean notMoved = true;
-        double moneyBefore = player.getBalance().doubleValue();
-        while (notMoved) {
-            assertTrue(player.getField().getValue() == null);
-            player.moveTo(freeparkingField);
-            notMoved = false;
-        }
-        assertTrue(player.getField().getValue().equals(freeparkingField));
-        double moneyAfter =  player.getBalance().doubleValue();
-        assertEquals(moneyBefore+500,moneyAfter);
-    }
+
+	@Test
+	public void testFreeparkingField()
+	{
+		Game game = new Game();
+		int moneyInTheMiddle = 500;
+		FreeparkingField freeparkingField = new FreeparkingField();
+		Player player = new Player();
+		int moneyBefore = player.getBalance().intValue();
+		player.setGame(game);
+
+		game.putMoneyInTheMiddle(moneyInTheMiddle);
+		assertEquals(moneyInTheMiddle, game.getMoneyInTheMiddle().intValue());
+
+		freeparkingField.landing(player);
+
+		int moneyAfter = player.getBalance().intValue();
+		assertEquals(moneyBefore + moneyInTheMiddle, moneyAfter);
+		assertEquals(0, game.getMoneyInTheMiddle().intValue());
+	}
 }
