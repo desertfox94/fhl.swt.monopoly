@@ -41,7 +41,6 @@ public class TestStreetField {
         //Mockito.when(streetField.ask()).thenReturn(false);
 
         doReturn(false).when(streetField).ask();
-        Whitebox.setInternalState(streetField, "street", street);
 
         streetField.setStreet(street);
         streetField.landing(player);
@@ -60,7 +59,8 @@ public class TestStreetField {
         Player playerTwo = new Player();
         Player playerThree = new Player();
         int index = 5;
-        StreetField streetField = new StreetField(street, index);
+        StreetField streetField = spy(new StreetField(street, index));
+        doReturn(true).when(streetField).ask();
         street.setName("ParkAllee");
         StreetDetails rentDetails = new StreetDetails();
         BigDecimal rentHouse = new BigDecimal(200);
