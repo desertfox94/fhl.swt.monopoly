@@ -1,8 +1,0 @@
-Stunden pro Person pro Woche : 8
-2 Storypoints werden 5 Std gebraucht
-
-
-
-Straﬂe zur Auktion freigeben:	2	5H
-Auf Auktion bieten:		21
-Miete bezahlen: 		5	Aktuell kann nur die normale Miete, ohne h‰user/Hotels abgezogen werden. Hypothek aufnehmen und Bankrott gehen sind nicht mit gesch‰tzt(Andere Anwendungsf‰lle) 
