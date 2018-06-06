@@ -19,10 +19,23 @@ public class StreetField extends Field {
         super(street.getName(), index);
         this.street = street;
     }
-      
+
+    public boolean ask(){
+        return MessageUtil.ask("Strasse Kaufen", "Wollen Sie die Strasse Kaufen?", "ja", "nein, Auktion starten");
+    }
+
+    public void setStreet(Street street) {
+        this.street = street;
+    }
+
+    public Street getStreet() {
+        return street;
+    }
+
     @Override
     public void landing(Player player) {
         StreetOwner owner = street.getOwner();
+        buyStreet = ask();
         if (owner == null) {
             if (buyStreet) {
                 player.pay(street.getPrice().doubleValue());
