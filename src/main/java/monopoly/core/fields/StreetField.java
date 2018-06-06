@@ -1,5 +1,10 @@
 package monopoly.core.fields;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import monopoly.core.MessageUtil;
 import monopoly.model.Game;
 import monopoly.model.Player;
@@ -13,8 +18,9 @@ import monopoly.model.StreetOwner;
  */
 public class StreetField extends Field {
 	public boolean buyStreet = false; // für JunitTesting als globale 
+	public boolean mortage = false;
     private Street street;
-
+    
     public StreetField(Street street, int index) {
         super(street.getName(), index);
         this.street = street;
@@ -23,7 +29,11 @@ public class StreetField extends Field {
     public boolean ask(){
         return MessageUtil.ask("Strasse Kaufen", "Wollen Sie die Strasse Kaufen?", "ja", "nein, Auktion starten");
     }
-
+    
+    public boolean askMortage(){
+        return MessageUtil.ask("Hypothek aufnehmen", "Wollen Sie eine Hypothek aufnehmen?", "ja", "nein, Haus verkaufen");
+    }
+  
     public void setStreet(Street street) {
         this.street = street;
     }
@@ -47,21 +57,20 @@ public class StreetField extends Field {
             }
         } else if (owner != player) {
             double rent = street.getRent().doubleValue();
-        	boolean streetWithoutHouse = false;
-            if ( player.getBalance().doubleValue() < rent ) {            	   		
-            	for (Street s : player.getStreets()) {
-            		if (s.getNumberOfHouses() == 0) {  // nehme vorerst erste Straße ohne Haus im loop
-            			streetWithoutHouse = true;
-            			if (!s.isMortage()) {s.assumeMortage();} // hypothek aufnehmen 
-            		}
-            	}            		
-            	if (streetWithoutHouse == false) {
-                	if (owner instanceof Player) {
-                		((Player) owner).addMoney(rent); // gehe ins negative um rent zu zahlen
-                	} 										
-            	}			        	
-            } 
-            if ( (player.getBalance().doubleValue() >= rent) && (!((Player) owner).isInJail()) ) {
+   
+            if ( player.getBalance().doubleValue() < rent 
+            		&& ( player.checkForHouses() == true ) || ( player.checkForMortage() == true ) ) {       	 	
+            	
+            	mortage = askMortage();
+            	
+            	if (mortage = true)										
+            	{ player.nonMortagedHouses().get(0).assumeMortage(); }	// Abfrage welches Haus zur Hypothek TODO
+            										
+            	else if (mortage = false)
+            	{ ((Player) player.sellableHouses()).sellHouse(0); }   // Abfrage welches Haus zum verkauf TODO
+            }
+                   
+            else if ( (player.getBalance().doubleValue() >= rent) && (!((Player) owner).isInJail()) ) {
             	player.pay(rent);
             	if (owner instanceof Player) {
             		((Player) owner).addMoney(rent);

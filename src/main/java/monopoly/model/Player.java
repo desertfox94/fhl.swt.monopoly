@@ -1,6 +1,7 @@
 package monopoly.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
@@ -152,4 +153,25 @@ public class Player implements StreetOwner, CardOwner {
 		return name.toString();
 	}
 	
+	public void sellHouse(int index) {
+		streets.remove(index);
+	}
+	
+	 public List<Street> sellableHouses() {  
+	    	return getStreets().stream().filter(s -> s.getNumberOfHouses() > 0).collect(Collectors.<Street>toList());
+	 }
+	    
+	 public List<Street> nonMortagedHouses() {
+	    	return getStreets().stream().filter(s -> !s.isMortage()).collect(Collectors.<Street>toList());
+	 }
+	    
+	 public boolean checkForHouses (){
+	    	return getStreets().stream().anyMatch(s -> s.getNumberOfHouses() > 0);
+	 }
+	 
+	 public boolean checkForMortage (){
+	    	return getStreets().stream().anyMatch(s -> !s.isMortage());
+	 }
+
+
 }

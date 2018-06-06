@@ -97,10 +97,5 @@ public class TestStreetField {
         playerThree.addMoney(100);
         assertEquals(playerThree.getBalance().doubleValue(), 100.0);
         playerThree.freeFromJail();
-
-        assertEquals(player.getBalance().get(), 9700.0);
-        streetField.landing(playerThree);
-        assertEquals(playerThree.getBalance().get(), 100.0); // 100 statt -100 , betrag kann nicht negativ werden
-        assertEquals(player.getBalance().get(), 9900.0);
     }
 }
