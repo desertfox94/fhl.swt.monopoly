@@ -15,7 +15,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
-import java.math.BigDecimal;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -53,7 +52,7 @@ public class TestStreetField {
 
     @Test
     public void testLanding() {
-        BigDecimal dec = new BigDecimal(500);
+        int dec = 500;
         Street street = new Street();
         Player player = new Player();
         Player playerTwo = new Player();
@@ -63,7 +62,7 @@ public class TestStreetField {
         doReturn(true).when(streetField).ask();
         street.setName("ParkAllee");
         StreetDetails rentDetails = new StreetDetails();
-        BigDecimal rentHouse = new BigDecimal(200);
+        int rentHouse = 200;
         rentDetails.setFirstHouseRent(rentHouse);
 
         street.setRentDetails(rentDetails);

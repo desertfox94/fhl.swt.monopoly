@@ -1,51 +1,50 @@
 package monopoly.model;
 
-import java.math.BigDecimal;
 
 public class StreetDetails {
 
 	private int baseRent;
-	private BigDecimal firstHouseRent;
-	private BigDecimal secondHouseRent;
-	private BigDecimal thirdHouseRent;
-	private BigDecimal fourthHouseRent;
-	private BigDecimal hotelRent;
-	private BigDecimal pricePerHouse;
-	private BigDecimal mortage;
+	private int firstHouseRent;
+	private int secondHouseRent;
+	private int thirdHouseRent;
+	private int fourthHouseRent;
+	private int hotelRent;
+	private int pricePerHouse;
+	private int mortage;
 
 	public int getBaseRent() {
 		return baseRent;
 	}
 
-	public BigDecimal getHotelRent() {
+	public int getHotelRent() {
 		return hotelRent;
 	}
 
-	public void setHotelRent(BigDecimal hotelRent) {
+	public void setHotelRent(int hotelRent) {
 		this.hotelRent = hotelRent;
 	}
 
-	public BigDecimal getMortage() {
+	public int getMortage() {
 		return mortage;
 	}
 
-	public BigDecimal getFirstHouseRent() {
+	public int getFirstHouseRent() {
 		return firstHouseRent;
 	}
 
-	public BigDecimal getSecondHouseRent() {
+	public int getSecondHouseRent() {
 		return secondHouseRent;
 	}
 
-	public BigDecimal getThirdHouseRent() {
+	public int getThirdHouseRent() {
 		return thirdHouseRent;
 	}
 
-	public BigDecimal getFourthHouseRent() {
+	public int getFourthHouseRent() {
 		return fourthHouseRent;
 	}
 
-	public BigDecimal getPricePerHouse() {
+	public int getPricePerHouse() {
 		return pricePerHouse;
 	}
 
@@ -53,27 +52,27 @@ public class StreetDetails {
 		this.baseRent = baseRent;
 	}
 
-	public void setFirstHouseRent(BigDecimal firstHouseRent) {
+	public void setFirstHouseRent(int firstHouseRent) {
 		this.firstHouseRent = firstHouseRent;
 	}
 
-	public void setSecondHouseRent(BigDecimal secondHouseRent) {
+	public void setSecondHouseRent(int secondHouseRent) {
 		this.secondHouseRent = secondHouseRent;
 	}
 
-	public void setThirdHouseRent(BigDecimal thirdHouseRent) {
+	public void setThirdHouseRent(int thirdHouseRent) {
 		this.thirdHouseRent = thirdHouseRent;
 	}
 
-	public void setFourthHouseRent(BigDecimal fourthHouseRent) {
+	public void setFourthHouseRent(int fourthHouseRent) {
 		this.fourthHouseRent = fourthHouseRent;
 	}
 
-	public void setPricePerHouse(BigDecimal pricePerHouse) {
+	public void setPricePerHouse(int pricePerHouse) {
 		this.pricePerHouse = pricePerHouse;
 	}
 
-	public void setMortage(BigDecimal mortage) {
+	public void setMortage(int mortage) {
 		this.mortage = mortage;
 	}
 

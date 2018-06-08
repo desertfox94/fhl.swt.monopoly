@@ -1,6 +1,5 @@
 package monopoly.model;
 
-import java.math.BigDecimal;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -8,7 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Street {
 
 	private String name;
-	private BigDecimal price;
+	private Integer price;
 	private int numberOfHouses;
 	private boolean hotelBuild;
 	private boolean mortage;
@@ -27,11 +26,11 @@ public class Street {
 		this.name = name;
 	}
 
-	public BigDecimal getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -41,7 +40,7 @@ public class Street {
 
 	public void buildHouses(int numberOfHouses) {
 		this.numberOfHouses = numberOfHouses;
-		rent.set(getCurrentRent().intValue());
+		rent.set(getCurrentRent());
 	}
 
 	public void demolishHouses(int numberOfHouses) {
@@ -88,7 +87,7 @@ public class Street {
 		return auctionObjective;
 	}
 
-	private BigDecimal getCurrentRent() {
+	private int getCurrentRent() {
 		if (getHotel()) {
 			return rentDetails.getHotelRent();
 		}
@@ -103,7 +102,7 @@ public class Street {
 			return rentDetails.getFourthHouseRent();
 		case 0:
 		default:
-			return new BigDecimal(rentDetails.getBaseRent());
+			return rentDetails.getBaseRent();
 		}
 	}
 
