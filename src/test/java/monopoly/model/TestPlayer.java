@@ -66,33 +66,33 @@ public class TestPlayer {
 	@Test
 	public void testgetsetBalance() {
 		Player player = new Player();
-		assertTrue((player.getBalance() != null) && (player.getBalance().doubleValue() == 0.0));
-		double balance = 4;
+		assertTrue((player.getBalance() != null) && (player.getBalance().intValue() == 0));
+		int balance = 4;
 		player.setBalance(balance);
-		assertTrue(player.getBalance().doubleValue() == 4.0);
+		assertTrue(player.getBalance().intValue() == 4);
 	}
 
 	@Test
 	public void testpay() {
 		Player player = new Player();
-		player.setBalance(100.0);
-		double beforeBalance = player.getBalance().doubleValue();
-		double payment = 3.5;
-		double payment2 = 1000.0;
-		double negativePayment = -200;
+		player.setBalance(100);
+		int beforeBalance = player.getBalance().intValue();
+		int payment = 3;
+		int payment2 = 1000;
+		int negativePayment = -200;
 
 		player.pay(payment);
-		assertTrue(player.getBalance().doubleValue() == beforeBalance - payment); // -3.5
+		assertTrue(player.getBalance().intValue() == beforeBalance - payment); // -3.5
 
 		player.setBalance(beforeBalance);
 
 		player.pay(payment2);
-		assertTrue(player.getBalance().doubleValue() == beforeBalance - payment2); // -900
+		assertTrue(player.getBalance().intValue() == beforeBalance - payment2); // -900
 
 		player.setBalance(beforeBalance);
 
 		player.pay(negativePayment);
-		assertTrue(player.getBalance().doubleValue() == beforeBalance - negativePayment); // 300
+		assertTrue(player.getBalance().intValue() == beforeBalance - negativePayment); // 300
 																							// ->
 																							// ignores
 																							// -
@@ -101,18 +101,18 @@ public class TestPlayer {
 	@Test
 	public void testaddMoney() {
 		Player player = new Player();
-		player.setBalance(100.0);
-		double beforeBalance = player.getBalance().doubleValue();
-		double money = 3.5;
-		double negativeMoney = -1000.0;
+		player.setBalance(100);
+		int beforeBalance = player.getBalance().intValue();
+		int money = 3;
+		int negativeMoney = -1000;
 
 		player.addMoney(money);
-		assertTrue(player.getBalance().doubleValue() == beforeBalance + money);
+		assertTrue(player.getBalance().intValue() == beforeBalance + money);
 
 		player.setBalance(beforeBalance);
 
 		player.pay(negativeMoney);
-		assertTrue(player.getBalance().doubleValue() == beforeBalance - negativeMoney); // 1100
+		assertTrue(player.getBalance().intValue() == beforeBalance - negativeMoney); // 1100
 																						// ->
 																						// ignores
 																						// -

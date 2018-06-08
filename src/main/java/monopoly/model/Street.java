@@ -2,8 +2,8 @@ package monopoly.model;
 
 import java.math.BigDecimal;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Street {
 
@@ -17,7 +17,7 @@ public class Street {
 	private StreetGroup group;
 	private boolean auctionObjective;
 
-	private DoubleProperty rent = new SimpleDoubleProperty();
+	private IntegerProperty rent = new SimpleIntegerProperty();
 
 	public String getName() {
 		return name;
@@ -41,7 +41,7 @@ public class Street {
 
 	public void buildHouses(int numberOfHouses) {
 		this.numberOfHouses = numberOfHouses;
-		rent.set(getCurrentRent().doubleValue());
+		rent.set(getCurrentRent().intValue());
 	}
 
 	public void demolishHouses(int numberOfHouses) {
@@ -116,7 +116,7 @@ public class Street {
 		this.group = group;
 	}
 
-	public DoubleProperty getRent() {
+	public IntegerProperty getRent() {
 		return rent;
 	}
 

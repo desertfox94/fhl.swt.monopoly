@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class StreetDetails {
 
-	private double baseRent;
+	private int baseRent;
 	private BigDecimal firstHouseRent;
 	private BigDecimal secondHouseRent;
 	private BigDecimal thirdHouseRent;
@@ -13,7 +13,7 @@ public class StreetDetails {
 	private BigDecimal pricePerHouse;
 	private BigDecimal mortage;
 
-	public double getBaseRent() {
+	public int getBaseRent() {
 		return baseRent;
 	}
 
@@ -49,7 +49,7 @@ public class StreetDetails {
 		return pricePerHouse;
 	}
 
-	public void setBaseRent(double baseRent) {
+	public void setBaseRent(int baseRent) {
 		this.baseRent = baseRent;
 	}
 

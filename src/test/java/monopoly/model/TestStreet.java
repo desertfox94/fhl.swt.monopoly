@@ -1,7 +1,7 @@
 package monopoly.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableNumberValue;
 
 import org.junit.Test;
@@ -124,9 +124,9 @@ public class TestStreet {
 	public void testgetrent() {
 		Street street = new Street();
 		StreetDetails rentDetails = new StreetDetails();
-		double rent = 50;
+		int rent = 50;
 		
-		DoubleProperty rent2 = new SimpleDoubleProperty();
+		IntegerProperty rent2 = new SimpleIntegerProperty();
 		rent2.set(50); // vergleichsobject
 		
 		assertTrue(	street.getRent().getValue() == 0);	

@@ -74,7 +74,7 @@ public class TestStreetField {
 
         streetField.buyStreet = true;
         streetField.landing(player);
-        assertEquals(player.getBalance().doubleValue(), 9500.0);
+        assertEquals(player.getBalance().intValue(), 9500);
         assertEquals(street.getOwner(), player);
         assertTrue(!player.getStreets().isEmpty());
         assertEquals(player.getStreets().get(0).getName(), "ParkAllee");
@@ -83,19 +83,19 @@ public class TestStreetField {
 
         playerTwo.addMoney(10000);
 
-        assertEquals(player.getBalance().get(), 9500.0);
+        assertEquals(player.getBalance().get(), 9500);
         streetField.landing(playerTwo);
-        assertEquals(playerTwo.getBalance().get(), 9800.0);
-        assertEquals(player.getBalance().get(), 9700.0);
+        assertEquals(playerTwo.getBalance().get(), 9800);
+        assertEquals(player.getBalance().get(), 9700);
 
         player.sendToJail();
         streetField.landing(playerTwo);
-        assertEquals(playerTwo.getBalance().get(), 9800.0);
-        assertEquals(player.getBalance().get(), 9700.0);
+        assertEquals(playerTwo.getBalance().get(), 9800);
+        assertEquals(player.getBalance().get(), 9700);
 
 
         playerThree.addMoney(100);
-        assertEquals(playerThree.getBalance().doubleValue(), 100.0);
+        assertEquals(playerThree.getBalance().intValue(), 100);
         playerThree.freeFromJail();
     }
 }

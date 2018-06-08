@@ -48,7 +48,7 @@ public class StreetField extends Field {
         buyStreet = ask();
         if (owner == null) {
             if (buyStreet) {
-                player.pay(street.getPrice().doubleValue());
+                player.pay(street.getPrice().intValue());
                 player.addToInventory(street);
                 street.setOwner(player);
             } else {
@@ -56,9 +56,9 @@ public class StreetField extends Field {
                 street.startAuction();
             }
         } else if (owner != player) {
-            double rent = street.getRent().doubleValue();
+            int rent = street.getRent().intValue();
    
-            if ( player.getBalance().doubleValue() < rent 
+            if ( player.getBalance().intValue() < rent
             		&& ( player.checkForHouses() == true ) || ( player.checkForMortage() == true ) ) {       	 	
             	
             	mortage = askMortage();
@@ -70,7 +70,7 @@ public class StreetField extends Field {
             	{ ((Player) player.sellableHouses()).sellHouse(0); }   // Abfrage welches Haus zum verkauf TODO
             }
                    
-            else if ( (player.getBalance().doubleValue() >= rent) && (!((Player) owner).isInJail()) ) {
+            else if ( (player.getBalance().intValue() >= rent) && (!((Player) owner).isInJail()) ) {
             	player.pay(rent);
             	if (owner instanceof Player) {
             		((Player) owner).addMoney(rent);

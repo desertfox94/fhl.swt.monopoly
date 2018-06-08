@@ -3,8 +3,8 @@ package monopoly.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import monopoly.core.CircleList;
 import monopoly.core.cards.CardSet;
 import monopoly.core.fields.Field;
@@ -17,7 +17,7 @@ public class Game {
 
 	private int rounde;
 
-	private DoubleProperty moneyInTheMiddle = new SimpleDoubleProperty();
+	private IntegerProperty moneyInTheMiddle = new SimpleIntegerProperty();
 
 	private List<DiceCast> currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
 
@@ -69,7 +69,7 @@ public class Game {
 		return currentPlayerDiceCastHistory;
 	}
 
-	public DoubleProperty getMoneyInTheMiddle() {
+	public IntegerProperty getMoneyInTheMiddle() {
 		return moneyInTheMiddle;
 	}
 
@@ -87,11 +87,11 @@ public class Game {
 	}
 
 	public void payOutMoneyInTheMiddle(Player player) {
-		player.addMoney(moneyInTheMiddle.doubleValue());
-		moneyInTheMiddle.set(0.0);
+		player.addMoney(moneyInTheMiddle.intValue());
+		moneyInTheMiddle.set(0);
 	}
 
-	public void putMoneyInTheMiddle(double amount) {
+	public void putMoneyInTheMiddle(int amount) {
 		moneyInTheMiddle.set(moneyInTheMiddle.get() + amount);
 	}
 

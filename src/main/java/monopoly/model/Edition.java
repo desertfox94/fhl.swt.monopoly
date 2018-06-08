@@ -12,7 +12,7 @@ public class Edition {
 	private CircleList<Field> fields;
 	private int maxAmountOfPlayers;
 	private String currency;
-	private double currencyFactor;
+	private int currencyFactor;
 	private List<Figure> figures = new LinkedList<>();
 	private String background;
 
@@ -48,11 +48,11 @@ public class Edition {
 		this.currency = currency;
 	}
 
-	public double getCurrencyFactor() {
+	public int getCurrencyFactor() {
 		return currencyFactor;
 	}
 
-	public void setCurrencyFactor(double currencyFactor) {
+	public void setCurrencyFactor(int currencyFactor) {
 		this.currencyFactor = currencyFactor;
 	}
 

@@ -54,7 +54,7 @@ public class TestEdition {
     public void testGetAndSetCurrencyFactor(){
         Edition edition = new Edition();
         assertTrue(edition.getCurrencyFactor() == 0);
-        double factor = 3.813485;
+        int factor = 4;
         edition.setCurrencyFactor(factor);
         assertTrue(edition.getCurrencyFactor() == factor);
     }

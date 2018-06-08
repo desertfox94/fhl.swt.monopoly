@@ -22,7 +22,7 @@ public class StreetImporter extends CsvImporter<Street> {
 		street.setName(line.getValue(0));
 		street.setPrice(line.getBigDecimalValue(1));
 		StreetDetails rentDetails = new StreetDetails();
-		rentDetails.setBaseRent(new Double(line.getValue(2)));
+		rentDetails.setBaseRent(new Integer(line.getValue(2)));
 		rentDetails.setFirstHouseRent(line.getBigDecimalValue(3));
 		rentDetails.setSecondHouseRent(line.getBigDecimalValue(4));
 		rentDetails.setThirdHouseRent(line.getBigDecimalValue(5));
