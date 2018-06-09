@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -248,31 +249,93 @@ public class TestPlayer {
 		player.setGame(game); 		
 	}
 	
+	/**
+	 * @author Christoph Thomas, 9. Juni
+	 */
+	@Test
+	public void testcheckForHouses() {
+		Player player = new Player();
+		Street street = new Street();
+		StreetDetails rentDetails = new StreetDetails();		
+		
+		street.setRentDetails(rentDetails);
+		rentDetails.setFirstHouseRent(50);
+		player.addToInventory(street);
+	
+		assertFalse(player.checkForHouses());
+		street.buildHouses(1);
+		assertTrue(player.checkForHouses());	
+	}
+
+
+	@Test
+	public void testsellableHouses() {
+		Player player = new Player();
+		Street street = new Street();
+		Street street2 = new Street();
+		StreetDetails rentDetails = new StreetDetails();		
+		StreetDetails rentDetails2 = new StreetDetails();	
+		
+		street.setRentDetails(rentDetails);
+		street2.setRentDetails(rentDetails);
+		rentDetails.setFirstHouseRent(50);	
+		rentDetails2.setFirstHouseRent(50);
+
+		player.addToInventory(street);
+		player.addToInventory(street2);
+		
+		assertEquals(player.sellableHouses().size(), 0);
+		
+		street.buildHouses(1);
+		street2.buildHouses(1);
+		
+		assertEquals(player.sellableHouses().size(), 2);
+		assertEquals(player.sellableHouses().get(0), street);
+	}
+
+	@Test
+	public void testcheckForMortage() {
+		Player player = new Player();
+		Street street = new Street();
+		Street street2 = new Street();
+		StreetDetails rentDetails = new StreetDetails();	
+		StreetDetails rentDetails2 = new StreetDetails();	
+		
+		street.setRentDetails(rentDetails);
+		street2.setRentDetails(rentDetails);
+		rentDetails.setFirstHouseRent(50);
+		rentDetails2.setFirstHouseRent(50);
+		player.addToInventory(street);
+		player.addToInventory(street2);
+	
+		assertTrue(player.checkForMortage());
+		street.assumeMortage();
+		assertTrue(player.checkForMortage());
+		street2.assumeMortage();
+		assertFalse(player.checkForMortage());
+	}
+	
+	@Test
+	public void testnonMortagedHouses() {
+		Player player = new Player();
+		Street street = new Street();
+		Street street2 = new Street();
+		StreetDetails rentDetails = new StreetDetails();	
+		StreetDetails rentDetails2 = new StreetDetails();	
+		
+		street.setRentDetails(rentDetails);
+		street2.setRentDetails(rentDetails);
+		rentDetails.setFirstHouseRent(50);
+		rentDetails2.setFirstHouseRent(50);
+		player.addToInventory(street);
+		player.addToInventory(street2);
+	
+		assertEquals(player.nonMortagedHouses().size(), 2);
+		assertEquals(player.nonMortagedHouses().get(0), street);
+		street.assumeMortage();
+		assertEquals(player.nonMortagedHouses().size(), 1);
+		street2.assumeMortage();
+		assertEquals(player.nonMortagedHouses().size(), 0);
+	}		
 }
-
-
-//
-//public void setGame(Game game) {
-//this.game = game;
-//} missing getter
-
-
-// @Override
-// public void removeFromInventory(Street street) {
-// // TODO Auto-generated method stub
-//
-// }  missing remove method
-
-// @Override
-// public void addCardToInventory(Card card) {
-// // TODO Auto-generated method stub
-//
-// } missing addcard method
-//
-// @Override
-// public void removeCardFromInventory(Card card) {
-// // TODO Auto-generated method stub
-//
-// } missing remove card method
-//
 
