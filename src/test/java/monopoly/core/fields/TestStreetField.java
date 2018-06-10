@@ -17,6 +17,7 @@ import org.mockito.stubbing.Answer;
 
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
@@ -36,9 +37,9 @@ public class TestStreetField {
     public void testLandingAndAuction() {
         Player player = new Player();
         Street street = new Street();
-         streetField = spy(new StreetField(street, 1));
+        streetField = spy(new StreetField(street, 1));
         //Mockito.when(streetField.ask()).thenReturn(false);
-
+   
         doReturn(false).when(streetField).ask();
 
         streetField.setStreet(street);
@@ -97,4 +98,36 @@ public class TestStreetField {
         assertEquals(playerThree.getBalance().intValue(), 100);
         playerThree.freeFromJail();
     }
+    
+    @Test
+    public void testLanding_Mortage() {
+    	 Player player = new Player();
+    	 Player owner = new Player();
+         Street playerStreet = new Street();
+         Street landingStreet = new Street();
+         StreetDetails rentDetails = new StreetDetails();
+         streetField = spy(new StreetField(landingStreet, 10));
+         
+         doReturn(true).when(streetField).ask();
+         doReturn(true).when(streetField).askForMortage();
+         
+         landingStreet.setPrice(50);
+         rentDetails.setBaseRent(150);       
+         landingStreet.setRentDetails(rentDetails);    
+         player.addToInventory(playerStreet); // Assume Player has one not Mortaged Street 
+     
+         assertFalse(playerStreet.isMortage());  
+         assertTrue(player.hasNoMortagedStreets());
+         assertEquals(player.notMortagedStreets().get(0), playerStreet);        
+       
+         streetField.setStreet(landingStreet);         
+         streetField.landing(owner);
+         assertEquals(owner.getStreets().size(), 1);
+         
+         assertEquals(player.notMortagedStreets().get(0), playerStreet);
+         streetField.landing(player);
+         assertFalse(player.hasNoMortagedStreets());
+         assertTrue(player.getStreets().get(0).isMortage());
+         assertTrue(player.notMortagedStreets().isEmpty());        
+     }   
 }

@@ -14,11 +14,10 @@ import monopoly.model.StreetOwner;
 /**
  * A regular Street field. several of these will form a majority of the playing field.
  * 
- * MessageUtils auskommentiert, da  streetField.landing(player) im junittest einen ExceptioninitializerError wirft
  */
 public class StreetField extends Field {
 	public boolean buyStreet = false; // für JunitTesting als globale 
-	public boolean mortage = false;
+	public boolean mortage = true;
     private Street street;
     
     public StreetField(Street street, int index) {
@@ -30,7 +29,7 @@ public class StreetField extends Field {
         return MessageUtil.ask("Strasse Kaufen", "Wollen Sie die Strasse Kaufen?", "ja", "nein, Auktion starten");
     }
     
-    public boolean askMortage(){
+    public boolean askForMortage(){
         return MessageUtil.ask("Hypothek aufnehmen", "Wollen Sie eine Hypothek aufnehmen?", "ja", "nein, Haus verkaufen");
     }
   
@@ -46,6 +45,7 @@ public class StreetField extends Field {
     public void landing(Player player) {
         StreetOwner owner = street.getOwner();
         buyStreet = ask();
+           
         if (owner == null) {
             if (buyStreet) {
                 player.pay(street.getPrice().intValue());
@@ -56,18 +56,19 @@ public class StreetField extends Field {
                 street.startAuction();
             }
         } else if (owner != player) {
+        	
             int rent = street.getRent().intValue();
    
             if ( player.getBalance().intValue() < rent
-            		&& ( player.checkForHouses() == true ) || ( player.checkForMortage() == true ) ) {       	 	
+            		&& ( player.hasHouses() == true ) || ( player.hasNoMortagedStreets() == true ) ) {       	 	
+            	mortage = askForMortage();
+                   	
             	
-            	mortage = askMortage();
-            	
-            	if (mortage = true)										
-            	{ player.nonMortagedHouses().get(0).assumeMortage(); }	// Abfrage welches Haus zur Hypothek TODO
+            	if (mortage == true)										
+            	{ player.notMortagedStreets().get(0).assumeMortage(); }	// Abfrage welches Straße zur Hypothek TODO
             										
-            	else if (mortage = false)
-            	{ ((Player) player.sellableHouses()).sellHouse(0); }   // Abfrage welches Haus zum verkauf TODO
+            	else if (mortage == false)
+            	{ ((Player) player.streetsWithHouse()).sellHouse(0); }   // Abfrage welches Haus zum verkauf TODO
             }
                    
             else if ( (player.getBalance().intValue() >= rent) && (!((Player) owner).isInJail()) ) {

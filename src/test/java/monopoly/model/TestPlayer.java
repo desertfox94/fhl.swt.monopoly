@@ -253,7 +253,7 @@ public class TestPlayer {
 	 * @author Christoph Thomas, 9. Juni
 	 */
 	@Test
-	public void testcheckForHouses() {
+	public void testhasHouses() {
 		Player player = new Player();
 		Street street = new Street();
 		StreetDetails rentDetails = new StreetDetails();		
@@ -262,14 +262,14 @@ public class TestPlayer {
 		rentDetails.setFirstHouseRent(50);
 		player.addToInventory(street);
 	
-		assertFalse(player.checkForHouses());
+		assertFalse(player.hasHouses());
 		street.buildHouses(1);
-		assertTrue(player.checkForHouses());	
+		assertTrue(player.hasHouses());	
 	}
 
 
 	@Test
-	public void testsellableHouses() {
+	public void teststreetsWithHouse() {
 		Player player = new Player();
 		Street street = new Street();
 		Street street2 = new Street();
@@ -284,17 +284,17 @@ public class TestPlayer {
 		player.addToInventory(street);
 		player.addToInventory(street2);
 		
-		assertEquals(player.sellableHouses().size(), 0);
+		assertEquals(player.streetsWithHouse().size(), 0);
 		
 		street.buildHouses(1);
 		street2.buildHouses(1);
 		
-		assertEquals(player.sellableHouses().size(), 2);
-		assertEquals(player.sellableHouses().get(0), street);
+		assertEquals(player.streetsWithHouse().size(), 2);
+		assertEquals(player.streetsWithHouse().get(0), street);
 	}
 
 	@Test
-	public void testcheckForMortage() {
+	public void testhasNoMortagedStreets() {
 		Player player = new Player();
 		Street street = new Street();
 		Street street2 = new Street();
@@ -308,15 +308,15 @@ public class TestPlayer {
 		player.addToInventory(street);
 		player.addToInventory(street2);
 	
-		assertTrue(player.checkForMortage());
+		assertTrue(player.hasNoMortagedStreets());
 		street.assumeMortage();
-		assertTrue(player.checkForMortage());
+		assertTrue(player.hasNoMortagedStreets());
 		street2.assumeMortage();
-		assertFalse(player.checkForMortage());
+		assertFalse(player.hasNoMortagedStreets());
 	}
 	
 	@Test
-	public void testnonMortagedHouses() {
+	public void testnotMortagedHouses() {
 		Player player = new Player();
 		Street street = new Street();
 		Street street2 = new Street();
@@ -330,12 +330,12 @@ public class TestPlayer {
 		player.addToInventory(street);
 		player.addToInventory(street2);
 	
-		assertEquals(player.nonMortagedHouses().size(), 2);
-		assertEquals(player.nonMortagedHouses().get(0), street);
+		assertEquals(player.notMortagedStreets().size(), 2);
+		assertEquals(player.notMortagedStreets().get(0), street);
 		street.assumeMortage();
-		assertEquals(player.nonMortagedHouses().size(), 1);
+		assertEquals(player.notMortagedStreets().size(), 1);
 		street2.assumeMortage();
-		assertEquals(player.nonMortagedHouses().size(), 0);
+		assertEquals(player.notMortagedStreets().size(), 0);
 	}		
 }
 

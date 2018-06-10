@@ -155,19 +155,19 @@ public class Player implements StreetOwner, CardOwner {
 		streets.remove(index);
 	}
 	
-	 public List<Street> sellableHouses() {  
+	 public List<Street> streetsWithHouse() {  
 	    	return getStreets().stream().filter(s -> s.getNumberOfHouses() > 0).collect(Collectors.<Street>toList());
 	 }
 	    
-	 public List<Street> nonMortagedHouses() {
+	 public List<Street> notMortagedStreets() {
 	    	return getStreets().stream().filter(s -> !s.isMortage()).collect(Collectors.<Street>toList());
 	 }
 	    
-	 public boolean checkForHouses (){
+	 public boolean hasHouses (){
 	    	return getStreets().stream().anyMatch(s -> s.getNumberOfHouses() > 0);
 	 }
 	 
-	 public boolean checkForMortage (){
+	 public boolean hasNoMortagedStreets (){
 	    	return getStreets().stream().anyMatch(s -> !s.isMortage());
 	 }
 
