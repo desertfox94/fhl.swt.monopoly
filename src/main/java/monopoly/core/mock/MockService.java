@@ -90,7 +90,7 @@ public class MockService extends DBService {
 			throw new RuntimeException(e);
 		}
 		edition.setFigures(figures);
-		edition.setCurrencyFactor(1.0);
+		edition.setCurrencyFactor(1);
 		edition.setCurrency(currency);
 		edition.setName(name);
 		edition.setFields(FieldsFactory.createFields(streets, communityCards, eventCards));

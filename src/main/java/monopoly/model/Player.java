@@ -1,12 +1,11 @@
 package monopoly.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,7 +20,7 @@ public class Player implements StreetOwner, CardOwner {
 	private String id;
 	private Game game;
 	private StringProperty name = new SimpleStringProperty();
-	private DoubleProperty balance = new SimpleDoubleProperty();
+	private IntegerProperty balance = new SimpleIntegerProperty();
 	private ObservableList<Street> streets = FXCollections.observableArrayList();
 	private ObservableList<Card> cards = FXCollections.observableArrayList();
 	private IntegerProperty jailCount = new SimpleIntegerProperty();
@@ -57,15 +56,15 @@ public class Player implements StreetOwner, CardOwner {
 		this.name.set(name);
 	}
 
-	public DoubleProperty getBalance() {
+	public IntegerProperty getBalance() {
 		return balance;
 	}
 
-	public void pay(double amount) {
+	public void pay(int amount) {
 		balance.set(balance.get() - amount);
 	}
 
-	public void addMoney(double amount) {
+	public void addMoney(int amount) {
 		balance.set(balance.get() + amount);
 	}
 
@@ -133,7 +132,7 @@ public class Player implements StreetOwner, CardOwner {
 		cards.remove(card);
 	}
 
-	public void setBalance(double balance) {
+	public void setBalance(int balance) {
 		this.balance.set(balance);
 	}
 
@@ -152,4 +151,25 @@ public class Player implements StreetOwner, CardOwner {
 		return name.toString();
 	}
 	
+	public void sellHouse(int index) {
+		streets.remove(index);
+	}
+	
+	 public List<Street> streetsWithHouse() {  
+	    	return getStreets().stream().filter(s -> s.getNumberOfHouses() > 0).collect(Collectors.<Street>toList());
+	 }
+	    
+	 public List<Street> notMortagedStreets() {
+	    	return getStreets().stream().filter(s -> !s.isMortage()).collect(Collectors.<Street>toList());
+	 }
+	    
+	 public boolean hasHouses (){
+	    	return getStreets().stream().anyMatch(s -> s.getNumberOfHouses() > 0);
+	 }
+	 
+	 public boolean hasNoMortagedStreets (){
+	    	return getStreets().stream().anyMatch(s -> !s.isMortage());
+	 }
+
+
 }

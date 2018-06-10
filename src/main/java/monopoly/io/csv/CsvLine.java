@@ -1,6 +1,7 @@
 package monopoly.io.csv;
 
-import java.math.BigDecimal;
+import javafx.beans.property.IntegerProperty;
+
 
 public class CsvLine {
 
@@ -13,10 +14,10 @@ public class CsvLine {
 		this.row = row;
 	}
 
-	public BigDecimal getBigDecimalValue(int column) {
+	public Integer getIntegerValue(int column) {
 		String value = getValue(column);
 		if (value != null && !value.isEmpty()) {
-			return new BigDecimal(value);
+			return new Integer(value);
 		}
 		return null;
 	}

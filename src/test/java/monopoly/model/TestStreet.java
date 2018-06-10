@@ -1,15 +1,13 @@
 package monopoly.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ObservableNumberValue;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
 
 /**
  * @author Christoph Thomas
@@ -28,8 +26,8 @@ public class TestStreet {
 	public void testsetgetPrice() {
 		Street street = new Street();
 		
-		BigDecimal price = new BigDecimal("8900");
-		BigDecimal negativeprice = new BigDecimal("-8900");
+		Integer price = 8900;
+		Integer negativeprice = -8900;
 	
 		
 		assertTrue(street.getPrice() == null);
@@ -43,7 +41,7 @@ public class TestStreet {
 	public void testbuildgetdemolishHouses() {
 		Street street = new Street();
 		StreetDetails rentDetails = new StreetDetails();
-		BigDecimal price = new BigDecimal("8900");	
+		int price = 8900;
 		rentDetails.setFirstHouseRent(price);
 		
 		assertTrue(street.getNumberOfHouses() == 0);	
@@ -98,7 +96,7 @@ public class TestStreet {
 	public void testsetgetRentDetails() {
 		Street street = new Street();
 		StreetDetails rentDetails = new StreetDetails();
-		BigDecimal price = new BigDecimal("8900");	
+		int price = 8900;
 		
 		assertTrue(street.getRentDetails() == null);	
 		street.setRentDetails(rentDetails);
@@ -110,7 +108,7 @@ public class TestStreet {
 	@Test
 	public void testsetgetgroups() {
 		StreetGroup group = new StreetGroup();
-		BigDecimal price = new BigDecimal("8900");			
+		int price = 8900;
 		Street street = new Street();
 		
 		assertTrue(street.getGroup() == null);	
@@ -124,9 +122,9 @@ public class TestStreet {
 	public void testgetrent() {
 		Street street = new Street();
 		StreetDetails rentDetails = new StreetDetails();
-		double rent = 50;
+		int rent = 50;
 		
-		DoubleProperty rent2 = new SimpleDoubleProperty();
+		IntegerProperty rent2 = new SimpleIntegerProperty();
 		rent2.set(50); // vergleichsobject
 		
 		assertTrue(	street.getRent().getValue() == 0);	
@@ -144,10 +142,10 @@ public class TestStreet {
 	
 		
 		StreetDetails rentDetails = new StreetDetails();
-		BigDecimal pricefirst = new BigDecimal("8900");	
-		BigDecimal pricesecond = new BigDecimal("0");
-		BigDecimal pricethird = new BigDecimal("-3");
-		BigDecimal pricefourth = new BigDecimal("40");
+		int pricefirst = 8900;
+		int pricesecond = 0;
+		int pricethird = -3;
+		int pricefourth = 40;
 
 		assertTrue(street.getRentDetails() == null);	
 		street.setRentDetails(rentDetails);
@@ -174,9 +172,20 @@ public class TestStreet {
 	@Test
 	public void testReleaseToAuction() {
 		Street street = new Street();
-		assertFalse(street.IsAuctionObjective());
-		street.zurAuktionFreigeben();
-		assertTrue(street.IsAuctionObjective());
+		assertFalse(street.isAuctionObjective());
+		street.startAuction();
+		assertTrue(street.isAuctionObjective());
+	}
+	
+	// Florian Nickel
+	@Test
+	public void testTerminateAuction() {
+		Street street = new Street();
+		assertFalse(street.isAuctionObjective());
+		street.startAuction();
+		assertTrue(street.isAuctionObjective());
+		street.endAuction();
+		assertFalse(street.isAuctionObjective());
 	}
 }
 

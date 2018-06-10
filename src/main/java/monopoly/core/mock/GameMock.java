@@ -36,7 +36,7 @@ public class GameMock extends Game {
     // instantiate Player mock-up
 	private static Player mockPlayer(String name, Figure figure) {
 		Player player = new Player();
-		player.setBalance(8000.0);
+		player.setBalance(8000);
 		int streetCount = r.nextInt(8);
 		player.setFigure(figure);
 		// for (int i = 0; i < streetCount; i++) {

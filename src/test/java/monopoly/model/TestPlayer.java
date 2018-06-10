@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -66,33 +67,33 @@ public class TestPlayer {
 	@Test
 	public void testgetsetBalance() {
 		Player player = new Player();
-		assertTrue((player.getBalance() != null) && (player.getBalance().doubleValue() == 0.0));
-		double balance = 4;
+		assertTrue((player.getBalance() != null) && (player.getBalance().intValue() == 0));
+		int balance = 4;
 		player.setBalance(balance);
-		assertTrue(player.getBalance().doubleValue() == 4.0);
+		assertTrue(player.getBalance().intValue() == 4);
 	}
 
 	@Test
 	public void testpay() {
 		Player player = new Player();
-		player.setBalance(100.0);
-		double beforeBalance = player.getBalance().doubleValue();
-		double payment = 3.5;
-		double payment2 = 1000.0;
-		double negativePayment = -200;
+		player.setBalance(100);
+		int beforeBalance = player.getBalance().intValue();
+		int payment = 3;
+		int payment2 = 1000;
+		int negativePayment = -200;
 
 		player.pay(payment);
-		assertTrue(player.getBalance().doubleValue() == beforeBalance - payment); // -3.5
+		assertTrue(player.getBalance().intValue() == beforeBalance - payment); // -3.5
 
 		player.setBalance(beforeBalance);
 
 		player.pay(payment2);
-		assertTrue(player.getBalance().doubleValue() == beforeBalance - payment2); // -900
+		assertTrue(player.getBalance().intValue() == beforeBalance - payment2); // -900
 
 		player.setBalance(beforeBalance);
 
 		player.pay(negativePayment);
-		assertTrue(player.getBalance().doubleValue() == beforeBalance - negativePayment); // 300
+		assertTrue(player.getBalance().intValue() == beforeBalance - negativePayment); // 300
 																							// ->
 																							// ignores
 																							// -
@@ -101,18 +102,18 @@ public class TestPlayer {
 	@Test
 	public void testaddMoney() {
 		Player player = new Player();
-		player.setBalance(100.0);
-		double beforeBalance = player.getBalance().doubleValue();
-		double money = 3.5;
-		double negativeMoney = -1000.0;
+		player.setBalance(100);
+		int beforeBalance = player.getBalance().intValue();
+		int money = 3;
+		int negativeMoney = -1000;
 
 		player.addMoney(money);
-		assertTrue(player.getBalance().doubleValue() == beforeBalance + money);
+		assertTrue(player.getBalance().intValue() == beforeBalance + money);
 
 		player.setBalance(beforeBalance);
 
 		player.pay(negativeMoney);
-		assertTrue(player.getBalance().doubleValue() == beforeBalance - negativeMoney); // 1100
+		assertTrue(player.getBalance().intValue() == beforeBalance - negativeMoney); // 1100
 																						// ->
 																						// ignores
 																						// -
@@ -248,31 +249,93 @@ public class TestPlayer {
 		player.setGame(game); 		
 	}
 	
+	/**
+	 * @author Christoph Thomas, 9. Juni
+	 */
+	@Test
+	public void testhasHouses() {
+		Player player = new Player();
+		Street street = new Street();
+		StreetDetails rentDetails = new StreetDetails();		
+		
+		street.setRentDetails(rentDetails);
+		rentDetails.setFirstHouseRent(50);
+		player.addToInventory(street);
+	
+		assertFalse(player.hasHouses());
+		street.buildHouses(1);
+		assertTrue(player.hasHouses());	
+	}
+
+
+	@Test
+	public void teststreetsWithHouse() {
+		Player player = new Player();
+		Street street = new Street();
+		Street street2 = new Street();
+		StreetDetails rentDetails = new StreetDetails();		
+		StreetDetails rentDetails2 = new StreetDetails();	
+		
+		street.setRentDetails(rentDetails);
+		street2.setRentDetails(rentDetails);
+		rentDetails.setFirstHouseRent(50);	
+		rentDetails2.setFirstHouseRent(50);
+
+		player.addToInventory(street);
+		player.addToInventory(street2);
+		
+		assertEquals(player.streetsWithHouse().size(), 0);
+		
+		street.buildHouses(1);
+		street2.buildHouses(1);
+		
+		assertEquals(player.streetsWithHouse().size(), 2);
+		assertEquals(player.streetsWithHouse().get(0), street);
+	}
+
+	@Test
+	public void testhasNoMortagedStreets() {
+		Player player = new Player();
+		Street street = new Street();
+		Street street2 = new Street();
+		StreetDetails rentDetails = new StreetDetails();	
+		StreetDetails rentDetails2 = new StreetDetails();	
+		
+		street.setRentDetails(rentDetails);
+		street2.setRentDetails(rentDetails);
+		rentDetails.setFirstHouseRent(50);
+		rentDetails2.setFirstHouseRent(50);
+		player.addToInventory(street);
+		player.addToInventory(street2);
+	
+		assertTrue(player.hasNoMortagedStreets());
+		street.assumeMortage();
+		assertTrue(player.hasNoMortagedStreets());
+		street2.assumeMortage();
+		assertFalse(player.hasNoMortagedStreets());
+	}
+	
+	@Test
+	public void testnotMortagedHouses() {
+		Player player = new Player();
+		Street street = new Street();
+		Street street2 = new Street();
+		StreetDetails rentDetails = new StreetDetails();	
+		StreetDetails rentDetails2 = new StreetDetails();	
+		
+		street.setRentDetails(rentDetails);
+		street2.setRentDetails(rentDetails);
+		rentDetails.setFirstHouseRent(50);
+		rentDetails2.setFirstHouseRent(50);
+		player.addToInventory(street);
+		player.addToInventory(street2);
+	
+		assertEquals(player.notMortagedStreets().size(), 2);
+		assertEquals(player.notMortagedStreets().get(0), street);
+		street.assumeMortage();
+		assertEquals(player.notMortagedStreets().size(), 1);
+		street2.assumeMortage();
+		assertEquals(player.notMortagedStreets().size(), 0);
+	}		
 }
-
-
-//
-//public void setGame(Game game) {
-//this.game = game;
-//} missing getter
-
-
-// @Override
-// public void removeFromInventory(Street street) {
-// // TODO Auto-generated method stub
-//
-// }  missing remove method
-
-// @Override
-// public void addCardToInventory(Card card) {
-// // TODO Auto-generated method stub
-//
-// } missing addcard method
-//
-// @Override
-// public void removeCardFromInventory(Card card) {
-// // TODO Auto-generated method stub
-//
-// } missing remove card method
-//
 

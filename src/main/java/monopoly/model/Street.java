@@ -1,23 +1,22 @@
 package monopoly.model;
 
-import java.math.BigDecimal;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Street {
 
 	private String name;
-	private BigDecimal price;
+	private Integer price;
 	private int numberOfHouses;
 	private boolean hotelBuild;
 	private boolean mortage;
 	private StreetOwner owner;
 	private StreetDetails rentDetails;
 	private StreetGroup group;
-	private boolean isAuctionObjective;
+	private boolean auctionObjective;
 
-	private DoubleProperty rent = new SimpleDoubleProperty();
+	private IntegerProperty rent = new SimpleIntegerProperty();
 
 	public String getName() {
 		return name;
@@ -27,11 +26,11 @@ public class Street {
 		this.name = name;
 	}
 
-	public BigDecimal getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -41,7 +40,7 @@ public class Street {
 
 	public void buildHouses(int numberOfHouses) {
 		this.numberOfHouses = numberOfHouses;
-		rent.set(getCurrentRent().doubleValue());
+		rent.set(getCurrentRent());
 	}
 
 	public void demolishHouses(int numberOfHouses) {
@@ -84,11 +83,11 @@ public class Street {
 		return group;
 	}
 	
-	public boolean IsAuctionObjective() {
-		return isAuctionObjective;
+	public boolean isAuctionObjective() {
+		return auctionObjective;
 	}
 
-	private BigDecimal getCurrentRent() {
+	private int getCurrentRent() {
 		if (getHotel()) {
 			return rentDetails.getHotelRent();
 		}
@@ -103,7 +102,7 @@ public class Street {
 			return rentDetails.getFourthHouseRent();
 		case 0:
 		default:
-			return new BigDecimal(rentDetails.getBaseRent());
+			return rentDetails.getBaseRent();
 		}
 	}
 
@@ -116,14 +115,18 @@ public class Street {
 		this.group = group;
 	}
 
-	public DoubleProperty getRent() {
+	public IntegerProperty getRent() {
 		return rent;
 	}
 
 
-	public void zurAuktionFreigeben(){
-		isAuctionObjective = true;
+	public void startAuction(){
+		auctionObjective = true;
 		//Todo: MXX Auktion starten aufrufen.
+	}
+	
+	public void endAuction() {
+		auctionObjective = false;
 	}
 
 }
