@@ -83,7 +83,7 @@ public class AppViewController {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Spiel beenden");
 		alert.setHeaderText("Soll der Spielstand gespeichert werden?");
-		alert.setContentText("Achtung! Ungespeicherte Änderungen gehen verloren.");
+		alert.setContentText("Achtung! Ungespeicherte ï¿½nderungen gehen verloren.");
 
 		ButtonType saveAndClose = new ButtonType("Speichern und Beenden");
 		ButtonType closeWithoutSave = new ButtonType("Ohne Speichern beenden");
