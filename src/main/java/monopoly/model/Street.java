@@ -66,6 +66,12 @@ public class Street {
 	public void assumeMortage() {
 		this.mortage = true;
 	}
+	
+	public void redeemMortage() {
+		if(!this.mortage) return;
+		this.mortage = false;
+		((Player)owner).addMoney(-price / 2);
+	}
 
 	public StreetOwner getOwner() {
 		return owner;
@@ -118,7 +124,6 @@ public class Street {
 	public IntegerProperty getRent() {
 		return rent;
 	}
-
 
 	public void startAuction(){
 		auctionObjective = true;

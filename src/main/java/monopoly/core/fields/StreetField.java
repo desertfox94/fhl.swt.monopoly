@@ -33,6 +33,10 @@ public class StreetField extends Field {
         return MessageUtil.ask("Hypothek aufnehmen", "Wollen Sie eine Hypothek aufnehmen?", "ja", "nein, Haus verkaufen");
     }
   
+    public boolean askRedeemMortage() {
+    	return MessageUtil.ask("Hypothek abbezahlen?", "Wollen Sie die Hypothek abbezahlen?", "ja", "nein");
+    }
+    
     public void setStreet(Street street) {
         this.street = street;
     }
@@ -57,7 +61,7 @@ public class StreetField extends Field {
             }
         } else if (owner != player) {
         	
-            int rent = street.getRent().intValue();
+            int rent = street.isMortage() ? 0 : street.getRent().intValue();
    
             if ( player.getBalance().intValue() < rent
             		&& ( player.hasHouses() == true ) || ( player.hasNoMortagedStreets() == true ) ) {       	 	
