@@ -68,4 +68,8 @@ public class CircleList<T> {
 		return list.get(index);
 	}
 
+	public int size(){
+		return list.size();
+	}
+
 }
