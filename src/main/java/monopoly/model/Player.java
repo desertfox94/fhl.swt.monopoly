@@ -162,6 +162,10 @@ public class Player implements StreetOwner, CardOwner {
 	 public List<Street> notMortagedStreets() {
 	    	return getStreets().stream().filter(s -> !s.isMortage()).collect(Collectors.<Street>toList());
 	 }
+	 
+	 public List<Street> mortagedStreets() {
+	    	return getStreets().stream().filter(s -> s.isMortage()).collect(Collectors.<Street>toList());
+	 }
 	    
 	 public boolean hasHouses (){
 	    	return getStreets().stream().anyMatch(s -> s.getNumberOfHouses() > 0);
@@ -171,5 +175,10 @@ public class Player implements StreetOwner, CardOwner {
 	    	return getStreets().stream().anyMatch(s -> !s.isMortage());
 	 }
 
+	 public void moneyForMortage () {
+		 for (Street s : mortagedStreets()) {
+			 this.addMoney(s.getPrice());
+		 }
+	 }
 
 }
