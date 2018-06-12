@@ -1,0 +1,2 @@
+[diff "utf8"]
+    textconv = "iconv -f -t utf-8"
