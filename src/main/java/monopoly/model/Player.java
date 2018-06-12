@@ -114,6 +114,7 @@ public class Player implements StreetOwner, CardOwner {
 
 	@Override
 	public void addToInventory(Street street) {
+		street.setOwner(this);
 		streets.add(street);
 	}
 
