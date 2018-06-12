@@ -1,5 +1,6 @@
 package monopoly.core.fields;
 
+import monopoly.core.MessageUtil;
 import monopoly.core.cards.Card;
 import monopoly.core.cards.CardSet;
 import monopoly.core.cards.OwnableCard;
@@ -19,6 +20,7 @@ public class CardField extends Field {
 	@Override
 	public void landing(Player player) {
 		Card card = cards.draw();
+		MessageUtil.inform(card.getTitle(), card.getDescription());
 		if (card instanceof OwnableCard) {
 			((OwnableCard) card).assignTo(player);
 		} else {

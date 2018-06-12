@@ -26,7 +26,7 @@ public class GameMock extends Game {
 	// instantiate Game mock-up
 	public static Game mockGame() {
 		Game game = new Game();
-		Edition edition = DBService.getDefault().loadEdition(null);
+		Edition edition = DBService.getDefault().loadEdition(MockService.EDITION_STANDARD);
 		game.setEdition(edition);
 		game.addPlayer(mockPlayer("John", edition.getFigures().get(0)));
 		game.addPlayer(mockPlayer("Bernd", edition.getFigures().get(1)));
