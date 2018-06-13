@@ -14,12 +14,12 @@ public class CsvLine {
 		this.row = row;
 	}
 
-	public Integer getIntegerValue(int column) {
+	public int getIntegerValue(int column) {
 		String value = getValue(column);
 		if (value != null && !value.isEmpty()) {
 			return new Integer(value);
 		}
-		return null;
+		return 0;
 	}
 
 	public String getValue(int column) {

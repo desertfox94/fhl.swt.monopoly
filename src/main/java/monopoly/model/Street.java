@@ -1,17 +1,16 @@
 package monopoly.model;
 
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Street {
 
 	private String name;
-	private Integer price;
+	private int price;
 	private int numberOfHouses;
 	private boolean hotelBuild;
 	private boolean mortage;
-	private StreetOwner owner;
+	private Player owner;
 	private StreetDetails rentDetails;
 	private StreetGroup group;
 	private boolean auctionObjective;
@@ -26,7 +25,7 @@ public class Street {
 		this.name = name;
 	}
 
-	public Integer getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
@@ -64,14 +63,28 @@ public class Street {
 	}
 
 	public void assumeMortage() {
-		this.mortage = true;
+		if (!mortage) {
+			mortage = true;
+			owner.addMoney(mortageValue());
+		}
 	}
 
-	public StreetOwner getOwner() {
+	public int mortageValue() {
+		return price / 2;
+	}
+
+	public void redeemMortage() {
+		if (mortage) {
+			mortage = false;
+			owner.addMoney(mortageValue() * -1);
+		}
+	}
+
+	public Player getOwner() {
 		return owner;
 	}
 
-	public void setOwner(StreetOwner owner) {
+	public void setOwner(Player owner) {
 		this.owner = owner;
 	}
 
@@ -82,7 +95,7 @@ public class Street {
 	public StreetGroup getGroup() {
 		return group;
 	}
-	
+
 	public boolean isAuctionObjective() {
 		return auctionObjective;
 	}
@@ -119,12 +132,11 @@ public class Street {
 		return rent;
 	}
 
-
-	public void startAuction(){
+	public void startAuction() {
 		auctionObjective = true;
-		//Todo: MXX Auktion starten aufrufen.
+		// Todo: MXX Auktion starten aufrufen.
 	}
-	
+
 	public void endAuction() {
 		auctionObjective = false;
 	}

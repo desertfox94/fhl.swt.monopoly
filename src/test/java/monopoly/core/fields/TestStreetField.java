@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 
+
 public class TestStreetField {
 
 
@@ -33,6 +34,10 @@ public class TestStreetField {
         MockitoAnnotations.initMocks(this);
     }
 
+
+    /**
+     * @author Jake Stradling
+     */
     @Test
     public void testLandingAndAuction() {
         Player player = new Player();

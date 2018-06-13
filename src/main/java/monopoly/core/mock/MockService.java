@@ -13,6 +13,9 @@ import monopoly.core.DBService;
 import monopoly.core.cards.Card;
 import monopoly.core.cards.CardFactory;
 import monopoly.core.cards.CardSet;
+import monopoly.core.cards.FreeFromJail;
+import monopoly.core.cards.GotoSchlossallee;
+import monopoly.core.cards.StreetReconstruction;
 import monopoly.core.fields.FieldsFactory;
 import monopoly.io.StreetImporter;
 import monopoly.io.csv.CSVImport;
@@ -23,8 +26,8 @@ import monopoly.model.Street;
 
 public class MockService extends DBService {
 
-	private static final String EDITION_GOT = "GoT";
-	private static final String EDITION_STANDARD = "Standard";
+	static final String EDITION_GOT = "GoT";
+	static final String EDITION_STANDARD = "Standard";
 
 	public Game loadGame(String name) {
 		return GameMock.mockGame();
@@ -55,8 +58,8 @@ public class MockService extends DBService {
 	@Override
 	public Edition loadEdition(String name) {
 		Edition edition = new Edition();
-		CardSet communityCards = CardFactory.createCommunityCards();
-		CardSet eventCards = CardFactory.createEventCards();
+		CardSet communityCards = CardFactory.createCards("Ereigniskarten");
+		CardSet eventCards = CardFactory.createCards("Gemeinschaftskarten");
 		List<Figure> figures = new LinkedList<Figure>();
 		String streetsCsv = null;
 		String background = null;

@@ -1,0 +1,2 @@
+[diff "cp1252"]
+    textconv = "iconv -f cp1252 -t utf-8"

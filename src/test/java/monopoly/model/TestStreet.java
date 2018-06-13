@@ -1,12 +1,12 @@
 package monopoly.model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 
 /**
@@ -25,16 +25,10 @@ public class TestStreet {
 	@Test
 	public void testsetgetPrice() {
 		Street street = new Street();
-		
-		Integer price = 8900;
-		Integer negativeprice = -8900;
-	
-		
-		assertTrue(street.getPrice() == null);
+		int price = 8900;
+		assertFalse(street.getPrice() == price);
 		street.setPrice(price);
-		assertTrue(street.getPrice().compareTo(price) == 0);
-		street.setPrice(price);	
-		assertTrue(!(street.getPrice().compareTo(negativeprice) == 0)); // ignores (-) 8900 instead -8900			
+		assertTrue(street.getPrice() == price);
 	}
 	
 	@Test
@@ -76,7 +70,8 @@ public class TestStreet {
 	@Test
 	public void testassumeisMontage() {
 		Street street = new Street();
-		assertTrue(!street.isMortage());
+		street.setOwner(new Player());
+		assertFalse(street.isMortage());
 		street.assumeMortage();
 		assertTrue(street.isMortage());		
 	}

@@ -27,15 +27,15 @@ public class MonopolyEngine {
 	 */
 	private DiceCast rollDiceInJail() {
 		if (game.getPlayersThrowCount() > MAX_THROWS_IN_JAIL) {
-			throw new RuntimeException("Spieler hat zu oft gewürfelt!");
+			throw new RuntimeException("Spieler hat zu oft gewï¿½rfelt!");
 		}
 		rollTheDice();
 		if (diceCast.isDouble()) {
-			game.getCurrentPlayer().freeFromJail();
+			Player player = game.getCurrentPlayer();
+			player.freeFromJail();
+			game.movePlayer(player, diceCast.current());
 		}
-		// TODO: Darf ein Spieler um die ANzahl der Paschaugen vorrücken oder
-		// würfelt er
-		// erneut?
+
 		return diceCast;
 	}
 
@@ -62,33 +62,10 @@ public class MonopolyEngine {
 		if (player.getDoubleCount() == MAX_DOUBLE_COUNT) {
 			player.sendToJail();
 		}
-		movePlayer(player, diceCast.current());
+		game.movePlayer(player, diceCast.current());
 		return diceCast;
 	}
 
-
-	/**
-	 * This Method is called by rolling the dice and moves the player forward on the playing field.
-	 * It also contains logic for passing and landing on a field.
-	 * @param player The player who last rolled, and who is supposed to be moved.
-	 * @param diceCast The value of the player's roll, so the method can evaluate how far to move said player.
-	 */
-	private void movePlayer(Player player, int diceCast) {
-		CircleList<Field> fields = game.getEdition().getFields();
-		fields.select(player.getField().get());
-		Field field = null;
-		for (int i = 0; i < diceCast; i++) {
-			field = fields.next();
-			player.moveTo(field);
-			field.passing(player);
-		}
-		field.landing(player);
-		player.moveTo(field);
-	}
-
-	/**
-	 * 
-	 */
 	private void rollTheDice() {
 		diceCast.next();
 		game.playerRolledTheDice(diceCast);

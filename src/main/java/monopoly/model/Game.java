@@ -95,6 +95,37 @@ public class Game {
 		moneyInTheMiddle.set(moneyInTheMiddle.get() + amount);
 	}
 
+	public void movePlayerToField(Player player, Field target) {
+		CircleList<Field> fields = getEdition().getFields();
+		Field field = player.getField().get();
+		fields.select(field);
+		while (target != (field = fields.next())) {
+			player.moveTo(field);
+			field.passing(player);
+		}
+		player.moveTo(field);
+		field.landing(player);
+	}
+	
+	/**
+	 * This Method is called by rolling the dice and moves the player forward on the playing field.
+	 * It also contains logic for passing and landing on a field.
+	 * @param player The player who last rolled, and who is supposed to be moved.
+	 * @param diceCast The value of the player's roll, so the method can evaluate how far to move said player.
+	 */
+	public void movePlayer(Player player, int diceCast) {
+		CircleList<Field> fields = getEdition().getFields();
+		fields.select(player.getField().get());
+		Field field = null;
+		for (int i = 0; i < diceCast; i++) {
+			field = fields.next();
+			player.moveTo(field);
+			field.passing(player);
+		}
+		player.moveTo(field);
+		field.landing(player);
+	}
+	
 	public void endGame() {
 		//TODO
 	}
