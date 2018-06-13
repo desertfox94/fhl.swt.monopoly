@@ -31,11 +31,11 @@ public class MonopolyEngine {
 		}
 		rollTheDice();
 		if (diceCast.isDouble()) {
-			game.getCurrentPlayer().freeFromJail();
+			Player player = game.getCurrentPlayer();
+			player.freeFromJail();
+			game.movePlayer(player, diceCast.current());
 		}
-		// TODO: Darf ein Spieler um die ANzahl der Paschaugen vorr�cken oder
-		// w�rfelt er
-		// erneut?
+
 		return diceCast;
 	}
 
