@@ -4,10 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class TestRedeemMortage {
+public class TestRedeemMortgage {
 
 	@Test
-	public void reedemMortage() {
+	public void reedemMortgage() {
 		Player player = new Player();
 		Street street = new Street();
 		street.setPrice(1000);
@@ -16,16 +16,16 @@ public class TestRedeemMortage {
 		player.addToInventory(street);
 		
 		// Hypothek aufnhemen
-		street.assumeMortage();
+		street.assumeMortgage();
 		
 		// Hypothek abbezahlen
-		street.redeemMortage();
+		street.redeemMortgage();
 		int newMoney = player.getBalance().intValue();
 		assertEquals(playerMoney, newMoney);
 	}
 	
 	@Test
-	public void DontReedemMoratgeWithoutMortage() {
+	public void dontReedemMortgageWithoutMortgage() {
 		Player player = new Player();
 		Street street = new Street();
 		street.setPrice(1000);
@@ -34,7 +34,7 @@ public class TestRedeemMortage {
 		player.addToInventory(street);
 		
 		// Hypothek abbezahlen
-		street.redeemMortage();
+		street.redeemMortgage();
 		int newMoney = player.getBalance().intValue();
 		assertEquals(playerMoney, newMoney);
 	}

@@ -4,8 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import monopoly.core.CircleList;
@@ -294,7 +292,7 @@ public class TestPlayer {
 	}
 
 	@Test
-	public void testhasNoMortagedStreets() {
+	public void testHasNoMortgagedStreets() {
 		Player player = new Player();
 		Street street = new Street();
 		Street street2 = new Street();
@@ -308,15 +306,15 @@ public class TestPlayer {
 		player.addToInventory(street);
 		player.addToInventory(street2);
 	
-		assertTrue(player.hasNoMortagedStreets());
-		street.assumeMortage();
-		assertTrue(player.hasNoMortagedStreets());
-		street2.assumeMortage();
-		assertFalse(player.hasNoMortagedStreets());
+		assertTrue(player.hasNoMortgagedStreets());
+		street.assumeMortgage();
+		assertTrue(player.hasNoMortgagedStreets());
+		street2.assumeMortgage();
+		assertFalse(player.hasNoMortgagedStreets());
 	}
 	
 	@Test
-	public void testnotMortagedHouses() {
+	public void testNotMortgagedHouses() {
 		Player player = new Player();
 		Street street = new Street();
 		Street street2 = new Street();
@@ -330,12 +328,12 @@ public class TestPlayer {
 		player.addToInventory(street);
 		player.addToInventory(street2);
 	
-		assertEquals(player.notMortagedStreets().size(), 2);
-		assertEquals(player.notMortagedStreets().get(0), street);
-		street.assumeMortage();
-		assertEquals(player.notMortagedStreets().size(), 1);
-		street2.assumeMortage();
-		assertEquals(player.notMortagedStreets().size(), 0);
+		assertEquals(player.notMortgagedStreets().size(), 2);
+		assertEquals(player.notMortgagedStreets().get(0), street);
+		street.assumeMortgage();
+		assertEquals(player.notMortgagedStreets().size(), 1);
+		street2.assumeMortgage();
+		assertEquals(player.notMortgagedStreets().size(), 0);
 	}		
 }
 

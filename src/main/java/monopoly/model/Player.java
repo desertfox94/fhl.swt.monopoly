@@ -160,24 +160,24 @@ public class Player implements StreetOwner, CardOwner {
 	    	return getStreets().stream().filter(s -> s.getNumberOfHouses() > 0).collect(Collectors.<Street>toList());
 	 }
 	    
-	 public List<Street> notMortagedStreets() {
-	    	return getStreets().stream().filter(s -> !s.isMortage()).collect(Collectors.<Street>toList());
+	 public List<Street> notMortgagedStreets() {
+	    	return getStreets().stream().filter(s -> !s.isMortgage()).collect(Collectors.<Street>toList());
 	 }
 	 
-	 public List<Street> mortagedStreets() {
-	    	return getStreets().stream().filter(s -> s.isMortage()).collect(Collectors.<Street>toList());
+	 public List<Street> mortgagedStreets() {
+	    	return getStreets().stream().filter(s -> s.isMortgage()).collect(Collectors.<Street>toList());
 	 }
 	    
 	 public boolean hasHouses (){
 	    	return getStreets().stream().anyMatch(s -> s.getNumberOfHouses() > 0);
 	 }
 	 
-	 public boolean hasNoMortagedStreets (){
-	    	return getStreets().stream().anyMatch(s -> !s.isMortage());
+	 public boolean hasNoMortgagedStreets(){
+	    	return getStreets().stream().anyMatch(s -> !s.isMortgage());
 	 }
 
-	 public void moneyForMortage () {
-		 for (Street s : mortagedStreets()) {
+	 public void moneyForMortgage() {
+		 for (Street s : mortgagedStreets()) {
 			 this.addMoney(s.getPrice());
 		 }
 	 }

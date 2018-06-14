@@ -71,9 +71,9 @@ public class TestStreet {
 	public void testassumeisMontage() {
 		Street street = new Street();
 		street.setOwner(new Player());
-		assertFalse(street.isMortage());
-		street.assumeMortage();
-		assertTrue(street.isMortage());		
+		assertFalse(street.isMortgage());
+		street.assumeMortgage();
+		assertTrue(street.isMortgage());
 	}
 	
 	@Test

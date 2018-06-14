@@ -29,7 +29,7 @@ public class StreetImporter extends CsvImporter<Street> {
 		rentDetails.setFourthHouseRent(line.getIntegerValue(6));
 		rentDetails.setHotelRent(line.getIntegerValue(7));
 		rentDetails.setPricePerHouse(line.getIntegerValue(8));
-		rentDetails.setMortage(line.getIntegerValue(9));
+		rentDetails.setMortgage(line.getIntegerValue(9));
 		street.setRentDetails(rentDetails);
 		StreetGroup group = streetGroups.getOrDefault(line.getValue(10), new StreetGroup());
 		group.getStreets().add(street);
