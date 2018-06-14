@@ -33,6 +33,7 @@ public class MonopolyEngine {
 		if (diceCast.isDouble()) {
 			Player player = game.getCurrentPlayer();
 			player.freeFromJail();
+			MessageUtil.inform("Du kommst aus dem Gefängnis frei!", "Du kommst Aus dem Gefängnis frei, weil du einen Pasch gewürfelt hast.");
 			game.movePlayer(player, diceCast.current());
 		}
 
