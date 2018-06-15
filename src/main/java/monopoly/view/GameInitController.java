@@ -1,26 +1,38 @@
 package monopoly.view;
 
 import java.io.IOException;
+import java.util.List;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Control;
-import monopoly.core.MonopolyEngine;
+import monopoly.model.Edition;
 import monopoly.model.Game;
+import monopoly.model.Player;
 import monopoly.view.loadGame.LoadGameController;
 import monopoly.view.playground.PlaygroundController;
 import monopoly.view.startNewGame.NewGameController;
 
 /**
  * Der {@link GameInitController} ist eine Basis Klasse zum Initialisieren eines
- * Spiels. Er lädt die Game-View und sorgt dafür, dass ihr ein Spiel Objekt
- * übergeben wird und in der AppView angezeigt wird. Dieser Kontroller bildet
- * die Basis für bspw. {@link NewGameController} und {@link LoadGameController}.
+ * Spiels. Er lï¿½dt die Game-View und sorgt dafï¿½r, dass ihr ein Spiel Objekt
+ * ï¿½bergeben wird und in der AppView angezeigt wird. Dieser Kontroller bildet
+ * die Basis fï¿½r bspw. {@link NewGameController} und {@link LoadGameController}.
  *
  */
 public class GameInitController {
 
+	public void startGame(Edition edition, List<Player> players) {
+		Game game = new Game();
+		game.setEdition(edition);
+		for (Player player : players) {
+			game.addPlayer(player);
+			player.setGame(game);
+			player.setBalance(edition.getStartMoney());
+		}
+		startGame(game);
+	}
+	
 	public void startGame(Game game) {
-		MonopolyEngine engine = new MonopolyEngine(game);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(AppViewController.class.getResource("playground/PlaygroundView.fxml"));
 		try {

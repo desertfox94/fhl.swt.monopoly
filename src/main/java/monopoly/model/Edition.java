@@ -8,6 +8,7 @@ import monopoly.core.fields.Field;
 
 public class Edition {
 
+	private int startMoney;
 	private String name;
 	private CircleList<Field> fields;
 	private int maxAmountOfPlayers;
@@ -79,6 +80,13 @@ public class Edition {
 	@Override
 	public String toString() {
 		return name;
+	}
+	public int getStartMoney() {
+		return startMoney;
+	}
+
+	public void setStartMoney(int startMoney) {
+		this.startMoney = startMoney;
 	}
 
 }
