@@ -48,27 +48,27 @@ public class MessageUtil {
 	 * @param title
 	 * @param contentText
 	 */
-	public static void inform(String headerText, String title, String contentText) {
-		showAndWait(create(AlertType.INFORMATION, headerText, title, contentText));
+	public static void inform(String title, String headerText, String contentText) {
+		showAndWait(create(AlertType.INFORMATION, title, headerText, contentText));
 	}
 
-	public static boolean ask(String headerText, String title) {
-		return ask(headerText, title, null, ButtonBar.ButtonData.OK_DONE.name(),
+	public static boolean ask(String title, String headerText) {
+		return ask(title, headerText, null, ButtonBar.ButtonData.OK_DONE.name(),
 				ButtonBar.ButtonData.CANCEL_CLOSE.name());
 	}
 
-	public static boolean ask(String headerText, String title, String contentText) {
-		return ask(headerText, title, contentText, ButtonBar.ButtonData.OK_DONE.name(),
+	public static boolean ask(String title, String headerText, String contentText) {
+		return ask(title, headerText, contentText, ButtonBar.ButtonData.OK_DONE.name(),
 				ButtonBar.ButtonData.CANCEL_CLOSE.name());
 	}
 
-	public static boolean ask(String headerText, String title, String okText, String cancelText) {
-		return ask(headerText, title, null, okText, cancelText);
+	public static boolean ask(String title, String headerText, String okText, String cancelText) {
+		return ask(title, headerText, null, okText, cancelText);
 	}
 
-	public static boolean ask(String headerText, String title, String contentText, String okText, String cancelText) {
+	public static boolean ask(String title, String headerText, String contentText, String okText, String cancelText) {
 		ButtonType okButton = okButton(okText);
-		Alert alert = create(AlertType.CONFIRMATION, headerText, title, contentText, okButton, cancelButton(cancelText));
+		Alert alert = create(AlertType.CONFIRMATION, title, headerText, contentText, okButton, cancelButton(cancelText));
 		Optional<ButtonType> result = showAndWait(alert);
 		return result.isPresent() && !result.get().getButtonData().isCancelButton();
 	}
@@ -81,11 +81,14 @@ public class MessageUtil {
 		return new ButtonType(okText, ButtonBar.ButtonData.OK_DONE);
 	}
 
-	private static final Alert create(AlertType alertType, String headerText, String title, String contentText, ButtonType... buttons) {
+	private static final Alert create(AlertType alertType, String title, String headerText, String contentText, ButtonType... buttons) {
 		if (isJUnitTestExecution()) {
 			return null;
 		}
-		return new Alert(alertType, contentText, buttons);
+		Alert alert = new Alert(alertType, contentText, buttons);
+		alert.setHeaderText(headerText);
+		alert.setTitle(title);
+		return alert;
 	}
 
 	private static final Optional<ButtonType> showAndWait(Alert alert) {
