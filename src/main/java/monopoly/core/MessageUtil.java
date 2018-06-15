@@ -1,5 +1,7 @@
 package monopoly.core;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -13,6 +15,8 @@ import javafx.scene.control.ButtonType;
  */
 public class MessageUtil {
 
+	public static boolean  SUPPRESS_IN_TESTEXECUTION = true;
+	
 	/**
 	 * Stellt dem Nutzer eine Frage. Die Frage wird als modaler Dialog
 	 * angezeigt.
@@ -29,7 +33,7 @@ public class MessageUtil {
 	}
 
 	/**
-	 * Öffnet einen Modalen Info-Dialog.
+	 * ï¿½ffnet einen Modalen Info-Dialog.
 	 * 
 	 * @param title
 	 * @param contentText
@@ -39,25 +43,23 @@ public class MessageUtil {
 	}
 
 	/**
-	 * Öffnet einen Modalen Info-Dialog.
+	 * ï¿½ffnet einen Modalen Info-Dialog.
 	 * 
 	 * @param title
 	 * @param contentText
 	 */
 	public static void inform(String headerText, String title, String contentText) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle(title);
-		alert.setHeaderText(headerText);
-		alert.setContentText(contentText);
-		alert.showAndWait();
+		showAndWait(create(AlertType.INFORMATION, headerText, title, contentText));
 	}
 
 	public static boolean ask(String headerText, String title) {
-		return ask(headerText, title, null, ButtonBar.ButtonData.OK_DONE.name(), ButtonBar.ButtonData.CANCEL_CLOSE.name());
+		return ask(headerText, title, null, ButtonBar.ButtonData.OK_DONE.name(),
+				ButtonBar.ButtonData.CANCEL_CLOSE.name());
 	}
 
 	public static boolean ask(String headerText, String title, String contentText) {
-		return ask(headerText, title, contentText, ButtonBar.ButtonData.OK_DONE.name(), ButtonBar.ButtonData.CANCEL_CLOSE.name());
+		return ask(headerText, title, contentText, ButtonBar.ButtonData.OK_DONE.name(),
+				ButtonBar.ButtonData.CANCEL_CLOSE.name());
 	}
 
 	public static boolean ask(String headerText, String title, String okText, String cancelText) {
@@ -66,11 +68,8 @@ public class MessageUtil {
 
 	public static boolean ask(String headerText, String title, String contentText, String okText, String cancelText) {
 		ButtonType okButton = okButton(okText);
-		Alert alert = new Alert(AlertType.CONFIRMATION, "", okButton, cancelButton(cancelText));
-		alert.setHeaderText(headerText);
-		alert.setTitle(title);
-		alert.setContentText(contentText);
-		Optional<ButtonType> result = alert.showAndWait();
+		Alert alert = create(AlertType.CONFIRMATION, headerText, title, contentText, okButton, cancelButton(cancelText));
+		Optional<ButtonType> result = showAndWait(alert);
 		return result.isPresent() && !result.get().getButtonData().isCancelButton();
 	}
 
@@ -80,6 +79,34 @@ public class MessageUtil {
 
 	private static ButtonType okButton(String okText) {
 		return new ButtonType(okText, ButtonBar.ButtonData.OK_DONE);
+	}
+
+	private static final Alert create(AlertType alertType, String headerText, String title, String contentText, ButtonType... buttons) {
+		if (isJUnitTestExecution()) {
+			return null;
+		}
+		return new Alert(alertType, contentText, buttons);
+	}
+
+	private static final Optional<ButtonType> showAndWait(Alert alert) {
+		if (alert != null) {
+			return alert.showAndWait();
+		}
+		return Optional.empty();
+	}
+	
+	private static final boolean isJUnitTestExecution() {
+		if (!SUPPRESS_IN_TESTEXECUTION) {
+			return false;
+		}
+		 StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+		    List<StackTraceElement> list = Arrays.asList(stackTrace);
+		    for (StackTraceElement element : list) {
+		        if (element.getClassName().startsWith("org.junit.")) {
+		            return true;
+		        }           
+		    }
+		    return false;
 	}
 
 }
