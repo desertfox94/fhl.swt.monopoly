@@ -12,7 +12,7 @@ public class TestRedeemMortgage {
 		Street street = new Street();
 		street.setPrice(1000);
 		street.setOwner(player);
-		int playerMoney = player.getBalance().intValue();
+		int playerMoney = player.getBalance();
 		player.addToInventory(street);
 		
 		// Hypothek aufnhemen
@@ -20,7 +20,7 @@ public class TestRedeemMortgage {
 		
 		// Hypothek abbezahlen
 		street.redeemMortgage();
-		int newMoney = player.getBalance().intValue();
+		int newMoney = player.getBalance();
 		assertEquals(playerMoney, newMoney);
 	}
 	
@@ -30,12 +30,12 @@ public class TestRedeemMortgage {
 		Street street = new Street();
 		street.setPrice(1000);
 		street.setOwner(player);
-		int playerMoney = player.getBalance().intValue();
+		int playerMoney = player.getBalance();
 		player.addToInventory(street);
 		
 		// Hypothek abbezahlen
 		street.redeemMortgage();
-		int newMoney = player.getBalance().intValue();
+		int newMoney = player.getBalance();
 		assertEquals(playerMoney, newMoney);
 	}
 }
