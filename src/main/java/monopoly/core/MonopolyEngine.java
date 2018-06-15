@@ -21,6 +21,7 @@ public class MonopolyEngine {
 		this.game = game;
 	}
 
+
 	/**
 	 * This Method is called by a player at the start of his move, if he is in jail.
 	 * @return returns the dicecast of the roll, independent from its result. Frees the player if a double was rolled.
@@ -33,6 +34,7 @@ public class MonopolyEngine {
 		if (diceCast.isDouble()) {
 			Player player = game.getCurrentPlayer();
 			player.freeFromJail();
+			game.setJustGotOutOfJail(true);
 			MessageUtil.inform("Du kommst aus dem Gefängnis frei!", "Du kommst Aus dem Gefängnis frei, weil du einen Pasch gewürfelt hast.");
 			game.movePlayer(player, diceCast.current());
 		}
@@ -79,7 +81,7 @@ public class MonopolyEngine {
 	 */
 	public boolean canPlayerRollTheDice() {
 		List<DiceCast> diceCastHistory = game.getCurrentPlayerDiceCastHistory();
-		return (diceCastHistory.isEmpty() || diceCastHistory.stream().allMatch(diceCast -> diceCast.isDouble())) && diceCastHistory.size() < 3;
+		return (diceCastHistory.isEmpty() || diceCastHistory.stream().allMatch(diceCast -> diceCast.isDouble())) && diceCastHistory.size() < 3 && !game.isJustGotOutOfJail();
 	}
 
 	public Game getGame() {

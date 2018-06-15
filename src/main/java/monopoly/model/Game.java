@@ -25,6 +25,11 @@ public class Game {
 
 	private CardSet eventCards;
 
+
+
+	private boolean justGotOutOfJail = false;
+
+
 	public void addPlayer(Player player) {
 		players.add(player);
 		Field field = player.getField().get();
@@ -75,6 +80,7 @@ public class Game {
 
 	public Player nextPlayer() {
 		currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
+		setJustGotOutOfJail(false);
 		return players.next();
 	}
 
@@ -130,4 +136,11 @@ public class Game {
 		//TODO
 	}
 
+	public boolean isJustGotOutOfJail() {
+		return justGotOutOfJail;
+	}
+
+	public void setJustGotOutOfJail(boolean justGotOutOfJail) {
+		this.justGotOutOfJail = justGotOutOfJail;
+	}
 }
