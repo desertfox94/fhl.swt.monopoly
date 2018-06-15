@@ -16,16 +16,16 @@ public class TestFreeparkingField
 		int moneyInTheMiddle = 500;
 		FreeparkingField freeparkingField = new FreeparkingField();
 		Player player = new Player();
-		int moneyBefore = player.getBalance().intValue();
+		int moneyBefore = player.getBalance();
 		player.setGame(game);
 
 		game.putMoneyInTheMiddle(moneyInTheMiddle);
-		assertEquals(moneyInTheMiddle, game.getMoneyInTheMiddle().intValue());
+		assertEquals(moneyInTheMiddle, game.getMoneyInTheMiddle());
 
 		freeparkingField.landing(player);
 
-		int moneyAfter = player.getBalance().intValue();
+		int moneyAfter = player.getBalance();
 		assertEquals(moneyBefore + moneyInTheMiddle, moneyAfter);
-		assertEquals(0, game.getMoneyInTheMiddle().intValue());
+		assertEquals(0, game.getMoneyInTheMiddle());
 	}
 }

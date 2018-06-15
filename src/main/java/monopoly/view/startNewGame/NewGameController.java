@@ -20,7 +20,6 @@ import javafx.scene.layout.Pane;
 import monopoly.core.DBService;
 import monopoly.model.Edition;
 import monopoly.model.Figure;
-import monopoly.model.Game;
 import monopoly.model.Player;
 import monopoly.view.GameInitController;
 import monopoly.view.startNewGame.NewPlayer.NewPlayerController;
@@ -41,7 +40,7 @@ public class NewGameController extends GameInitController implements Initializab
 
 	@FXML
 	/**
-	 * Auf diesem Grid werden die Felder für Spieler hinzugefügt
+	 * Auf diesem Grid werden die Felder fï¿½r Spieler hinzugefï¿½gt
 	 */
 	private GridPane playersGrid;
 
@@ -52,13 +51,7 @@ public class NewGameController extends GameInitController implements Initializab
 
 	@FXML
 	public void startGame() {
-		Game game = new Game();
-		game.setEdition(selectedEdition);
-		for (Player player : getPlayers()) {
-			game.addPlayer(player);
-			player.setGame(game);
-		}
-		startGame(game);
+		startGame(selectedEdition, getPlayers());
 	}
 
 	private List<Player> getPlayers() {
@@ -116,7 +109,7 @@ public class NewGameController extends GameInitController implements Initializab
 	}
 
 	/**
-	 * @return Spieler müssen immer einen Namen und ein Bild angegeben haben
+	 * @return Spieler mï¿½ssen immer einen Namen und ein Bild angegeben haben
 	 */
 	private boolean areAllPlayerComplete() {
 		return newPlayerControllers.stream().filter(p -> p.isModelIncomplete()).count() == 0;

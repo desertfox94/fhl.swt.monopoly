@@ -11,9 +11,9 @@ public class TestCards {
 	@Test
 	public void testDividendCard() {
 		Player player = new Player();		
-		assertEquals(0.0, player.getBalance().intValue(), 0.00001);
+		assertEquals(0, player.getBalance());
 		Card dividendCard = new DividendCard();
 		assertTrue(dividendCard.execute(player));
-		assertEquals(1000.0, player.getBalance().intValue(), 0.00001);
+		assertEquals(1000, player.getBalance());
 	}
 }

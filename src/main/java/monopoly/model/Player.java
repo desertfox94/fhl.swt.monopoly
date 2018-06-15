@@ -30,14 +30,17 @@ public class Player implements StreetOwner, CardOwner {
 	private int doubleCount;
 	private SimpleIntegerProperty position = new SimpleIntegerProperty(0);
 
-	public SimpleObjectProperty<Field> getField() {
+	public SimpleObjectProperty<Field> getFieldProperty() {
 		return field;
+	}
+	
+	public Field getField() {
+		return field.get();
 	}
 
 	public void moveTo(Field field) {
 		this.field.set(field);
 		position.set(field.getIndex());
-
 	}
 
 	public String getId() {
@@ -56,8 +59,12 @@ public class Player implements StreetOwner, CardOwner {
 		this.name.set(name);
 	}
 
-	public IntegerProperty getBalance() {
+	public IntegerProperty getBalanceProperty() {
 		return balance;
+	}
+	
+	public int getBalance() {
+		return balance.intValue();
 	}
 
 	public void pay(int amount) {
@@ -137,8 +144,12 @@ public class Player implements StreetOwner, CardOwner {
 		this.balance.set(balance);
 	}
 
-	public SimpleIntegerProperty getPosition() {
+	public SimpleIntegerProperty getPositionProperty() {
 		return position;
+	}
+	
+	public int getPosition() {
+		return position.get();
 	}
 
 	public void setGame(Game game) {

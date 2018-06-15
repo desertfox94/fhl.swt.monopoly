@@ -13,9 +13,6 @@ import monopoly.core.DBService;
 import monopoly.core.cards.Card;
 import monopoly.core.cards.CardFactory;
 import monopoly.core.cards.CardSet;
-import monopoly.core.cards.FreeFromJail;
-import monopoly.core.cards.GotoSchlossallee;
-import monopoly.core.cards.StreetReconstruction;
 import monopoly.core.fields.FieldsFactory;
 import monopoly.io.StreetImporter;
 import monopoly.io.csv.CSVImport;
@@ -58,6 +55,7 @@ public class MockService extends DBService {
 	@Override
 	public Edition loadEdition(String name) {
 		Edition edition = new Edition();
+		edition.setStartMoney(10000);
 		CardSet communityCards = CardFactory.createCards("Ereigniskarten");
 		CardSet eventCards = CardFactory.createCards("Gemeinschaftskarten");
 		List<Figure> figures = new LinkedList<Figure>();
