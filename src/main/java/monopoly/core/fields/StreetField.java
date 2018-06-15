@@ -20,7 +20,7 @@ public class StreetField extends Field {
 	}
 
 	public boolean ask() {
-		return MessageUtil.ask("Strasse Kaufen", "Wollen Sie die Strasse Kaufen?", "ja", "nein, Auktion starten");
+		return MessageUtil.ask("Strasse Kaufen", "Wollen Sie " + street.getName() + " Kaufen?", street.getName() + " kostet " + street.getPrice(), "ja", "nein, Auktion starten");
 	}
 
 	public boolean askForMortgage() {
