@@ -10,7 +10,7 @@ public class PlayerInventoryModel {
 	private Player player;
 
 	public String getAccountBalance() {
-		return player.getBalance().toString();
+		return String.valueOf(player.getBalance());
 	}
 
 	public List<Street> getStreets() {

@@ -58,7 +58,7 @@ public class StreetField extends Field {
 
 			int rent = street.isMortgage() ? 0 : street.getRent().intValue();
 
-			if (player.getBalance().intValue() < rent && (player.hasHouses() == true)
+			if (player.getBalance() < rent && (player.hasHouses() == true)
 					|| (player.hasNoMortgagedStreets() == true)) {
 				mortgage = askForMortgage();
 
@@ -71,7 +71,7 @@ public class StreetField extends Field {
 				} // Abfrage welches Haus zum verkauf TODO
 			}
 
-			else if ((player.getBalance().intValue() >= rent) && (!((Player) owner).isInJail())) {
+			else if ((player.getBalance() >= rent) && (!((Player) owner).isInJail())) {
 				player.pay(rent);
 				if (owner instanceof Player) {
 					((Player) owner).addMoney(rent);
