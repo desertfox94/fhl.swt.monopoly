@@ -19,8 +19,8 @@ public class CardFactory {
 	public static CardSet createCards(String type) {
 		CircleList<Card> cards = new CircleList<>();
 		cards.add(new FreeFromJail());
-		cards.add(new GotoSchlossallee());
-		cards.add(new StreetReconstruction());
+		//cards.add(new GotoSchlossallee());
+		//cards.add(new StreetReconstruction());
 		return new CardSet(cards, type);
 	}
 

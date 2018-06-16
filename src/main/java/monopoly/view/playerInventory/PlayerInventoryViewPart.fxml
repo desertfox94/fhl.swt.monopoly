@@ -36,14 +36,14 @@
               <columns>
                 <TableColumn fx:id="streetNameColum" prefWidth="175.0" text="Name" />
                 <TableColumn fx:id="currentRentColumn" prefWidth="100.0" text="Aktuelle Miete" />
-                  <TableColumn fx:id="streetGroupColum" minWidth="50.0" prefWidth="102.0" text="Gruppe" />
+              	<TableColumn fx:id="streetGroupColum" minWidth="50.0" prefWidth="102.0" text="Gruppe" />
               </columns>
                <contextMenu>
                   <ContextMenu>
                     <items>
                         <MenuItem fx:id="takeMortgageMenuItem" mnemonicParsing="false" onAction="#takeMortgage" text="Hypothek aufnehmen" />
-                        <MenuItem fx:id="removeMortgageMenuItem" mnemonicParsing="false" onAction="#removeMortgage" text="Hypothek abbezahlen" />
-                      <MenuItem fx:id="detailsMenuItem" mnemonicParsing="false" onAction="#showStreetDetails" text="Details" />
+                    	<MenuItem fx:id="removeMortgageMenuItem" mnemonicParsing="false" onAction="#removeMortgage" text="Hypothek abbezahlen" />
+                      	<MenuItem fx:id="detailsMenuItem" mnemonicParsing="false" onAction="#showStreetDetails" text="Details" />
                     </items>
                   </ContextMenu>
                </contextMenu>
@@ -58,7 +58,15 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+            <ListView fx:id="cardTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6">
+            <contextMenu>
+                  <ContextMenu>
+                    <items>
+                        <MenuItem fx:id="executeCardMenuItem" mnemonicParsing="false" onAction="#takeMortgage" text="Benutzen" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </ListView>
             <Label fx:id="accountBalanceLabel" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -25,4 +25,8 @@ public abstract class Card {
 	
 	public abstract boolean execute(Player player);
 
+	@Override
+	public String toString() {
+		return title;
+	}
 }

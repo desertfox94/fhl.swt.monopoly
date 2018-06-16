@@ -3,16 +3,20 @@ package monopoly.view.playerInventory;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import monopoly.core.fields.Field;
 import monopoly.model.Game;
 import monopoly.model.Player;
 import monopoly.model.Street;
+import monopoly.core.cards.Card;
 
 public class PlayerInventoryController {
 
@@ -26,6 +30,9 @@ public class PlayerInventoryController {
 
 	@FXML
 	private TableView<Street> streetTable;
+	
+	@FXML
+	private ListView<Card> cardTable;
 
 	@FXML
 	private TableColumn<Street, String> streetNameColum;
@@ -44,6 +51,9 @@ public class PlayerInventoryController {
 
 	@FXML
 	private MenuItem detailsMenuItem;
+	
+	@FXML
+	private MenuItem executeCardMenuItem;
 
 	private Player player;
 
@@ -69,8 +79,16 @@ public class PlayerInventoryController {
 
 	private void intializeControls() {
 		streetTable.setItems(player.getStreets());
+		cardTable.setItems(player.getCards());
 		streetGroupColum.setCellValueFactory(s -> new SimpleStringProperty(""));
 		streetNameColum.setCellValueFactory(s -> new SimpleStringProperty(s.getValue().getName()));
+		
+		executeCardMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	cardTable.getSelectionModel().getSelectedItem().execute(player);	        	
+		    }
+		});
+		
 		// currentRentColumn.setCellValueFactory(s -> new
 		// SimpleStringProperty("" +
 		// s.getValue().getRent().get()));

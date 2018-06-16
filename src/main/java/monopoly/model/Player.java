@@ -80,7 +80,7 @@ public class Player implements StreetOwner, CardOwner {
 		return streets;
 	}
 
-	public List<Card> getCards() {
+	public ObservableList<Card> getCards() {
 		return cards;
 	}
 
