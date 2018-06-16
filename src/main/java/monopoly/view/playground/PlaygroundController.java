@@ -77,9 +77,9 @@ public class PlaygroundController {
 	}
 
 	@FXML
-	private void setDie(){
-		int value = Integer.parseInt(valueDie.getText());
-		game.movePlayer(game.getCurrentPlayer(),value);
+	private void setDie() {
+	    int value =Integer.parseInt(valueDie.getText().trim());
+        game.movePlayer(game.getCurrentPlayer(),value);
 	}
 
 
@@ -106,6 +106,7 @@ public class PlaygroundController {
 	}
 
 	public void preparePlayground(Game game) {
+	    valueDie.setText("1");
 		this.game = game;
 		engine = new MonopolyEngine(game);
 		engine.getDiceCast().addListeners(new DieListener(dieOne), new DieListener(dieTwo));
