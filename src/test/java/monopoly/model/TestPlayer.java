@@ -4,8 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import monopoly.core.CircleList;
@@ -23,7 +21,7 @@ public class TestPlayer {
 	@Test
 	public void testGetfield() {
 		Player player = new Player();
-		assertTrue(player.getField() != null);
+		assertTrue(player.getFieldProperty() != null);
 	}
 
 	@Test
@@ -37,11 +35,11 @@ public class TestPlayer {
 
 		Boolean notMoved = true;
 		while (notMoved) {
-			assertTrue(player.getField().getValue() == null);
+			assertTrue(player.getFieldProperty().getValue() == null);
 			player.moveTo(startfield);
 			notMoved = false;
 		}
-		assertTrue(player.getField().getValue().equals(startfield));
+		assertTrue(player.getFieldProperty().getValue().equals(startfield));
 	}
 
 	@Test
@@ -67,33 +65,33 @@ public class TestPlayer {
 	@Test
 	public void testgetsetBalance() {
 		Player player = new Player();
-		assertTrue((player.getBalance() != null) && (player.getBalance().intValue() == 0));
+		assertTrue(player.getBalance() == 0);
 		int balance = 4;
 		player.setBalance(balance);
-		assertTrue(player.getBalance().intValue() == 4);
+		assertTrue(player.getBalance() == 4);
 	}
 
 	@Test
 	public void testpay() {
 		Player player = new Player();
 		player.setBalance(100);
-		int beforeBalance = player.getBalance().intValue();
+		int beforeBalance = player.getBalance();
 		int payment = 3;
 		int payment2 = 1000;
 		int negativePayment = -200;
 
 		player.pay(payment);
-		assertTrue(player.getBalance().intValue() == beforeBalance - payment); // -3.5
+		assertTrue(player.getBalance() == beforeBalance - payment); // -3.5
 
 		player.setBalance(beforeBalance);
 
 		player.pay(payment2);
-		assertTrue(player.getBalance().intValue() == beforeBalance - payment2); // -900
+		assertTrue(player.getBalance() == beforeBalance - payment2); // -900
 
 		player.setBalance(beforeBalance);
 
 		player.pay(negativePayment);
-		assertTrue(player.getBalance().intValue() == beforeBalance - negativePayment); // 300
+		assertTrue(player.getBalance() == beforeBalance - negativePayment); // 300
 																							// ->
 																							// ignores
 																							// -
@@ -103,17 +101,17 @@ public class TestPlayer {
 	public void testaddMoney() {
 		Player player = new Player();
 		player.setBalance(100);
-		int beforeBalance = player.getBalance().intValue();
+		int beforeBalance = player.getBalance();
 		int money = 3;
 		int negativeMoney = -1000;
 
 		player.addMoney(money);
-		assertTrue(player.getBalance().intValue() == beforeBalance + money);
+		assertTrue(player.getBalance() == beforeBalance + money);
 
 		player.setBalance(beforeBalance);
 
 		player.pay(negativeMoney);
-		assertTrue(player.getBalance().intValue() == beforeBalance - negativeMoney); // 1100
+		assertTrue(player.getBalance() == beforeBalance - negativeMoney); // 1100
 																						// ->
 																						// ignores
 																						// -
@@ -230,16 +228,16 @@ public class TestPlayer {
 		StreetField streetfield = new StreetField(street, 15);
 		JailField jailfield = new JailField();
 		
-		assertTrue(player.getPosition().get() == 0);
+		assertTrue(player.getPosition() == 0);
 		
 		player.moveTo(startfield);
-		assertTrue(player.getPosition().get() == 0);
+		assertTrue(player.getPosition() == 0);
 	
 		player.moveTo(streetfield);
-		assertTrue(player.getPosition().get() == 15);
+		assertTrue(player.getPosition() == 15);
 		
 		player.moveTo(jailfield);
-		assertTrue(player.getPosition().get() == 10); //jailindex static = 10				
+		assertTrue(player.getPosition() == 10); //jailindex static = 10				
 	}
 	
 	@Test
@@ -294,7 +292,7 @@ public class TestPlayer {
 	}
 
 	@Test
-	public void testhasNoMortagedStreets() {
+	public void testHasNoMortgagedStreets() {
 		Player player = new Player();
 		Street street = new Street();
 		Street street2 = new Street();
@@ -308,15 +306,15 @@ public class TestPlayer {
 		player.addToInventory(street);
 		player.addToInventory(street2);
 	
-		assertTrue(player.hasNoMortagedStreets());
-		street.assumeMortage();
-		assertTrue(player.hasNoMortagedStreets());
-		street2.assumeMortage();
-		assertFalse(player.hasNoMortagedStreets());
+		assertTrue(player.hasNoMortgagedStreets());
+		street.assumeMortgage();
+		assertTrue(player.hasNoMortgagedStreets());
+		street2.assumeMortgage();
+		assertFalse(player.hasNoMortgagedStreets());
 	}
 	
 	@Test
-	public void testnotMortagedHouses() {
+	public void testNotMortgagedHouses() {
 		Player player = new Player();
 		Street street = new Street();
 		Street street2 = new Street();
@@ -330,12 +328,12 @@ public class TestPlayer {
 		player.addToInventory(street);
 		player.addToInventory(street2);
 	
-		assertEquals(player.notMortagedStreets().size(), 2);
-		assertEquals(player.notMortagedStreets().get(0), street);
-		street.assumeMortage();
-		assertEquals(player.notMortagedStreets().size(), 1);
-		street2.assumeMortage();
-		assertEquals(player.notMortagedStreets().size(), 0);
+		assertEquals(player.notMortgagedStreets().size(), 2);
+		assertEquals(player.notMortgagedStreets().get(0), street);
+		street.assumeMortgage();
+		assertEquals(player.notMortgagedStreets().size(), 1);
+		street2.assumeMortgage();
+		assertEquals(player.notMortgagedStreets().size(), 0);
 	}		
 }
 

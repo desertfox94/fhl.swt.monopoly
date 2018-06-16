@@ -117,7 +117,7 @@ public class PlaygroundController {
 		List<Player> allPlayers = game.getPlayers().toList();
 		for (Player player : allPlayers) {
 			addPlayerInventoryToPlayerHub(player);
-			player.getPosition().addListener(createPlayerMovedListener(player));
+			player.getPositionProperty().addListener(createPlayerMovedListener(player));
 			playerFigures.put(player, createPlayerFigure(player));
 		}
 	}
@@ -150,7 +150,7 @@ public class PlaygroundController {
 	}
 
 	private void adjustPlayerPosition(Player player) {
-		Point pos = new PlayerPositionHelper(playgroundImageDescr, getSizeOfBackgroundImage(), game).calc(player.getPosition().intValue(), playground.getRotate());
+		Point pos = new PlayerPositionHelper(playgroundImageDescr, getSizeOfBackgroundImage(), game).calc(player.getPositionProperty().intValue(), playground.getRotate());
 		ImageView img = playerFigures.get(player);
 		img.relocate(pos.getX(), pos.getY());
 	}

@@ -5,15 +5,8 @@ import monopoly.model.Street;
 import monopoly.model.StreetDetails;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
-import org.mockito.internal.util.reflection.Whitebox;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 
 import static junit.framework.TestCase.assertEquals;
@@ -79,7 +72,7 @@ public class TestStreetField {
 
         streetField.buyStreet = true;
         streetField.landing(player);
-        assertEquals(player.getBalance().intValue(), 9500);
+        assertEquals(player.getBalance(), 9500);
         assertEquals(street.getOwner(), player);
         assertTrue(!player.getStreets().isEmpty());
         assertEquals(player.getStreets().get(0).getName(), "ParkAllee");
@@ -88,24 +81,24 @@ public class TestStreetField {
 
         playerTwo.addMoney(10000);
 
-        assertEquals(player.getBalance().get(), 9500);
+        assertEquals(player.getBalance(), 9500);
         streetField.landing(playerTwo);
-        assertEquals(playerTwo.getBalance().get(), 9800);
-        assertEquals(player.getBalance().get(), 9700);
+        assertEquals(playerTwo.getBalance(), 9800);
+        assertEquals(player.getBalance(), 9700);
 
         player.sendToJail();
         streetField.landing(playerTwo);
-        assertEquals(playerTwo.getBalance().get(), 9800);
-        assertEquals(player.getBalance().get(), 9700);
+        assertEquals(playerTwo.getBalance(), 9800);
+        assertEquals(player.getBalance(), 9700);
 
 
         playerThree.addMoney(100);
-        assertEquals(playerThree.getBalance().intValue(), 100);
+        assertEquals(playerThree.getBalance(), 100);
         playerThree.freeFromJail();
     }
     
     @Test
-    public void testLanding_Mortage() {
+    public void testLanding_Mortgage() {
     	 Player player = new Player();
     	 Player owner = new Player();
          Street playerStreet = new Street();
@@ -114,25 +107,25 @@ public class TestStreetField {
          streetField = spy(new StreetField(landingStreet, 10));
          
          doReturn(true).when(streetField).ask();
-         doReturn(true).when(streetField).askForMortage();
+         doReturn(true).when(streetField).askForMortgage();
          
          landingStreet.setPrice(50);
          rentDetails.setBaseRent(150);       
          landingStreet.setRentDetails(rentDetails);    
-         player.addToInventory(playerStreet); // Assume Player has one not Mortaged Street 
+         player.addToInventory(playerStreet); // Assume Player has one not Mortgaged Street
      
-         assertFalse(playerStreet.isMortage());  
-         assertTrue(player.hasNoMortagedStreets());
-         assertEquals(player.notMortagedStreets().get(0), playerStreet);        
+         assertFalse(playerStreet.isMortgage());
+         assertTrue(player.hasNoMortgagedStreets());
+         assertEquals(player.notMortgagedStreets().get(0), playerStreet);
        
          streetField.setStreet(landingStreet);         
          streetField.landing(owner);
          assertEquals(owner.getStreets().size(), 1);
          
-         assertEquals(player.notMortagedStreets().get(0), playerStreet);
+         assertEquals(player.notMortgagedStreets().get(0), playerStreet);
          streetField.landing(player);
-         assertFalse(player.hasNoMortagedStreets());
-         assertTrue(player.getStreets().get(0).isMortage());
-         assertTrue(player.notMortagedStreets().isEmpty());        
+         assertFalse(player.hasNoMortgagedStreets());
+         assertTrue(player.getStreets().get(0).isMortgage());
+         assertTrue(player.notMortgagedStreets().isEmpty());
      }   
 }

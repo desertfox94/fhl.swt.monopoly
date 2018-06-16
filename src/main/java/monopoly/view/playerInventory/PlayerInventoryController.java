@@ -74,19 +74,19 @@ public class PlayerInventoryController {
 		// currentRentColumn.setCellValueFactory(s -> new
 		// SimpleStringProperty("" +
 		// s.getValue().getRent().get()));
-		player.getBalance().addListener(new ChangeListener<Number>() {
+		player.getBalanceProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				accountBalanceLabel.textProperty().set(newValue.toString());
 			}
 		});
-		player.getField().addListener(new ChangeListener<Field>() {
+		player.getFieldProperty().addListener(new ChangeListener<Field>() {
 			public void changed(javafx.beans.value.ObservableValue<? extends Field> observable, Field oldValue, Field newValue) {
 				currentFieldLabel.textProperty().set(newValue.getName());
 			};
 		});
-		currentFieldLabel.textProperty().set(player.getField().get().getName());
+		currentFieldLabel.textProperty().set(player.getFieldProperty().get().getName());
 		refreshTitle();
 	}
 

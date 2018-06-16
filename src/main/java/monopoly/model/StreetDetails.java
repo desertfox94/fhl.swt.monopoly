@@ -10,7 +10,7 @@ public class StreetDetails {
 	private int fourthHouseRent;
 	private int hotelRent;
 	private int pricePerHouse;
-	private int mortage;
+	private int mortgage;
 
 	public int getBaseRent() {
 		return baseRent;
@@ -24,8 +24,8 @@ public class StreetDetails {
 		this.hotelRent = hotelRent;
 	}
 
-	public int getMortage() {
-		return mortage;
+	public int getMortgage() {
+		return mortgage;
 	}
 
 	public int getFirstHouseRent() {
@@ -72,8 +72,8 @@ public class StreetDetails {
 		this.pricePerHouse = pricePerHouse;
 	}
 
-	public void setMortage(int mortage) {
-		this.mortage = mortage;
+	public void setMortgage(int mortgage) {
+		this.mortgage = mortgage;
 	}
 
 }

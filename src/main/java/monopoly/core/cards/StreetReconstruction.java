@@ -6,8 +6,8 @@ import monopoly.model.Street;
 
 public class StreetReconstruction extends Card {
 
-	private static final int COSTS_PER_HOUSE = 800;
-	private static final int COSTS_PER_HOTEL = 2300;
+	public static final int COSTS_PER_HOUSE = 800;
+	public static final int COSTS_PER_HOTEL = 2300;
 
 	public StreetReconstruction() {
 		super("Straßenausbesserungsarbeiten", "Du wirst zu Straßenausbesserungsarbeiten herangezogen. Zahle für deine Häuser und Hotels:\nDM 800 je Haus\nDM 2300 je Hotel\nAn die Bank");

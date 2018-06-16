@@ -9,7 +9,7 @@ public class Street {
 	private int price;
 	private int numberOfHouses;
 	private boolean hotelBuild;
-	private boolean mortage;
+	private boolean mortgage;
 	private Player owner;
 	private StreetDetails rentDetails;
 	private StreetGroup group;
@@ -58,25 +58,25 @@ public class Street {
 		this.hotelBuild = false;
 	}
 
-	public boolean isMortage() {
-		return mortage;
+	public boolean isMortgage() {
+		return mortgage;
 	}
 
-	public void assumeMortage() {
-		if (!mortage) {
-			mortage = true;
-			owner.addMoney(mortageValue());
+	public void assumeMortgage() {
+		if (!mortgage) {
+			mortgage = true;
+			owner.addMoney(mortgageValue());
 		}
 	}
 
-	public int mortageValue() {
+	public int mortgageValue() {
 		return price / 2;
 	}
 
-	public void redeemMortage() {
-		if (mortage) {
-			mortage = false;
-			owner.addMoney(mortageValue() * -1);
+	public void redeemMortgage() {
+		if (mortgage) {
+			mortgage = false;
+			owner.addMoney(mortgageValue() * -1);
 		}
 	}
 

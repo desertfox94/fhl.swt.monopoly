@@ -1,14 +1,13 @@
-
 package monopoly.model;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class TestRedeemMortage {
+public class TestRedeemMortgage {
 
 	@Test
-	public void reedemMortage() {
+	public void reedemMortgage() {
 		Player player = new Player();
 		Street street = new Street();
 		street.setPrice(1000);
@@ -26,7 +25,7 @@ public class TestRedeemMortage {
 	}
 	
 	@Test
-	public void DontReedemMoratgeWithoutMortage() {
+	public void dontReedemMortgageWithoutMortgage() {
 		Player player = new Player();
 		Street street = new Street();
 		street.setPrice(1000);

@@ -30,14 +30,17 @@ public class Player implements StreetOwner, CardOwner {
 	private int doubleCount;
 	private SimpleIntegerProperty position = new SimpleIntegerProperty(0);
 
-	public SimpleObjectProperty<Field> getField() {
+	public SimpleObjectProperty<Field> getFieldProperty() {
 		return field;
+	}
+	
+	public Field getField() {
+		return field.get();
 	}
 
 	public void moveTo(Field field) {
 		this.field.set(field);
 		position.set(field.getIndex());
-
 	}
 
 	public String getId() {
@@ -56,8 +59,12 @@ public class Player implements StreetOwner, CardOwner {
 		this.name.set(name);
 	}
 
-	public IntegerProperty getBalance() {
+	public IntegerProperty getBalanceProperty() {
 		return balance;
+	}
+	
+	public int getBalance() {
+		return balance.intValue();
 	}
 
 	public void pay(int amount) {
@@ -137,8 +144,12 @@ public class Player implements StreetOwner, CardOwner {
 		this.balance.set(balance);
 	}
 
-	public SimpleIntegerProperty getPosition() {
+	public SimpleIntegerProperty getPositionProperty() {
 		return position;
+	}
+	
+	public int getPosition() {
+		return position.get();
 	}
 
 	public void setGame(Game game) {
@@ -160,24 +171,24 @@ public class Player implements StreetOwner, CardOwner {
 	    	return getStreets().stream().filter(s -> s.getNumberOfHouses() > 0).collect(Collectors.<Street>toList());
 	 }
 	    
-	 public List<Street> notMortagedStreets() {
-	    	return getStreets().stream().filter(s -> !s.isMortage()).collect(Collectors.<Street>toList());
+	 public List<Street> notMortgagedStreets() {
+	    	return getStreets().stream().filter(s -> !s.isMortgage()).collect(Collectors.<Street>toList());
 	 }
 	 
-	 public List<Street> mortagedStreets() {
-	    	return getStreets().stream().filter(s -> s.isMortage()).collect(Collectors.<Street>toList());
+	 public List<Street> mortgagedStreets() {
+	    	return getStreets().stream().filter(s -> s.isMortgage()).collect(Collectors.<Street>toList());
 	 }
 	    
 	 public boolean hasHouses (){
 	    	return getStreets().stream().anyMatch(s -> s.getNumberOfHouses() > 0);
 	 }
 	 
-	 public boolean hasNoMortagedStreets (){
-	    	return getStreets().stream().anyMatch(s -> !s.isMortage());
+	 public boolean hasNoMortgagedStreets(){
+	    	return getStreets().stream().anyMatch(s -> !s.isMortgage());
 	 }
 
-	 public void moneyForMortage () {
-		 for (Street s : mortagedStreets()) {
+	 public void moneyForMortgage() {
+		 for (Street s : mortgagedStreets()) {
 			 this.addMoney(s.getPrice());
 		 }
 	 }

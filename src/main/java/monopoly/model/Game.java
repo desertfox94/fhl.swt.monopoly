@@ -25,9 +25,14 @@ public class Game {
 
 	private CardSet eventCards;
 
+
+
+	private boolean justGotOutOfJail = false;
+
+
 	public void addPlayer(Player player) {
 		players.add(player);
-		Field field = player.getField().get();
+		Field field = player.getFieldProperty().get();
 		if (field == null) {
 			player.moveTo(edition.getFields().get(0));
 		}
@@ -69,12 +74,18 @@ public class Game {
 		return currentPlayerDiceCastHistory;
 	}
 
-	public IntegerProperty getMoneyInTheMiddle() {
+	public IntegerProperty getMoneyInTheMiddleProperty() {
 		return moneyInTheMiddle;
 	}
+	
+	public int getMoneyInTheMiddle() {
+		return moneyInTheMiddle.get();
+	}
+
 
 	public Player nextPlayer() {
 		currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
+		setJustGotOutOfJail(false);
 		return players.next();
 	}
 
@@ -97,7 +108,7 @@ public class Game {
 
 	public void movePlayerToField(Player player, Field target) {
 		CircleList<Field> fields = getEdition().getFields();
-		Field field = player.getField().get();
+		Field field = player.getFieldProperty().get();
 		fields.select(field);
 		while (target != (field = fields.next())) {
 			player.moveTo(field);
@@ -115,7 +126,7 @@ public class Game {
 	 */
 	public void movePlayer(Player player, int diceCast) {
 		CircleList<Field> fields = getEdition().getFields();
-		fields.select(player.getField().get());
+		fields.select(player.getFieldProperty().get());
 		Field field = null;
 		for (int i = 0; i < diceCast; i++) {
 			field = fields.next();
@@ -130,4 +141,11 @@ public class Game {
 		//TODO
 	}
 
+	public boolean isJustGotOutOfJail() {
+		return justGotOutOfJail;
+	}
+
+	public void setJustGotOutOfJail(boolean justGotOutOfJail) {
+		this.justGotOutOfJail = justGotOutOfJail;
+	}
 }
