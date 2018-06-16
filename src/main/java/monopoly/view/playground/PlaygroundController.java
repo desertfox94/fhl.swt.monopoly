@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -45,6 +46,9 @@ public class PlaygroundController {
 	private Button endTurnButton;
 
 	@FXML
+	private TextField valueDie;
+
+	@FXML
 	private Region playground;
 
 	@FXML
@@ -71,6 +75,13 @@ public class PlaygroundController {
 		disableDice(!engine.canPlayerRollTheDice());
 		adjustPlayerPosition(game.getCurrentPlayer());
 	}
+
+	@FXML
+	private void setDie(){
+		int value = Integer.parseInt(valueDie.getText());
+		game.movePlayer(game.getCurrentPlayer(),value);
+	}
+
 
 	private void disableDice(boolean b) {
 		dieOne.setDisable(b);

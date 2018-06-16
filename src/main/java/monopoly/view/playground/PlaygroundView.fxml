@@ -42,8 +42,8 @@
                         <Tooltip text="Spielfeld drehen" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="setDie" mnemonicParsing="false" text="Set Die" />
-                  <TextField prefHeight="25.0" prefWidth="58.0" />
+                  <Button fx:id="setDie" mnemonicParsing="false" onMouseClicked="#setDie" text="Set Die" />
+                  <TextField fx:id="valueDie" prefHeight="25.0" prefWidth="58.0" />
                </items>
             </ToolBar>
          </bottom>
