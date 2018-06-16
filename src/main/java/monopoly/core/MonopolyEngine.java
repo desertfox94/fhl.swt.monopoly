@@ -66,12 +66,13 @@ public class MonopolyEngine {
 		return diceCast;
 	}
 
+
 	private void rollTheDice() {
 		diceCast.next();
 		game.playerRolledTheDice(diceCast);
 	}
 
-	
+
 	/**
 	 * evaluates whether or not the player shoud be allowed to roll, based on the number of times he rolled and if he rolled doubles.
 	 * @return returns true, if current player can roll, false otherwise.
