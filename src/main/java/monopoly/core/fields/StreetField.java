@@ -56,27 +56,71 @@ public class StreetField extends Field {
 			}
 		} else if (owner != player) {
 
-			int rent = street.isMortgage() ? 0 : street.getRent().intValue();
+			//auf der strasse ist keine hypothek und der besitzer ist nicht im gefängnis
+			if(!street.isMortgage() && !owner.isInJail()){
+				//Miete muss bezahlt werden
+				int rent =  street.getRent().intValue();
 
-			if (player.getBalance() < rent && (player.hasHouses() == true)
-					|| (player.hasNoMortgagedStreets() == true)) {
-				mortgage = askForMortgage();
+				//Spieler hat genug geld zum bezahlen
+				if(player.getBalance() >= rent){
+					player.pay(rent);
+					owner.addMoney(rent);
+				}
+				//Spieler hat nicht genug geld
+				else{
+					int gatherable = player.getStreets().stream()
+							.map(s -> s.getHotel()? (s.getRentDetails().getPricePerHouse() * 5 + s.mortgageValue()) : (s.getRentDetails().getPricePerHouse() * s.getNumberOfHouses() + s.mortgageValue()))
+							.reduce(0, (a,b)-> a + b) ;
 
-				if (mortgage == true) {
-					player.notMortgagedStreets().get(0).assumeMortgage();
-				} // Abfrage welches Straße zur Hypothek TODO
+					System.out.println("gatherable: " + gatherable + " rent: " + rent);
+					//Spieler hat keine möglichkeit das geld aufzutreiben
+					if(gatherable < rent){
+						//Todo: Spieler verliert das Spiel
+						return;
+					}
+					else if(player.hasHouses() && player.hasNoMortgagedStreets()){
+						//Spieler kann hypothek aufnehmen oder häuser verkaufen
+						boolean ask = MessageUtil.ask("Zu wenig Geld", "Sie haben nicht genug Geld um die Miete zu Zahlen", "Häuser verkaufen", "Hypothek aufnehmen");
+						if(ask){
+							//Todo:Frage welche häuser
+						}
+						else {
+							//Todo:Frage welche strassen mit hypothek belasten
+						}
 
-				else if (mortgage == false) {
-					((Player) player.streetsWithHouse()).sellHouse(0);
-				} // Abfrage welches Haus zum verkauf TODO
-			}
+					}
+					else if(player.hasNoMortgagedStreets()){
+						//Todo: Frage welche Strassen
+					}
+					else if(player.hasHouses()){
+						//Todo: Frage welche häuser
+					}
 
-			else if ((player.getBalance() >= rent) && (!((Player) owner).isInJail())) {
-				player.pay(rent);
-				if (owner instanceof Player) {
-					((Player) owner).addMoney(rent);
+					//Todo: entfernen wenn vorherige bedingungen implementiert sind
+					for (Street street1 : player.streetsWithHouse()) {
+
+						if(street1.getHotel()){
+							street1.demolishHotel();
+							player.addMoney(street1.getRentDetails().getPricePerHouse() * 5);
+							street1.demolishHotel();
+							street1.demolishHouses( 4);
+						}else{
+							int count = street1.getNumberOfHouses();
+							street1.demolishHouses(count);
+							player.addMoney(street1.getRentDetails().getPricePerHouse() * count);
+						}
+					}
+					if(player.getBalance() < rent){
+
+						player.getStreets().forEach(s -> s.assumeMortgage());
+					}
+					//to be removed ends here
+
+
+					landing(player);
 				}
 			}
+
 		}
 	}
 }

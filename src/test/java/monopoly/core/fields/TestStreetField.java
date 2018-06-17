@@ -108,16 +108,19 @@ public class TestStreetField {
          
          doReturn(true).when(streetField).ask();
          doReturn(true).when(streetField).askForMortgage();
-         
+
+         playerStreet.setPrice(300); //mortgage will be enough for the rent
          landingStreet.setPrice(50);
-         rentDetails.setBaseRent(150);       
-         landingStreet.setRentDetails(rentDetails);    
+         rentDetails.setBaseRent(150);
+         rentDetails.setPricePerHouse(100);
+         landingStreet.setRentDetails(rentDetails);
+         playerStreet.setRentDetails(rentDetails);
          player.addToInventory(playerStreet); // Assume Player has one not Mortgaged Street
      
          assertFalse(playerStreet.isMortgage());
          assertTrue(player.hasNoMortgagedStreets());
          assertEquals(player.notMortgagedStreets().get(0), playerStreet);
-       
+
          streetField.setStreet(landingStreet);         
          streetField.landing(owner);
          assertEquals(owner.getStreets().size(), 1);
