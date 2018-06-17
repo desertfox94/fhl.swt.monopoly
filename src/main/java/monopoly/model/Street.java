@@ -74,7 +74,7 @@ public class Street {
 	}
 
 	public void redeemMortgage() {
-		if (mortgage) {
+		if (mortgage  && owner.getBalance() >= mortgageValue()) {
 			mortgage = false;
 			owner.addMoney(mortgageValue() * -1);
 		}

@@ -1,5 +1,6 @@
 package monopoly.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -70,10 +71,15 @@ public class TestStreet {
 	@Test
 	public void testassumeisMontage() {
 		Street street = new Street();
-		street.setOwner(new Player());
+		int price = 300;
+		street.setPrice(price);
+		Player owner = new Player();
+		int balanceBefore = owner.getBalance();
+		street.setOwner(owner);
 		assertFalse(street.isMortgage());
 		street.assumeMortgage();
 		assertTrue(street.isMortgage());
+		assertEquals(balanceBefore + price /2, owner.getBalance());
 	}
 	
 	@Test

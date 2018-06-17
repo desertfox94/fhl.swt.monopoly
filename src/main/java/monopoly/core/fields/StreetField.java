@@ -72,7 +72,6 @@ public class StreetField extends Field {
 							.map(s -> s.getHotel()? (s.getRentDetails().getPricePerHouse() * 5 + s.mortgageValue()) : (s.getRentDetails().getPricePerHouse() * s.getNumberOfHouses() + s.mortgageValue()))
 							.reduce(0, (a,b)-> a + b) ;
 
-					System.out.println("gatherable: " + gatherable + " rent: " + rent);
 					//Spieler hat keine möglichkeit das geld aufzutreiben
 					if(gatherable < rent){
 						//Todo: Spieler verliert das Spiel
