@@ -18,22 +18,33 @@ import monopoly.core.fields.Field;
 public class Player implements StreetOwner, CardOwner {
 
 	private String id;
+
 	private Game game;
+
 	private StringProperty name = new SimpleStringProperty();
+
 	private IntegerProperty balance = new SimpleIntegerProperty();
+
 	private ObservableList<Street> streets = FXCollections.observableArrayList();
+
 	private ObservableList<Card> cards = FXCollections.observableArrayList();
+
 	private IntegerProperty jailCount = new SimpleIntegerProperty();
+
 	private BooleanProperty jail = new SimpleBooleanProperty();
+
 	private SimpleObjectProperty<Field> field = new SimpleObjectProperty<>();
+
 	private Figure figure;
+
 	private int doubleCount;
+
 	private SimpleIntegerProperty position = new SimpleIntegerProperty(0);
 
 	public SimpleObjectProperty<Field> getFieldProperty() {
 		return field;
 	}
-	
+
 	public Field getField() {
 		return field.get();
 	}
@@ -51,6 +62,7 @@ public class Player implements StreetOwner, CardOwner {
 		this.id = id;
 	}
 
+	@Override
 	public String getName() {
 		return name.get();
 	}
@@ -62,7 +74,7 @@ public class Player implements StreetOwner, CardOwner {
 	public IntegerProperty getBalanceProperty() {
 		return balance;
 	}
-	
+
 	public int getBalance() {
 		return balance.intValue();
 	}
@@ -80,6 +92,7 @@ public class Player implements StreetOwner, CardOwner {
 		return streets;
 	}
 
+	@Override
 	public ObservableList<Card> getCards() {
 		return cards;
 	}
@@ -100,7 +113,6 @@ public class Player implements StreetOwner, CardOwner {
 	public void sendToJail() {
 		jailCount.set(1);
 		jail.set(true);
-		// field.set(game.getEdition().getFields().get(JailField.INDEX));
 	}
 
 	public Figure getFigure() {
@@ -147,7 +159,7 @@ public class Player implements StreetOwner, CardOwner {
 	public SimpleIntegerProperty getPositionProperty() {
 		return position;
 	}
-	
+
 	public int getPosition() {
 		return position.get();
 	}
@@ -156,41 +168,43 @@ public class Player implements StreetOwner, CardOwner {
 		this.game = game;
 	}
 
-	public Game getGame() {return game;}
+	public Game getGame() {
+		return game;
+	}
 
 	@Override
 	public String toString() {
 		return name.toString();
 	}
-	
+
 	public void sellHouse(int index) {
 		streets.remove(index);
 	}
-	
-	 public List<Street> streetsWithHouse() {  
-	    	return getStreets().stream().filter(s -> s.getNumberOfHouses() > 0).collect(Collectors.<Street>toList());
-	 }
-	    
-	 public List<Street> notMortgagedStreets() {
-	    	return getStreets().stream().filter(s -> !s.isMortgage()).collect(Collectors.<Street>toList());
-	 }
-	 
-	 public List<Street> mortgagedStreets() {
-	    	return getStreets().stream().filter(s -> s.isMortgage()).collect(Collectors.<Street>toList());
-	 }
-	    
-	 public boolean hasHouses (){
-	    	return getStreets().stream().anyMatch(s -> s.getNumberOfHouses() > 0);
-	 }
-	 
-	 public boolean hasNoMortgagedStreets(){
-	    	return getStreets().stream().anyMatch(s -> !s.isMortgage());
-	 }
 
-	 public void moneyForMortgage() {
-		 for (Street s : mortgagedStreets()) {
-			 this.addMoney(s.getPrice());
-		 }
-	 }
+	public List<Street> streetsWithHouse() {
+		return getStreets().stream().filter(s -> s.getNumberOfHouses() > 0).collect(Collectors.<Street> toList());
+	}
+
+	public List<Street> notMortgagedStreets() {
+		return getStreets().stream().filter(s -> !s.isMortgage()).collect(Collectors.<Street> toList());
+	}
+
+	public List<Street> mortgagedStreets() {
+		return getStreets().stream().filter(s -> s.isMortgage()).collect(Collectors.<Street> toList());
+	}
+
+	public boolean hasHouses() {
+		return getStreets().stream().anyMatch(s -> s.getNumberOfHouses() > 0);
+	}
+
+	public boolean hasNoMortgagedStreets() {
+		return getStreets().stream().anyMatch(s -> !s.isMortgage());
+	}
+
+	public void moneyForMortgage() {
+		for (Street s : mortgagedStreets()) {
+			this.addMoney(s.getPrice());
+		}
+	}
 
 }

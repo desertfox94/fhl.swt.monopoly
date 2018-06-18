@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import monopoly.core.CircleList;
 import monopoly.core.cards.CardSet;
 import monopoly.core.fields.Field;
+import monopoly.core.fields.JailField;
 
 public class Game {
 
@@ -25,10 +26,7 @@ public class Game {
 
 	private CardSet eventCards;
 
-
-
 	private boolean justGotOutOfJail = false;
-
 
 	public void addPlayer(Player player) {
 		players.add(player);
@@ -77,11 +75,10 @@ public class Game {
 	public IntegerProperty getMoneyInTheMiddleProperty() {
 		return moneyInTheMiddle;
 	}
-	
+
 	public int getMoneyInTheMiddle() {
 		return moneyInTheMiddle.get();
 	}
-
 
 	public Player nextPlayer() {
 		currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
@@ -106,6 +103,11 @@ public class Game {
 		moneyInTheMiddle.set(moneyInTheMiddle.get() + amount);
 	}
 
+	public void moveToJail(Player player) {
+		player.sendToJail();
+		movePlayerToField(player, edition.getFields().get(JailField.INDEX));
+	}
+
 	public void movePlayerToField(Player player, Field target) {
 		CircleList<Field> fields = getEdition().getFields();
 		Field field = player.getFieldProperty().get();
@@ -117,10 +119,11 @@ public class Game {
 		player.moveTo(field);
 		field.landing(player);
 	}
-	
+
 	/**
 	 * This Method is called by rolling the dice and moves the player forward on the playing field.
 	 * It also contains logic for passing and landing on a field.
+	 *
 	 * @param player The player who last rolled, and who is supposed to be moved.
 	 * @param diceCast The value of the player's roll, so the method can evaluate how far to move said player.
 	 */
@@ -136,7 +139,7 @@ public class Game {
 		player.moveTo(field);
 		field.landing(player);
 	}
-	
+
 	public void endGame() {
 		//TODO
 	}

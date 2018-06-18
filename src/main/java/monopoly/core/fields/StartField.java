@@ -1,6 +1,7 @@
 package monopoly.core.fields;
 
 import monopoly.model.Player;
+
 /**
  * the Start field in the bottom right corner of the playing field.
  */
@@ -19,7 +20,10 @@ public class StartField extends Field {
 
 	@Override
 	public void passing(Player player) {
-		player.addMoney(MONEY);
+		if (!player.isInJail()) {
+			// a player who is send to jail can pass one last time the start field.
+			player.addMoney(MONEY);
+		}
 	}
 
 }

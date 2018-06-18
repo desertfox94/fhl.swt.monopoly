@@ -4,8 +4,9 @@ import javafx.beans.value.ChangeListener;
 
 public class DiceCast {
 
-	private Die firstDie = new Die();
-	private Die secondDie = new Die();
+	protected Die firstDie = new Die();
+
+	protected Die secondDie = new Die();
 
 	public int current() {
 		return firstDie.get() + secondDie.get();
@@ -24,6 +25,11 @@ public class DiceCast {
 		firstDie.roll();
 		secondDie.roll();
 		return current();
+	}
+
+	@Override
+	public String toString() {
+		return "Wurf: " + firstDie.get() + " / " + secondDie.get();
 	}
 
 }

@@ -3,14 +3,14 @@ package monopoly.view.playground.die;
 import java.io.IOException;
 import java.util.HashMap;
 
-import javax.imageio.ImageIO;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+
+import javax.imageio.ImageIO;
 
 public class DieListener implements ChangeListener<Number> {
 
@@ -37,7 +37,10 @@ public class DieListener implements ChangeListener<Number> {
 
 	@Override
 	public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-		dieView.setImage(dieImages.get(newValue));
+		Image image = dieImages.get(newValue);
+		if (image != null) {
+			dieView.setImage(image);
+		}
 	}
 
 }

@@ -21,6 +21,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import monopoly.core.MonopolyEngine;
+import monopoly.core.mock.ManipulatableDiceCast;
 import monopoly.model.Game;
 import monopoly.model.Player;
 import monopoly.view.AppViewController;
@@ -46,7 +47,10 @@ public class PlaygroundController {
 	private Button endTurnButton;
 
 	@FXML
-	private TextField valueDie;
+	private TextField valueDieOne;
+
+	@FXML
+	private TextField valueDieTwo;
 
 	@FXML
 	private Region playground;
@@ -59,6 +63,8 @@ public class PlaygroundController {
 	private Map<Player, ImageView> playerFigures = new HashMap<>();
 
 	private PlaygroundImageDescriptor playgroundImageDescr;
+
+	private ManipulatableDiceCast diceCast;
 
 	public PlaygroundController() {
 	}
@@ -78,10 +84,10 @@ public class PlaygroundController {
 
 	@FXML
 	private void setDie() {
-	    int value =Integer.parseInt(valueDie.getText().trim());
-        game.movePlayer(game.getCurrentPlayer(),value);
+		valueDieOne.setText(valueDieOne.getText());
+		diceCast.useManipulatedThrow();
+		rollTheDice();
 	}
-
 
 	private void disableDice(boolean b) {
 		dieOne.setDisable(b);
@@ -106,9 +112,10 @@ public class PlaygroundController {
 	}
 
 	public void preparePlayground(Game game) {
-	    valueDie.setText("1");
 		this.game = game;
 		engine = new MonopolyEngine(game);
+		diceCast = new ManipulatableDiceCast(valueDieOne, valueDieTwo);
+		engine.setDiceCast(diceCast);
 		engine.getDiceCast().addListeners(new DieListener(dieOne), new DieListener(dieTwo));
 		playgroundImageDescr = PlaygroundImageDescriptor.loadGOTPlaygroundDescriptor();
 		playground.setStyle("-fx-background-image:  url('" + game.getEdition().getBackground() + "');");
@@ -136,7 +143,7 @@ public class PlaygroundController {
 
 	private ImageView createPlayerFigure(Player player) {
 		BufferedImage image = player.getFigure().getImage();
-		int size = (int) (playgroundImageDescr.getRegularFieldWidth() * playgroundImageDescr.getScale(getSizeOfBackgroundImage()));
+		int size = (int)(playgroundImageDescr.getRegularFieldWidth() * playgroundImageDescr.getScale(getSizeOfBackgroundImage()));
 		WritableImage figure = SwingFXUtils.toFXImage(image, new WritableImage(size, size));
 		ImageView imageView = new ImageView(figure);
 		imageView.setFitWidth(size);

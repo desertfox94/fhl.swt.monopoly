@@ -42,8 +42,9 @@
                         <Tooltip text="Spielfeld drehen" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="setDie" mnemonicParsing="false" onMouseClicked="#setDie" text="Set Die" />
-                  <TextField fx:id="valueDie" prefHeight="25.0" prefWidth="58.0" />
+                  <Button fx:id="setDie" mnemonicParsing="false" onMouseClicked="#setDie" text="Wurf manipulieren" />
+                  <TextField fx:id="valueDieOne" prefHeight="25.0" prefWidth="58.0" />
+                  <TextField fx:id="valueDieTwo" prefHeight="25.0" prefWidth="58.0" />
                </items>
             </ToolBar>
          </bottom>

@@ -39,11 +39,12 @@ public class PlaygroundImageDescriptor {
 	}
 
 	public double getHorizontalStartOfField(int index, RowAlignment alignment) {
-		index = index % 10;
 		switch (alignment) {
 		case BOTTOM:
 			index = 10 - index;
+			return cornerFieldSize + --index * regularFieldWidth;
 		case TOP:
+			index = index % 10;
 			if (index == 0) {
 				return 0;
 			}

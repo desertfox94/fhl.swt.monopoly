@@ -8,7 +8,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Die {
 
 	private static final Random RANDOM = new Random();
-	private IntegerProperty number = new SimpleIntegerProperty();
+
+	protected IntegerProperty number = new SimpleIntegerProperty();
 
 	public IntegerProperty getNumber() {
 		return number;
@@ -26,7 +27,7 @@ public class Die {
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Die) {
-			return number.get() == ((Die) o).number.get();
+			return number.get() == ((Die)o).number.get();
 		}
 		return false;
 	}
