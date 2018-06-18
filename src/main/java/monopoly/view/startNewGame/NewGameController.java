@@ -22,6 +22,7 @@ import monopoly.model.Edition;
 import monopoly.model.Figure;
 import monopoly.model.Player;
 import monopoly.view.GameInitController;
+import monopoly.view.startNewGame.NewPlayer.ComboGroup;
 import monopoly.view.startNewGame.NewPlayer.NewPlayerController;
 
 public class NewGameController extends GameInitController implements Initializable {
@@ -31,6 +32,8 @@ public class NewGameController extends GameInitController implements Initializab
 	private ObservableList<Edition> editions = FXCollections.observableArrayList(DBService.getDefault().loadAvailableEditions());
 
 	private ObservableList<Figure> figures = FXCollections.observableArrayList();
+
+	private ComboGroup comboGroup = new ComboGroup();
 
 	@FXML
 	private Pane root;
@@ -83,8 +86,9 @@ public class NewGameController extends GameInitController implements Initializab
 		}
 		NewPlayerController controller = loader.getController();
 		controller.setNumber(number);
-		controller.setItems(figures);
+		controller.setItems(comboGroup, figures);
 		controller.addModelValidationListener(new ChangeListener<Boolean>() {
+
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
 				startGameButton.setDisable(!(hasEnoughPlayers()) || !areAllPlayerComplete());
@@ -92,7 +96,7 @@ public class NewGameController extends GameInitController implements Initializab
 		});
 		controller.setGameController(this);
 		newPlayerControllers.add(controller);
-		return (Pane) loader.getRoot();
+		return (Pane)loader.getRoot();
 	}
 
 	private void loadFiguresForEdition() {
@@ -101,7 +105,7 @@ public class NewGameController extends GameInitController implements Initializab
 
 	/**
 	 * Hat das Spiel mehr als einen Spieler
-	 * 
+	 *
 	 * @return
 	 */
 	private boolean hasEnoughPlayers() {
@@ -117,7 +121,7 @@ public class NewGameController extends GameInitController implements Initializab
 
 	/**
 	 * Hat ein anderer Spieler bereits diesen Namen?
-	 * 
+	 *
 	 * @param name
 	 * @return
 	 */
@@ -133,6 +137,7 @@ public class NewGameController extends GameInitController implements Initializab
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		editionsBox.setItems(editions);
 		editionsBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Edition>() {
+
 			@Override
 			public void changed(ObservableValue<? extends Edition> arg0, Edition arg1, Edition newEdition) {
 				handleEditionChanged(newEdition);

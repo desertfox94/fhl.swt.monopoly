@@ -13,6 +13,8 @@ public class Figure {
 
 	private StringProperty name;
 
+	public boolean selected;
+
 	public Figure(BufferedImage image, String name) {
 		this.image = new SimpleObjectProperty<>(image);
 		this.name = new SimpleStringProperty(name);
@@ -33,6 +35,14 @@ public class Figure {
 	@Override
 	public String toString() {
 		return getName();
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 
 }

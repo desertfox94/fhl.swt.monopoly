@@ -1,8 +1,11 @@
 package monopoly.view.startNewGame.NewPlayer;
 
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -11,9 +14,6 @@ import javafx.scene.control.TextField;
 import monopoly.model.Figure;
 import monopoly.model.Player;
 import monopoly.view.startNewGame.NewGameController;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class NewPlayerController implements Initializable {
 
@@ -34,7 +34,7 @@ public class NewPlayerController implements Initializable {
 
 	private NewPlayerModel model = new NewPlayerModel(this);
 
-	private FigureCombobox figureCombobox;
+	private GroupCombobox figureCombobox;
 
 	private NewGameController gameController;
 
@@ -42,6 +42,7 @@ public class NewPlayerController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		name.textProperty().bindBidirectional(model.getNameProperty());
 		name.textProperty().addListener(new ChangeListener<String>() {
+
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String oldValue, String newValue) {
 				if (newValue != null) {
@@ -54,8 +55,6 @@ public class NewPlayerController implements Initializable {
 			}
 
 		});
-		model.getFigure().bind(combobox.getSelectionModel().selectedItemProperty());
-		figureCombobox = new FigureCombobox(combobox);
 	}
 
 	public void setNameValid(boolean valid) {
@@ -97,8 +96,9 @@ public class NewPlayerController implements Initializable {
 		return model.isIncomplete();
 	}
 
-	public void setItems(ObservableList<Figure> availableFigures) {
-		figureCombobox.setAvailableFigures(availableFigures);
+	public void setItems(ComboGroup group, List<Figure> availableFigures) {
+		figureCombobox = new GroupCombobox(group, availableFigures, combobox);
+		model.getFigure().bind(figureCombobox.getSelection());
 	}
 
 	public void addModelValidationListener(ChangeListener<Boolean> changeListener) {
