@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import monopoly.core.CircleList;
+import monopoly.core.MessageUtil;
 import monopoly.core.cards.CardSet;
 import monopoly.core.fields.Field;
 import monopoly.core.fields.JailField;
@@ -83,7 +84,14 @@ public class Game {
 	public Player nextPlayer() {
 		currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
 		setJustGotOutOfJail(false);
-		return players.next();
+		Player p = players.next();
+		if (p.isInJail() && p.getBalance() > 1000) {
+			if (MessageUtil.ask("Aus dem Gefängnis freikaufen?", p.getName() + ", wollen Sie sich für 1000 DM aus dem Gefängnis freikaufen?", "ja (1000DM)", "nein")) {
+				p.pay(1000);
+				p.freeFromJail();
+			}
+		}
+		return p;
 	}
 
 	public void playerRolledTheDice(DiceCast diceCast) {
