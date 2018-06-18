@@ -23,6 +23,10 @@ public class StreetField extends Field {
 		return MessageUtil.ask("Strasse Kaufen", "Wollen Sie " + street.getName() + " Kaufen?", street.getName() + " kostet " + street.getPrice(), "ja", "nein, Auktion starten");
 	}
 
+	public void tellRent() {
+		MessageUtil.inform("Miete", street.getName() + " ist bereits im besitz von " + street.getOwner().getName() +"\r\nSie zahlen " + street.getRent().intValue() + "DM Miete");
+	}
+	
 	public boolean askForMortgage() {
 		return MessageUtil.ask("Hypothek aufnehmen", "Wollen Sie eine Hypothek aufnehmen?", "ja",
 				"nein, Haus verkaufen");
@@ -43,9 +47,9 @@ public class StreetField extends Field {
 	@Override
 	public void landing(Player player) {
 		Player owner = street.getOwner();
-		buyStreet = ask();
 
 		if (owner == null) {
+			buyStreet = ask();
 			if (buyStreet) {
 				player.pay(street.getPrice());
 				player.addToInventory(street);
@@ -63,6 +67,7 @@ public class StreetField extends Field {
 
 				//Spieler hat genug geld zum bezahlen
 				if(player.getBalance() >= rent){
+					tellRent();
 					player.pay(rent);
 					owner.addMoney(rent);
 				}
