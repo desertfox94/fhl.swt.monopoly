@@ -1,5 +1,6 @@
 package monopoly.core.fields;
 
+import static monopoly.core.Logger.*;
 import monopoly.model.Player;
 /**
  * the "go to jail"-field in the top right corner of the playing field.
@@ -7,11 +8,12 @@ import monopoly.model.Player;
 public class GoToJail extends Field {
 
 	public GoToJail() {
-		super("Gehe ins Gefängnis", 30);
+		super("Gehe ins Gefï¿½ngnis", 30);
 	}
 
 	@Override
 	public void landing(Player player) {
+		ActionLogger.log(player, LANDING, "GO TO JAIL", "");
 		player.sendToJail();
 	}
 

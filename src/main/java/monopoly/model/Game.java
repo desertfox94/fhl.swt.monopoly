@@ -2,6 +2,7 @@ package monopoly.model;
 
 import static monopoly.core.Logger.ActionLogger;
 import static monopoly.core.Logger.GAME;
+import static monopoly.core.Logger.LANDING;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -112,11 +113,13 @@ public class Game {
 	}
 
 	public void payOutMoneyInTheMiddle(Player player) {
+		ActionLogger.log(player, GAME, "MONEY IN THE MIDDLE - PAY OUT", ""+ moneyInTheMiddle.intValue());
 		player.addMoney(moneyInTheMiddle.intValue());
 		moneyInTheMiddle.set(0);
 	}
 
 	public void putMoneyInTheMiddle(int amount) {
+		ActionLogger.log(getCurrentPlayer(), GAME, "MONEY IN THE MIDDLE - PAY IN", ""+ amount);
 		moneyInTheMiddle.set(moneyInTheMiddle.get() + amount);
 	}
 

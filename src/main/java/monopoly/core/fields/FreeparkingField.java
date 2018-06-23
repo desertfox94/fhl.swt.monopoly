@@ -1,5 +1,8 @@
 package monopoly.core.fields;
 
+import static monopoly.core.Logger.ActionLogger;
+import static monopoly.core.Logger.LANDING;
+
 import monopoly.model.Player;
 
 /**
@@ -14,6 +17,7 @@ public class FreeparkingField extends Field {
 
 	@Override
 	public void landing(Player player) {
+		ActionLogger.log(player, LANDING, "FREE PARKING", "");
 		player.getGame().payOutMoneyInTheMiddle(player);
 	}
 

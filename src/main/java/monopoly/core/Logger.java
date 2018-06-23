@@ -24,6 +24,8 @@ public class Logger {
 	
 	public static final String LANDING = "LANDING";
 	
+	public static final String PASSING = "PASSING";
+	
 	public static final String PLAYER = "PLAYER";
 	
 	public static final String MESSAGE = "MESSAGE";
