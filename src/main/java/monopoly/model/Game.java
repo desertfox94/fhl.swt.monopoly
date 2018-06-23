@@ -1,5 +1,8 @@
 package monopoly.model;
 
+import static monopoly.core.Logger.ActionLogger;
+import static monopoly.core.Logger.GAME;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,6 +32,8 @@ public class Game {
 
 	private boolean justGotOutOfJail = false;
 
+	long turnStartedAt;
+	
 	public void addPlayer(Player player) {
 		players.add(player);
 		Field field = player.getFieldProperty().get();
@@ -82,9 +87,13 @@ public class Game {
 	}
 
 	public Player nextPlayer() {
+		if (turnStartedAt != 0) {
+			ActionLogger.log(getCurrentPlayer(), GAME, "END TURN", String.format("%.2fs", ((System.currentTimeMillis() - turnStartedAt) / 1000)));			
+		}
 		currentPlayerDiceCastHistory = new LinkedList<DiceCast>();
 		setJustGotOutOfJail(false);
 		Player p = players.next();
+		ActionLogger.log(getCurrentPlayer(), GAME, "START TURN", "");
 		if (p.isInJail() && p.getBalance() > 1000) {
 			if (MessageUtil.ask("Aus dem Gefängnis freikaufen?", p.getName() + ", wollen Sie sich für 1000 DM aus dem Gefängnis freikaufen?", "ja (1000DM)", "nein")) {
 				p.pay(1000);

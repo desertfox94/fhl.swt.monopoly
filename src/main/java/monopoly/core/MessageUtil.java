@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import static monopoly.core.Logger.*;
 
 /**
  * Dieses Util dient dazu das Anzeigen von Dialogen zu vereinfachen.
@@ -93,7 +94,11 @@ public class MessageUtil {
 
 	private static final Optional<ButtonType> showAndWait(Alert alert) {
 		if (alert != null) {
-			return alert.showAndWait();
+			Optional<ButtonType> result = alert.showAndWait();
+			String details = alert.getTitle() + "\t-\t" + alert.getHeaderText() + "\t-\t" + alert.getContentText();
+			System.out.println(details);
+			ActionLogger.log(null, MESSAGE, details, result.get().getText());
+			return result;
 		}
 		return Optional.empty();
 	}

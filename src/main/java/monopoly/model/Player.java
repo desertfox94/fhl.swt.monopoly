@@ -1,5 +1,8 @@
 package monopoly.model;
 
+import static monopoly.core.Logger.ActionLogger;
+import static monopoly.core.Logger.PLAYER;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import monopoly.core.Logger;
 import monopoly.core.cards.Card;
 import monopoly.core.fields.Field;
 
@@ -80,10 +84,12 @@ public class Player implements StreetOwner, CardOwner {
 	}
 
 	public void pay(int amount) {
+		ActionLogger.log(this, PLAYER, "PAY", ""+amount);
 		balance.set(balance.get() - amount);
 	}
 
 	public void addMoney(int amount) {
+		ActionLogger.log(this, PLAYER, "ADD MONEY", ""+amount);
 		balance.set(balance.get() + amount);
 	}
 
@@ -106,11 +112,13 @@ public class Player implements StreetOwner, CardOwner {
 	}
 
 	public void freeFromJail() {
+		ActionLogger.log(this, PLAYER, "FREE FROM JAIL", "rounds in jail: " + jailCount.intValue());
 		jailCount.set(0);
 		jail.set(false);
 	}
 
 	public void sendToJail() {
+		Logger.ActionLogger.log(this, PLAYER, "SEND TO JAIL", "");
 		jailCount.set(1);
 		jail.set(true);
 	}
@@ -133,6 +141,7 @@ public class Player implements StreetOwner, CardOwner {
 
 	@Override
 	public void addToInventory(Street street) {
+		Logger.ActionLogger.log(this, PLAYER, "ADD STREET TO INVENTORY", street.getName());
 		street.setOwner(this);
 		streets.add(street);
 	}
@@ -144,11 +153,13 @@ public class Player implements StreetOwner, CardOwner {
 
 	@Override
 	public void addCardToInventory(Card card) {
+		Logger.ActionLogger.log(this, PLAYER, "ADD CARD TO INVENTORY", card.toString());
 		cards.add(card);
 	}
 
 	@Override
 	public void removeCardFromInventory(Card card) {
+		Logger.ActionLogger.log(this, PLAYER, "REMOVE CARD FROM INVENTORY", card.toString());
 		cards.remove(card);
 	}
 

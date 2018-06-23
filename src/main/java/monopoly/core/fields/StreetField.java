@@ -1,5 +1,6 @@
 package monopoly.core.fields;
 
+import static monopoly.core.Logger.*;
 import monopoly.core.MessageUtil;
 import monopoly.model.Player;
 import monopoly.model.Street;
@@ -51,10 +52,12 @@ public class StreetField extends Field {
 		if (owner == null) {
 			buyStreet = ask();
 			if (buyStreet) {
+				ActionLogger.log(player, STREET, "BUY STREET", street.getName());
 				player.pay(street.getPrice());
 				player.addToInventory(street);
 				street.setOwner(player);
 			} else {
+				ActionLogger.log(player, STREET, "START AUCTION", street.getName());
 				// zur auktion freigeben
 				street.startAuction();
 			}
@@ -64,7 +67,7 @@ public class StreetField extends Field {
 			if(!street.isMortgage() && !owner.isInJail()){
 				//Miete muss bezahlt werden
 				int rent =  street.getRent().intValue();
-
+				ActionLogger.log(player, STREET, "PAY RENT", street.getName());
 				//Spieler hat genug geld zum bezahlen
 				if(player.getBalance() >= rent){
 					tellRent();

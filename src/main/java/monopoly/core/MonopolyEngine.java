@@ -2,6 +2,7 @@ package monopoly.core;
 
 import java.util.List;
 
+import static monopoly.core.Logger.*;
 import monopoly.model.DiceCast;
 import monopoly.model.Game;
 import monopoly.model.Player;
@@ -19,6 +20,8 @@ public class MonopolyEngine {
 
 	private DiceCast diceCast = new DiceCast();
 
+
+	
 	public void setDiceCast(DiceCast diceCast) {
 		this.diceCast = diceCast;
 	}
@@ -33,11 +36,13 @@ public class MonopolyEngine {
 	 * @return returns the dicecast of the roll, independent from its result. Frees the player if a double was rolled.
 	 */
 	private DiceCast rollDiceInJail() {
+		ActionLogger.log(game.getCurrentPlayer(), GAME, "ROLL DICE IN JAIL", "");
 		if (game.getPlayersThrowCount() > MAX_THROWS_IN_JAIL) {
-			throw new RuntimeException("Spieler hat zu oft gew�rfelt!");
+			throw new RuntimeException("Spieler hat zu oft gewürfelt!");
 		}
 		rollTheDice();
 		if (diceCast.isDouble()) {
+			ActionLogger.log(game.getCurrentPlayer(), GAME, "DOUBLE IN JAIL", "");
 			Player player = game.getCurrentPlayer();
 			player.freeFromJail();
 			game.setJustGotOutOfJail(true);
@@ -68,6 +73,7 @@ public class MonopolyEngine {
 			player.incDoubleCount();
 		}
 		if (player.getDoubleCount() == MAX_DOUBLE_COUNT) {
+			ActionLogger.log(player, GAME, "DOUBLE LIMIT REACHED", "");
 			MessageUtil.inform("Ins Gefängnis", "Sie haben den dritten Pasch in Folge gewürfelt, gehe in Das Gefängnis.", "Begib dich direkt dorthin, gehe nicht über Los und ziehe keine 200DM ein.");
 			player.sendToJail();
 			game.moveToJail(player);
@@ -79,6 +85,7 @@ public class MonopolyEngine {
 
 	private void rollTheDice() {
 		diceCast.next();
+		ActionLogger.log(game.getCurrentPlayer(), GAME, "ROLL THE DICE", "" + diceCast.current());	
 		game.playerRolledTheDice(diceCast);
 	}
 

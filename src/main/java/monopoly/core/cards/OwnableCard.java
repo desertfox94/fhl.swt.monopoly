@@ -1,5 +1,6 @@
 package monopoly.core.cards;
 
+import monopoly.core.Logger;
 import monopoly.model.Player;
 
 public abstract class OwnableCard extends Card {
@@ -12,6 +13,7 @@ public abstract class OwnableCard extends Card {
 
 	public void assignTo(Player player) {
 		this.player = player;
+		Logger.ActionLogger.log(player, "ASSIGNED TO", toString());
 		player.addCardToInventory(this);
 	}
 	
@@ -21,6 +23,7 @@ public abstract class OwnableCard extends Card {
 
 	@Override
 	public final boolean execute(Player player) {
+		Logger.ActionLogger.log(player, "OWNABLE EXECUTED", toString());
 		boolean result = execute();
 		player.removeCardFromInventory(this);
 		cardSet.returnCard(this);

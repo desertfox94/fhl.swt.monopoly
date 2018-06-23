@@ -1,5 +1,7 @@
 package monopoly.core.fields;
 
+
+import static monopoly.core.Logger.*;
 import monopoly.core.MessageUtil;
 import monopoly.core.cards.Card;
 import monopoly.core.cards.CardSet;
@@ -20,10 +22,12 @@ public class CardField extends Field {
 	@Override
 	public void landing(Player player) {
 		Card card = cards.draw();
+		ActionLogger.log(player, CARD, "LAND ON CARDFIELD", card.toString());
 		MessageUtil.inform(card.getTitle(), card.getDescription());
 		if (card instanceof OwnableCard) {
 			((OwnableCard) card).assignTo(player);
 		} else {
+			ActionLogger.log(player, "CARD EXECUTED", card.toString());
 			card.execute(player);
 			cards.returnCard(card);
 		}
